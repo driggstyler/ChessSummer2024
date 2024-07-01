@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -7,6 +9,8 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessBoard {
+
+    private ChessPiece[][] boardArray = new ChessPiece[8][8];
 
     public ChessBoard() {
         
@@ -19,7 +23,11 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        throw new RuntimeException("Not implemented");
+        boardArray[position.getRow()-1][position.getColumn()-1] = piece;
+    }
+
+    public void removePiece(ChessPosition position) {
+        boardArray[position.getRow()-1][position.getColumn()-1] = null;
     }
 
     /**
@@ -30,7 +38,15 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        throw new RuntimeException("Not implemented");
+        try {
+            return boardArray[position.getRow() - 1][position.getColumn() - 1];
+        } catch(ArrayIndexOutOfBoundsException exception) {
+            return null;
+        }
+    }
+
+    public ChessPiece[][] getBoardArray() {
+        return boardArray;
     }
 
     /**
@@ -38,6 +54,60 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        throw new RuntimeException("Not implemented");
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7; j++) {
+                //Reset White Pieces
+                if ((i == 0 && j == 0) || (i == 0 && j == 7)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
+                }
+                else if ((i == 0 && j == 1) || (i == 0 && j == 6)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
+                }
+                else if ((i == 0 && j == 2) || (i == 0 && j == 5)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
+                }
+                else if (i == 0 && j == 3) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
+                }
+                else if (i == 0 && j == 4) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
+                }
+                else if (i == 1) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
+                }
+                //Reset Black Pieces
+                if ((i == 7 && j == 0) || (i == 7 && j == 7)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
+                }
+                else if ((i == 7 && j == 1) || (i == 7 && j == 6)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
+                }
+                else if ((i == 7 && j == 2) || (i == 7 && j == 5)) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
+                }
+                else if (i == 7 && j == 3) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
+                }
+                else if (i == 7 && j == 4) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
+                }
+                else if (i == 6) {
+                    boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
+                }
+                else {
+                    boardArray[i][j] = null;
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        ChessBoard chessBoard = (ChessBoard) o;
+        return Arrays.deepEquals(boardArray, chessBoard.getBoardArray());
     }
 }
