@@ -48,5 +48,6 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         throw new RuntimeException("Not implemented");
+        //suggested: make a switch statement for each function per pieceType
     }
 }
