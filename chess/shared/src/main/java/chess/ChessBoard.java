@@ -38,11 +38,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        try {
-            return boardArray[position.getRow() - 1][position.getColumn() - 1];
-        } catch(ArrayIndexOutOfBoundsException exception) {
-            return null;
-        }
+        return boardArray[position.getRow() - 1][position.getColumn() - 1];
     }
 
     public ChessPiece[][] getBoardArray() {
@@ -76,7 +72,7 @@ public class ChessBoard {
                     boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
                 }
                 //Reset Black Pieces
-                if ((i == 7 && j == 0) || (i == 7 && j == 7)) {
+                else if ((i == 7 && j == 0) || (i == 7 && j == 7)) {
                     boardArray[i][j] =  new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
                 }
                 else if ((i == 7 && j == 1) || (i == 7 && j == 6)) {
@@ -109,5 +105,10 @@ public class ChessBoard {
             return false;
         ChessBoard chessBoard = (ChessBoard) o;
         return Arrays.deepEquals(boardArray, chessBoard.getBoardArray());
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(boardArray);
     }
 }

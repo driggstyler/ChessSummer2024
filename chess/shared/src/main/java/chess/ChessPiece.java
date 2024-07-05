@@ -2,6 +2,7 @@ package chess;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -16,6 +17,8 @@ public class ChessPiece {
     private ChessPiece.PieceType type;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+        this.pieceColor = pieceColor;
+        this.type = type;
     }
 
     /**
@@ -54,7 +57,8 @@ public class ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         //suggested: make a switch statement for each function per pieceType
         Set<ChessMove> possibleMoves = new HashSet<>();
-        switch(board.getPiece(myPosition).getPieceType()) {
+        var val = board.getPiece(myPosition).getPieceType();
+        switch(val) {
             case ROOK: possibleMoves = rookPossibleMoves(possibleMoves, board, myPosition);
             break;
             case KNIGHT: possibleMoves = knightPossibleMoves(possibleMoves, board, myPosition);
@@ -98,18 +102,18 @@ public class ChessPiece {
         for (int i = -2; i <= 2; i++) {
             for (int j = -2; j <= 2; j++) {
                 if (i == j || i == (-1 * j) || i == 0 || j == 0) {
-                    break;
+                    continue;
                 }
                 ChessPosition currPosition = new ChessPosition(myPosition.getRow() + i, myPosition.getColumn() + j);
                 if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
-                    break;
+                    continue;
                 }
                 if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
                     possibleMoves.add(new ChessMove(myPosition, currPosition, null));
                 }
-                if (board.getPiece(currPosition) != null) {
-                    break;
-                }
+//                if (board.getPiece(currPosition) != null) {
+//                    break;
+//                }
             }
         }
         return possibleMoves;
@@ -215,5 +219,19 @@ public class ChessPiece {
             }
         }
         return possibleMoves;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        ChessPiece that = (ChessPiece) o;
+        return pieceColor == that.pieceColor && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pieceColor, type);
     }
 }
