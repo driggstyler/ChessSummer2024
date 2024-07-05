@@ -111,9 +111,6 @@ public class ChessPiece {
                 if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
                     possibleMoves.add(new ChessMove(myPosition, currPosition, null));
                 }
-//                if (board.getPiece(currPosition) != null) {
-//                    break;
-//                }
             }
         }
         return possibleMoves;
