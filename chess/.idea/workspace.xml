@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1fd737e6-0a98-447e-8733-39580340e214" name="Changes" comment="getTeamTurn actually returns the teamColor now">
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/ChessSummer2024.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/issuestore/4/0/4007291bc0982e6962128979dfcf73584789c0d1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/issuestore/5/2/52ae0d145dc64a595badf1bc1e26f868784a6a3d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/issuestore/7/b/7bc858c95265ea1098ea659b0fcdf04adc63dc31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/securityhotspotstore/4/0/4007291bc0982e6962128979dfcf73584789c0d1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/securityhotspotstore/5/2/52ae0d145dc64a595badf1bc1e26f868784a6a3d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/securityhotspotstore/7/b/7bc858c95265ea1098ea659b0fcdf04adc63dc31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_code_gson.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/10k-architecture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/lib/passoff-dependencies.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/shared.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessMove.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/InvalidMoveException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/ChessBoardTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/ChessMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/ChessPositionTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/TestUtilities.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/BishopMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/KingMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/KnightMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/PawnMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/QueenMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/test/java/passoff/chess/piece/RookMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/extracredit/CastlingTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/extracredit/EnPassantTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/game/FullGameTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/game/GameStatusTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/game/MakeMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/1-chess-game/passoff/chess/game/ValidMovesTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/dataaccess/DataAccessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/passoff/server/StandardAPITests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/resources/web/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/resources/web/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/resources/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/resources/web/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/3-web-api/server/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/4-database/dataaccess/DatabaseManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/4-database/passoff/server/DatabaseTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/4-database/resources/db.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/5-pregame/client/ServerFacadeTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/5-pregame/ui/EscapeSequences.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/6-gameplay/passoff/server/TestFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/6-gameplay/passoff/server/WebSocketTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/6-gameplay/websocket/commands/UserGameCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/starter-code/6-gameplay/websocket/messages/ServerMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-dependencies-assembly.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2iX2Xjaqp2J0WE5hrQQ7uUdupYp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "last_opened_file_path": "C:/Users/tyler/CS240/ChessSummer2024"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.passoff.chess in shared">
+    <configuration name="KnightMoveTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoff.chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoff.chess.piece" />
+      <option name="MAIN_CLASS_NAME" value="passoff.chess.piece.KnightMoveTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="chess in shared" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chess" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="passoff.chess in shared" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoff.chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoff.chess" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.passoff.chess in shared" />
+        <item itemvalue="JUnit.KnightMoveTests" />
+        <item itemvalue="JUnit.chess in shared" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1fd737e6-0a98-447e-8733-39580340e214" name="Changes" comment="" />
+      <created>1719622643048</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1719622643048</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Chess Position and Chess Move edits">
+      <created>1719871379353</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719871379353</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Chess Board edits">
+      <created>1719873636751</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719873636751</updated>
+    </task>
+    <task id="LOCAL-00003" summary="pieceMoves edited">
+      <created>1719879900121</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719879900121</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Chess Game edited (serious method revisions)">
+      <created>1720135912079</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720135912079</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Chess board reset needed equals and hash methods on the other classes, and knightPossibleMoves needed continue statements instead of break statements (now all project tests pass)">
+      <created>1720214293751</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720214293751</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Cut out commented code">
+      <created>1720214481671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1720214481671</updated>
+    </task>
+    <task id="LOCAL-00007" summary="getTeamTurn actually returns the teamColor now">
+      <created>1720214531460</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720214531460</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Chess Position and Chess Move edits" />
+    <MESSAGE value="Chess Board edits" />
+    <MESSAGE value="pieceMoves edited" />
+    <MESSAGE value="Chess Game edited (serious method revisions)" />
+    <MESSAGE value="Chess board reset needed equals and hash methods on the other classes, and knightPossibleMoves needed continue statements instead of break statements (now all project tests pass)" />
+    <MESSAGE value="Cut out commented code" />
+    <MESSAGE value="getTeamTurn actually returns the teamColor now" />
+    <option name="LAST_COMMIT_MESSAGE" value="getTeamTurn actually returns the teamColor now" />
+  </component>
+</project>
