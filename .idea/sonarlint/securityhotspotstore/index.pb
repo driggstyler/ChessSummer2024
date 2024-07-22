@@ -1,8 +1,6 @@
 
 A
 shared/shared.iml,7\9\79ea1508e9af0cc867e2dcc0eceb8e335efeb3ab
-k
-;shared/src/test/java/passoff/chess/piece/KingMoveTests.java,b\a\ba735f5288818d5bcb2d915ba581f2540fda32d0
 >
 server/pom.xml,0\8\08a8b343eb3d041b4e874e74bf19e4275b4be110
 d
@@ -15,14 +13,10 @@ A
 client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
 k
 ;shared/src/test/java/passoff/chess/piece/PawnMoveTests.java,f\5\f5f303eb20d0409e171fe16f357212147605d4a8
-l
-<shared/src/test/java/passoff/chess/piece/QueenMoveTests.java,a\2\a2bd15f35595ddc78d142da6ccffd03c5a50bac2
 N
 server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
 >
 client/pom.xml,0\4\041f522da4f7523dfafc230a092f5af2a53c5e8e
-e
-5shared/src/test/java/passoff/chess/TestUtilities.java,1\4\14062c2f20526a866f3144a841b2af7bd4bb47af
 >
 shared/pom.xml,b\a\ba2c82abfadd18e3d9d5240df233d9684925a7cd
 j

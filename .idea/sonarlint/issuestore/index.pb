@@ -13,8 +13,6 @@ j
 :shared/src/test/java/passoff/chess/ChessPositionTests.java,0\c\0cdc26a7fcc196ec68a5ed8d48a21c75493b79ef
 d
 4shared/src/main/java/chess/InvalidMoveException.java,e\3\e39c3486fec5f2b87e64591840622613400adc99
-k
-;shared/src/test/java/passoff/chess/piece/KingMoveTests.java,b\a\ba735f5288818d5bcb2d915ba581f2540fda32d0
 m
 =shared/src/test/java/passoff/chess/piece/KnightMoveTests.java,4\6\46ef87c304e18ba9d31ab5df8735551001527431
 N
@@ -29,9 +27,5 @@ k
 server/pom.xml,0\8\08a8b343eb3d041b4e874e74bf19e4275b4be110
 >
 shared/pom.xml,b\a\ba2c82abfadd18e3d9d5240df233d9684925a7cd
-l
-<shared/src/test/java/passoff/chess/piece/QueenMoveTests.java,a\2\a2bd15f35595ddc78d142da6ccffd03c5a50bac2
 k
 ;shared/src/test/java/passoff/chess/piece/RookMoveTests.java,7\f\7fcc205671386de1ff9a72d54f687d72d4f2fde0
-e
-5shared/src/test/java/passoff/chess/TestUtilities.java,1\4\14062c2f20526a866f3144a841b2af7bd4bb47af
