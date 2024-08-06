@@ -1,0 +1,12 @@
+
+{
+java:S1488x"fImmediately return this expression instead of assigning it to the temporary variable "hashedPassword".(þÝ½
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ò§†ù
+V	java:S125"<This block of commented-out lines of code should be removed.(½ô‹°ùÿÿÿÿ
+h	java:S100."NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û¥Åüùÿÿÿÿ
+P	java:S125/"<This block of commented-out lines of code should be removed.(ÍÎÝ
+b	java:S100B"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(² óo
+Q	java:S125C"<This block of commented-out lines of code should be removed.(•Èˆç
+b	java:S100\"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ôô‹L
+Q	java:S125]"<This block of commented-out lines of code should be removed.(œ‘ ñ
+V	java:S125m"<This block of commented-out lines of code should be removed.(Õ©÷üÿÿÿÿ
