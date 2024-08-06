@@ -3,7 +3,8 @@ package dataaccess.DAO;
 import Models.User;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.mindrot.jbcrypt.BCrypt;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -116,13 +117,20 @@ public class UserDAO {
         }
     }
     String storeUserPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hashedPassword = encoder.encode(password);
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        //String hashedPassword = encoder.encode(password);
         return hashedPassword;
     }
+//    public boolean verifyUser(String hashedPassword, String providedClearTextPassword) {
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        return encoder.matches(providedClearTextPassword, hashedPassword);
+//    }
     public boolean verifyUser(String hashedPassword, String providedClearTextPassword) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.matches(providedClearTextPassword, hashedPassword);
+        // read the previously hashed password from the database
+        //var hashedPassword = readHashedPasswordFromDatabase(username);
+
+        return BCrypt.checkpw(providedClearTextPassword, hashedPassword);
     }
 
 }
