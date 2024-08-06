@@ -1,20 +1,12 @@
 
-A
-shared/shared.iml,7\9\79ea1508e9af0cc867e2dcc0eceb8e335efeb3ab
 >
 server/pom.xml,0\8\08a8b343eb3d041b4e874e74bf19e4275b4be110
 d
 4shared/src/main/java/chess/InvalidMoveException.java,e\3\e39c3486fec5f2b87e64591840622613400adc99
 f
 6shared/src/test/java/passoff/chess/ChessMoveTests.java,d\0\d0976cffcef29072b835886c43fd62174459be03
-A
-server/server.iml,3\f\3f335f11ae5914540a6aba5f5129f694b55a8d87
-A
-client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
 k
 ;shared/src/test/java/passoff/chess/piece/PawnMoveTests.java,f\5\f5f303eb20d0409e171fe16f357212147605d4a8
-N
-server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
 >
 client/pom.xml,0\4\041f522da4f7523dfafc230a092f5af2a53c5e8e
 >

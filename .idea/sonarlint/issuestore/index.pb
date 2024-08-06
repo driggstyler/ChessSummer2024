@@ -1,10 +1,4 @@
 
-A
-shared/shared.iml,7\9\79ea1508e9af0cc867e2dcc0eceb8e335efeb3ab
-A
-server/server.iml,3\f\3f335f11ae5914540a6aba5f5129f694b55a8d87
-A
-client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
 m
 =shared/src/test/java/passoff/chess/piece/BishopMoveTests.java,3\0\30378d697b641130153ece6a5b8fa7c1b9b6adf4
 f
@@ -17,8 +11,6 @@ m
 =shared/src/test/java/passoff/chess/piece/KnightMoveTests.java,4\6\46ef87c304e18ba9d31ab5df8735551001527431
 N
 client/src/main/java/Main.java,e\c\ecb7a1924b25558f5bedb6f53e4d6092557bd541
-N
-server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
 k
 ;shared/src/test/java/passoff/chess/piece/PawnMoveTests.java,f\5\f5f303eb20d0409e171fe16f357212147605d4a8
 >
