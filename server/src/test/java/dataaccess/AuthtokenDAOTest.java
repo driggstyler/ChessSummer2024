@@ -1,10 +1,8 @@
-package dataAccessTests;
+package dataaccess;
 
 import Models.Authtoken;
 import Services.ClearService;
 import dataaccess.DAO.AuthtokenDAO;
-import dataaccess.DataAccessException;
-import dataaccess.DatabaseManager;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;

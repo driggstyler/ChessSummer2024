@@ -1,11 +1,9 @@
-package MyServiceTests;
+package service;
 
 import Models.Authtoken;
-import Models.Game;
-import Requests.JoinGameRequest;
-import Results.JoinGameResult;
+import Results.ListGamesResult;
 import Services.ClearService;
-import Services.JoinGameService;
+import Services.ListGamesService;
 import dataaccess.DAO.AuthtokenDAO;
 import dataaccess.DAO.GameDAO;
 import dataaccess.DataAccessException;
@@ -15,7 +13,7 @@ import org.junit.jupiter.api.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class JoinGameServiceTest {
+public class ListGamesServiceTest {
     @BeforeEach
     public void setup() {
         try (Connection conn = DatabaseManager.getConnection()){
@@ -29,31 +27,26 @@ public class JoinGameServiceTest {
         }
     }
     @Test
-    @DisplayName("Join Game Success")
-    public void joinGameSuccess() {
+    @DisplayName("List Games Success")
+    public void listGamesSuccess() {
         try (Connection conn = DatabaseManager.getConnection()){
             Authtoken authtoken = new Authtoken("abcdefg", "testUser1");
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             authtokenDAO.Insert(authtoken);
-            GameDAO gameDAO = new GameDAO(conn);
-            Game game = new Game();
-            gameDAO.Insert(101, game, "First Game");
-            JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", 101);
-            JoinGameService joinGameService = new JoinGameService();
-            JoinGameResult joinGameResult = joinGameService.Execute(joinGameRequest, "abcdefg");
-            Assertions.assertEquals("Joined game successfully.", joinGameResult.getMessage());
+            ListGamesService listGamesService = new ListGamesService();
+            ListGamesResult listGamesResult = listGamesService.Execute("abcdefg");
+            Assertions.assertEquals("Listed games successfully.", listGamesResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
-            System.out.println("Join Game Test threw an exception.");
+            System.out.println("List games test threw an exception.");
         }
     }
     @Test
-    @DisplayName("Join Game Failure")
-    public void joinGameFail() {
-        JoinGameRequest joinGameRequest = new JoinGameRequest("White", 101);
-        JoinGameService joinGameService = new JoinGameService();
-        JoinGameResult joinGameResult = joinGameService.Execute(joinGameRequest, "abcdefg");
-        Assertions.assertEquals("Error: Unauthorized.", joinGameResult.getMessage());
+    @DisplayName("List Games Failure")
+    public void listGamesFail() {
+        ListGamesService listGamesService = new ListGamesService();
+        ListGamesResult listGamesResult = listGamesService.Execute("abcdefg");
+        Assertions.assertEquals("Error: Unauthorized", listGamesResult.getMessage());
     }
     @AfterEach
     public void tearDown() {

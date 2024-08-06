@@ -1,4 +1,4 @@
-package MyServiceTests;
+package service;
 
 import Results.ClearResult;
 import Services.ClearService;

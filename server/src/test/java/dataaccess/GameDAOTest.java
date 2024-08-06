@@ -1,12 +1,10 @@
-package dataAccessTests;
+package dataaccess;
 
 import Models.Game;
 import Models.User;
 import Services.ClearService;
 import dataaccess.DAO.GameDAO;
 import dataaccess.DAO.UserDAO;
-import dataaccess.DataAccessException;
-import dataaccess.DatabaseManager;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package MyServiceTests;
+package service;
 
 import Requests.RegisterRequest;
 import Results.RegisterResult;
