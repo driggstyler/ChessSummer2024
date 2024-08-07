@@ -1,10 +1,7 @@
 package dataaccess.DAO;
 
-import Models.Authtoken;
 import Models.Game;
-import chess.ChessGame;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 
@@ -18,7 +15,6 @@ import java.util.*;
  * A Data Access Object to interact with the games in the database.
  */
 public class GameDAO {
-    //private static Map<String, ChessGame> database = new HashMap<>();
     private final Connection conn;
 
     public GameDAO(Connection conn) {
@@ -41,15 +37,6 @@ public class GameDAO {
             e.printStackTrace();
         }
     }
-
-    //    public Map<String, ChessGame> getDatabase() {
-    //        return database;
-    //    }
-
-
-    //    public void setDatabase(Map<String, ChessGame> database) {
-    //        this.database = database;
-    //    }
 
     /**
      * Claims the desired white or black position on the board for the user (Does not affect spectators).
@@ -109,7 +96,6 @@ public class GameDAO {
     public void Insert(int gameID, Game game, String gameName) throws DataAccessException {
         game.setGameName(gameName);
         game.setGameID(gameID);
-        //        database.put(gameID, game);
         String sql = "INSERT INTO game (gameID, gameName, game) VALUES(?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             Gson gson = new Gson();
@@ -132,7 +118,6 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public Game Find(int gameID) throws DataAccessException{
-        //return database.get(gameID);
         Game game;
         ResultSet rs;
         String sql = "SELECT * FROM game WHERE gameID = ?;";
@@ -141,9 +126,6 @@ public class GameDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 String json = rs.getString("game");
-                //GsonBuilder builder = new GsonBuilder();
-                //builder.registerTypeAdapter(Game.class, new GameAdapter());
-                //game = builder.create().fromJson(json, Game.class);
                 Gson gson = new Gson();
                 return gson.fromJson(json, Game.class);
             } else {
@@ -161,11 +143,6 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public ArrayList<Game> FindAll() throws DataAccessException{
-        //        ArrayList<ChessGame> games = new ArrayList<>();
-        //        for (String element : database.keySet()) {
-        //            games.add(database.get(element));
-        //        }
-        //        return games;
         ArrayList<Game> games = new ArrayList<>();
         ResultSet rs;
         String sql = "SELECT game FROM game;";
@@ -175,8 +152,6 @@ public class GameDAO {
             while (rs.next()) {
                 System.out.println(i++);
                 String json = rs.getString("game");
-//                GsonBuilder builder = new GsonBuilder();
-//                builder.registerTypeAdapter(Game.class, new GameAdapter());
                 Game game = new Gson().fromJson(json, Game.class);
                 games.add(game);
             }
@@ -197,7 +172,6 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public void clear() throws DataAccessException {
-        //database.clear();
         String sql = "DELETE FROM game";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.executeUpdate();

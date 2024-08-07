@@ -2,12 +2,8 @@ package Handlers;
 
 import Results.ClearResult;
 
-import java.io.IOException;
-
 import Services.ClearService;
 import com.google.gson.Gson;
-import dataaccess.DataAccessException;
-import org.ietf.jgss.GSSContext;
 import spark.*;
 
 public class ClearHandler implements Route {

@@ -22,7 +22,6 @@ public class ListGamesService {
      */
     public ListGamesResult Execute(String authtoken){
         ListGamesResult listGamesResult = new ListGamesResult();
-        //Database db = new Database();
         try (Connection conn = DatabaseManager.getConnection()){
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
@@ -32,7 +31,6 @@ public class ListGamesService {
                 return listGamesResult;
             }
             ArrayList<Game> games = gameDAO.FindAll();
-            //db.closeConnection(db.getConnection());
             listGamesResult.setGames(games);
             listGamesResult.setMessage("Listed games successfully.");
         } catch (DataAccessException | SQLException e) {

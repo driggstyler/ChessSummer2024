@@ -10,7 +10,6 @@ import dataaccess.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-//import mainChess.Game;
 
 /**
  * A service to handle the logic for the create game operation.
@@ -24,7 +23,6 @@ public class CreateGameService {
      */
     public CreateGameResult Execute(CreateGameRequest createGameRequest, String authtoken) {
         CreateGameResult createGameResult = new CreateGameResult();
-        //DatabaseManager db = new DatabaseManager();
         try (Connection conn = DatabaseManager.getConnection()){
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
@@ -47,7 +45,6 @@ public class CreateGameService {
                 gameID = 1;
             }
             gameDAO.Insert(gameID, new Game(), createGameRequest.getGameName());
-            //db.closeConnection(db.getConnection());
             createGameResult.setGameID(gameID);
             createGameResult.setSuccess(true);
             createGameResult.setMessage("Successfully created a new game.");

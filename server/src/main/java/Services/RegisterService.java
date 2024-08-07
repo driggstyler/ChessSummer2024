@@ -24,7 +24,6 @@ public class RegisterService {
      */
     public RegisterResult Execute(RegisterRequest registerRequest){
         RegisterResult registerResult = new RegisterResult();
-        //Database db = new Database();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             UserDAO userDAO = new UserDAO(conn);
@@ -32,13 +31,11 @@ public class RegisterService {
                     registerRequest.getPassword() == null) {
                 registerResult.setSuccess(false);
                 registerResult.setMessage("Error: Missing information to register.");
-                //db.closeConnection(db.getConnection());
                 return registerResult;
             }
             if (userDAO.Find(registerRequest.getUsername()) != null) {
                 registerResult.setSuccess(false);
                 registerResult.setMessage("Error: Username already taken.");
-                //db.closeConnection(db.getConnection());
                 return registerResult;
             }
             String authtoken = UUID.randomUUID().toString();
@@ -48,7 +45,6 @@ public class RegisterService {
             registerResult.setAuthtoken(authtoken);
             registerResult.setSuccess(true);
             registerResult.setMessage("Registered successfully.");
-            //db.closeConnection(db.getConnection());
         } catch (DataAccessException | SQLException e) {
             e.printStackTrace();
             registerResult.setSuccess(false);

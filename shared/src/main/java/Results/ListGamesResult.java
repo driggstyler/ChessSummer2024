@@ -1,7 +1,6 @@
 package Results;
 
 import Models.Game;
-import chess.ChessGame;
 
 import java.util.ArrayList;
 

@@ -4,20 +4,15 @@ import Models.User;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 import org.mindrot.jbcrypt.BCrypt;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A Data Access Object to interact with the users in the database.
  */
 public class UserDAO {
-    //private static Map<String, User> database = new HashMap<>();
     private final Connection conn;
 
     public UserDAO(Connection conn) {
@@ -45,7 +40,6 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void Insert(User user) throws DataAccessException {
-        //database.put(username, user);
         String sql = "INSERT INTO user (username, password, email) VALUES(?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
@@ -65,7 +59,6 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public User Find(String username) throws DataAccessException {
-        //return database.get(username);
         User user;
         ResultSet rs;
         String sql = "SELECT * FROM user WHERE username = ?;";
@@ -91,7 +84,6 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void Remove(String username) throws DataAccessException {
-        //database.remove(username);
         String sql = "DELETE FROM user WHERE username = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
@@ -107,7 +99,6 @@ public class UserDAO {
      * @throws DataAccessException
      */
     public void clear() throws DataAccessException {
-        //database.clear();
         String sql = "DELETE FROM user";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.executeUpdate();
@@ -118,18 +109,10 @@ public class UserDAO {
     }
     String storeUserPassword(String password) {
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //String hashedPassword = encoder.encode(password);
         return hashedPassword;
     }
-//    public boolean verifyUser(String hashedPassword, String providedClearTextPassword) {
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        return encoder.matches(providedClearTextPassword, hashedPassword);
-//    }
     public boolean verifyUser(String hashedPassword, String providedClearTextPassword) {
         // read the previously hashed password from the database
-        //var hashedPassword = readHashedPasswordFromDatabase(username);
-
         return BCrypt.checkpw(providedClearTextPassword, hashedPassword);
     }
 

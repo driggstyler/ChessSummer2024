@@ -5,7 +5,6 @@ import chess.ChessGame;
 /**
  * The Game object containing gameID, player's usernames, and name of the game.
  */
-//FIXME May be obselete now, but may change depending on client's construction, so this class will remain until then.
 public class Game {
     private int gameID;
     private String whiteUsername;

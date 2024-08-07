@@ -24,7 +24,6 @@ public class LoginService {
      */
     public LoginResult Execute(LoginRequest loginRequest){
         LoginResult loginResult = new LoginResult();
-        //Database db = new Database();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             UserDAO userDAO = new UserDAO(conn);
@@ -42,10 +41,8 @@ public class LoginService {
                     loginResult.setSuccess(false);
                     loginResult.setMessage("Error: Incorrect password.");
                 }
-                //db.closeConnection(db.getConnection());
             }
             else {
-                //db.closeConnection(db.getConnection());
                 loginResult.setSuccess(false);
                 loginResult.setMessage("Error: User not found in the database.");
             }

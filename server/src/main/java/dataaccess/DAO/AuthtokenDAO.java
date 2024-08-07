@@ -8,14 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A Data Access Object to interact with the authtokens in the database.
  */
 public class AuthtokenDAO {
-    //private static Map<String, Authtoken> database = new HashMap();
     private final Connection conn;
 
     public AuthtokenDAO(Connection conn) {
@@ -44,7 +41,6 @@ public class AuthtokenDAO {
      * @throws DataAccessException
      */
     public void Insert(Authtoken authtoken) throws DataAccessException {
-        //database.put(authtokenString, authtoken);
         String sql = "INSERT INTO authentication (authtoken, username) VALUES(?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, authtoken.getAuthtoken());
@@ -64,7 +60,6 @@ public class AuthtokenDAO {
      * @throws DataAccessException
      */
     public Authtoken Find(String authtokenString) throws DataAccessException {
-        //return database.get(authtokenString);
         Authtoken aToken;
         ResultSet rs;
         String sql = "SELECT * FROM authentication WHERE authtoken = ?;";
@@ -89,7 +84,6 @@ public class AuthtokenDAO {
      * @throws DataAccessException
      */
     public void Remove(String authtokenString) throws DataAccessException {
-        //database.remove(authtokenString);
         String sql = "DELETE FROM authentication WHERE authtoken = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, authtokenString);
@@ -105,7 +99,6 @@ public class AuthtokenDAO {
      * @throws DataAccessException
      */
     public void clear() throws DataAccessException {
-        //database.clear();
         String sql = "DELETE FROM authentication";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.executeUpdate();

@@ -5,7 +5,6 @@ import dataaccess.DAO.GameDAO;
 import Requests.JoinGameRequest;
 import Results.JoinGameResult;
 import dataaccess.DataAccessException;
-//import dataAccess.Database;
 import dataaccess.DatabaseManager;
 
 import java.sql.Connection;
@@ -23,21 +22,18 @@ public class JoinGameService {
      */
     public JoinGameResult Execute(JoinGameRequest joinGameRequest, String authtoken){
         JoinGameResult joinGameResult = new JoinGameResult();
-        //DatabaseManager db = new DatabaseManager();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
             if (authtokenDAO.Find(authtoken) == null) {
                 joinGameResult.setSuccess(false);
                 joinGameResult.setMessage("Error: Unauthorized.");
-                //db.closeConnection(db.getConnection());
                 return joinGameResult;
             }
             if (gameDAO.Find(joinGameRequest.getGameID()) == null ||
                     joinGameRequest.getPlayerColor() == null) {
                 joinGameResult.setSuccess(false);
                 joinGameResult.setMessage("Error: Bad request.");
-                //db.closeConnection(db.getConnection());
                 return joinGameResult;
             }
             if (joinGameRequest.getPlayerColor() != null) {
@@ -45,11 +41,9 @@ public class JoinGameService {
                 if (!claimedSpot) {
                     joinGameResult.setSuccess(false);
                     joinGameResult.setMessage("Error: Already taken.");
-                    //db.closeConnection(db.getConnection());
                     return joinGameResult;
                 }
             }
-            //db.closeConnection(db.getConnection());
             joinGameResult.setSuccess(true);
             joinGameResult.setMessage("Joined game successfully.");
         } catch (DataAccessException | SQLException e) {

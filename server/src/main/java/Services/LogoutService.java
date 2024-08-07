@@ -19,7 +19,6 @@ public class LogoutService {
      */
     public LogoutResult Execute(String authtoken){
         LogoutResult logoutResult = new LogoutResult();
-        //Database db = new Database();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             if (authtokenDAO.Find(authtoken) == null) {
@@ -28,8 +27,6 @@ public class LogoutService {
                 return logoutResult;
             }
             authtokenDAO.Remove(authtoken);
-            //FIXME make sure that auth exists
-            //db.closeConnection(db.getConnection());
             logoutResult.setSuccess(true);
             logoutResult.setMessage("Logged out successfully.");
         } catch (DataAccessException | SQLException e) {

@@ -1,9 +1,7 @@
 package dataaccess.DAO;
 
 import Models.Game;
-import chess.ChessGame;
 import com.google.gson.*;
-//import mainChess.Game;
 
 import java.lang.reflect.Type;
 

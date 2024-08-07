@@ -20,7 +20,6 @@ public class ClearService {
      */
     public ClearResult Execute() {
         ClearResult clearResult = new ClearResult();
-        //DatabaseManager db = new DatabaseManager();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
