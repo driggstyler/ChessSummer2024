@@ -141,7 +141,6 @@ public class PostLogin {
                 if (gameNum == 0) {continue;}
                 String playerColor = null;
                 ChessboardUI.run(new ChessBoard());
-
             }
             else {
                 System.out.println("Invalid command. Type help to view valid commands.");

@@ -32,12 +32,13 @@ public class ChessboardUI {
 
     public static void main(String[] args) {
         ChessBoard chessBoard = new ChessBoard();
-        chessBoard.resetBoard();
         run(chessBoard);
     }
 
     public static void run(ChessBoard chessBoard) {
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+
+        chessBoard.resetBoard();
 
         out.print(ERASE_SCREEN);
 
@@ -56,7 +57,7 @@ public class ChessboardUI {
 
         drawHeaders(out);
 
-        out.print(SET_BG_COLOR_BLACK);
+        out.print(SET_BG_COLOR_DARK_GREY);
         out.print(SET_TEXT_COLOR_WHITE);
     }
 
@@ -64,7 +65,7 @@ public class ChessboardUI {
 
         setBlack(out);
 
-        String[] headers = { " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h " };
+        String[] headers = { "    a ", " b ", " c ", " d ", " e ", " f ", " g ", " h " };
         for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
             drawHeader(out, headers[boardCol]);
 
@@ -97,8 +98,8 @@ public class ChessboardUI {
     private static void drawTicTacToeBoard(PrintStream out, ChessBoard chessBoard, String perspective) {
 
         for (int boardRow = 0; boardRow < BOARD_SIZE_IN_SQUARES; ++boardRow) {
-
-            drawRowOfSquares(out, boardRow, chessBoard, perspective);
+            int rowLabel = 8 - boardRow;
+            drawRowOfSquares(out, boardRow, chessBoard, perspective, rowLabel);
 
             if (boardRow < BOARD_SIZE_IN_SQUARES - 1) {
                 // Draw horizontal row separator.
@@ -108,23 +109,21 @@ public class ChessboardUI {
         }
     }
 
-    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective) {
-
+    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective, int rowLabel) {
         for (int squareRow = 0; squareRow < SQUARE_SIZE_IN_PADDED_CHARS; ++squareRow) {
             for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
-
                 if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
                     if (boardCol == 0) {
                         out.print(SET_BG_COLOR_BLACK);
                         out.print(SET_TEXT_COLOR_GREEN);
-                        out.print(squareRow);
+                        out.print(" " + rowLabel + " ");
                     }
                 }
                 else {
                     if (boardCol == 0) {
                         out.print(SET_BG_COLOR_BLACK);
                         out.print(SET_TEXT_COLOR_GREEN);
-                        out.print(" ");
+                        out.print("   ");
                     }
                 }
 
@@ -138,24 +137,30 @@ public class ChessboardUI {
                     int prefixLength = SQUARE_SIZE_IN_PADDED_CHARS / 2;
                     int suffixLength = SQUARE_SIZE_IN_PADDED_CHARS - prefixLength - 1;
                     //Iterate based on perspective
-                    int chessRow;
-                    int chessCol;
+//                    int chessRow;
+//                    int chessCol;
+//                    if (perspective.equals("black")) {
+//                        chessRow = 7 - boardRow;
+//                        chessCol = 7 - boardCol;
+//                    }
+//                    else {
+//                        chessRow = boardRow;
+//                        chessCol = boardCol;
+//                    }
+                    String letter;
+                    ChessPiece piece;
                     if (perspective.equals("white")) {
-                        chessRow = 7 - boardRow;
-                        chessCol = 7 - boardCol;
+                        piece = chessBoard.getPiece(new ChessPosition((7 - boardRow) + 1, boardCol + 1));
                     }
                     else {
-                        chessRow = boardRow;
-                        chessCol = boardCol;
+                        piece = chessBoard.getPiece(new ChessPosition(9 - ((7 - boardRow) + 1), 9 -(boardCol + 1)));
                     }
-                    String letter;
-                    ChessPiece piece = chessBoard.getPiece(new ChessPosition(chessRow + 1, chessCol + 1));
                     String color = "";
                     //switch statements for pieces
                     if (piece != null) {
                         switch (piece.getPieceType()) {
-                            case KING -> letter = Q;
-                            case QUEEN -> letter = K;
+                            case KING -> letter = K;
+                            case QUEEN -> letter = Q;
                             case BISHOP -> letter = B;
                             case KNIGHT -> letter = N;
                             case ROOK -> letter = R;
@@ -178,6 +183,21 @@ public class ChessboardUI {
                 }
                 else {
                     out.print(EMPTY.repeat(SQUARE_SIZE_IN_PADDED_CHARS));
+                }
+
+                if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
+                    if (boardCol == 7) {
+                        out.print(SET_BG_COLOR_BLACK);
+                        out.print(SET_TEXT_COLOR_GREEN);
+                        out.print(" " + rowLabel + " ");
+                    }
+                }
+                else {
+                    if (boardCol == 7) {
+                        out.print(SET_BG_COLOR_BLACK);
+                        out.print(SET_TEXT_COLOR_GREEN);
+                        out.print("   ");
+                    }
                 }
 
                 if (boardCol < BOARD_SIZE_IN_SQUARES - 1) {
