@@ -1,7 +1,7 @@
 package service;
 
 import Results.ClearResult;
-import Services.ClearService;
+import services.ClearService;
 import org.junit.jupiter.api.*;
 
 public class ClearServiceTest {

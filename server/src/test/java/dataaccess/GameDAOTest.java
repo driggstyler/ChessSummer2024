@@ -2,9 +2,9 @@ package dataaccess;
 
 import Models.Game;
 import Models.User;
-import Services.ClearService;
-import dataaccess.DAO.GameDAO;
-import dataaccess.DAO.UserDAO;
+import services.ClearService;
+import dataaccess.dao.GameDAO;
+import dataaccess.dao.UserDAO;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;

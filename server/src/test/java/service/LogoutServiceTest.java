@@ -2,10 +2,10 @@ package service;
 
 import Models.Authtoken;
 import Results.LogoutResult;
-import Services.ClearService;
-import Services.LogoutService;
-import dataaccess.DAO.AuthtokenDAO;
-import dataaccess.DAO.GameDAO;
+import services.ClearService;
+import services.LogoutService;
+import dataaccess.dao.AuthtokenDAO;
+import dataaccess.dao.GameDAO;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 import org.junit.jupiter.api.*;

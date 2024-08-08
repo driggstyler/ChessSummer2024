@@ -1,8 +1,8 @@
 package dataaccess;
 
 import Models.Authtoken;
-import Services.ClearService;
-import dataaccess.DAO.AuthtokenDAO;
+import services.ClearService;
+import dataaccess.dao.AuthtokenDAO;
 import org.junit.jupiter.api.*;
 
 import java.sql.Connection;

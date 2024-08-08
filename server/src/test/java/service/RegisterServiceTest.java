@@ -2,11 +2,11 @@ package service;
 
 import Requests.RegisterRequest;
 import Results.RegisterResult;
-import Services.ClearService;
-import Services.RegisterService;
-import dataaccess.DAO.AuthtokenDAO;
-import dataaccess.DAO.GameDAO;
-import dataaccess.DAO.UserDAO;
+import services.ClearService;
+import services.RegisterService;
+import dataaccess.dao.AuthtokenDAO;
+import dataaccess.dao.GameDAO;
+import dataaccess.dao.UserDAO;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 import org.junit.jupiter.api.*;
