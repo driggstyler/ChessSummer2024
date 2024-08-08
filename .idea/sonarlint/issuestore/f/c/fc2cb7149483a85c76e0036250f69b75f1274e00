@@ -1,0 +1,12 @@
+
+˜
+java:S1192B"Define a constant instead of duplicating this literal "Error encountered while inserting an authtoken into the database" 3 times.(¨Á…‚
+Œ
+java:S1319‘"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(²¾Àíúÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ò§†ù
+b	java:S100`"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ïˆM
+h	java:S100x"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı…Òúÿÿÿÿ
+?
+java:S1481y")Remove this unused "game" local variable.(®®Ä
+i	java:S100‘"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²¾Àíúÿÿÿÿ
+O	java:S106™"9Replace this use of System.out or System.err by a logger.(ÅÑ÷

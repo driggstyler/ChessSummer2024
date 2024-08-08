@@ -1,0 +1,16 @@
+
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(äª ø8à‘Æ’2
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ëêßûÿÿÿÿ8‘à‘Æ’2
+d
+java:S2095A"HUse try-with-resources or close this "Connection" in a "finally" clause.(’™Ýn8™à‘Æ’2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ùüð8šà‘Æ’2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(À—£´8šà‘Æ’2
+v	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(…œìé8šà‘Æ’2
+v	java:S115
+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Æ§Ïï8šà‘Æ’2
+\
+java:S1118":Add a private constructor to hide the implicit public one.( ùÓ‹ÿÿÿÿÿ8›à‘Æ’2
+b
+java:S1124%"EReorder the modifiers to comply with the Java Language Specification.(žûïÔ8¤à‘Æ’2
+b
+java:S1124>"EReorder the modifiers to comply with the Java Language Specification.(©Ü¢˜8¥à‘Æ’2
