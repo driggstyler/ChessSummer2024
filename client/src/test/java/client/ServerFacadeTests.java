@@ -35,7 +35,7 @@ public class ServerFacadeTests {
     void register() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
         var authData = facade.register(registerRequest);
-        assertTrue(authData.getAuthtoken().length() > 10);
+        assertTrue(authData.isSuccess());
     }
     @Test
     void registerFail() throws Exception {
@@ -43,7 +43,7 @@ public class ServerFacadeTests {
         facade.register(registerRequest);
         RegisterRequest registerRequest2 = new RegisterRequest("player1", "password", "p1@email.com");
         var authData = facade.register(registerRequest2);
-        assertFalse(authData.getAuthtoken().length() > 10);
+        assertFalse(authData.isSuccess());
     }
     @Test
     void login() throws Exception {
@@ -105,7 +105,7 @@ public class ServerFacadeTests {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
         facade.register(registerRequest);
         ListGamesResult listGamesResult = facade.listGames("notRealAuthtoken");
-        assertTrue(listGamesResult.isSuccess());
+        assertFalse(listGamesResult.isSuccess());
     }
     @Test
     void joinGame() throws Exception {
