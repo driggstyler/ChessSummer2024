@@ -6,15 +6,15 @@ import Results.LoginResult;
 import Results.RegisterResult;
 import java.util.Scanner;
 
-public class PreLogin {
+public class prelogin {
     int port;
-    public PreLogin(int port) {
+    public prelogin(int port) {
         this.port = port;
     }
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        PostLogin postLogin = new PostLogin();
-        ServerFacade serverFacade = new ServerFacade(port);
+        postlogin postLogin = new postlogin();
+        serverfacade serverFacade = new serverfacade(port);
         System.out.println("Welcome, to see commands type help.");
         while (true) {
             String input = scanner.nextLine();

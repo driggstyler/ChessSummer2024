@@ -9,18 +9,18 @@ import Results.JoinGameResult;
 import Results.ListGamesResult;
 import Results.LogoutResult;
 import chess.ChessBoard;
-import ui.ChessboardUI;
+import ui.chessboardui;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class PostLogin {
+public class postlogin {
     //Join and play game starts UI
     public void run(int port, String authtoken) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Game> games = new ArrayList<>();
-        ServerFacade serverFacade = new ServerFacade(port);
+        serverfacade serverFacade = new serverfacade(port);
         try {
             ListGamesResult listGamesResult = serverFacade.listGames(authtoken);
             games = listGamesResult.getGames();
@@ -118,7 +118,7 @@ public class PostLogin {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
                         System.out.println("Successfully joined game");
-                        ChessboardUI.run(new ChessBoard());
+                        chessboardui.run(new ChessBoard());
                     }
                     else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");
@@ -142,7 +142,7 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                ChessboardUI.run(new ChessBoard());
+                chessboardui.run(new ChessBoard());
             }
             else {
                 System.out.println("Invalid command. Type help to view valid commands.");

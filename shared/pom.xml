@@ -44,7 +44,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        MainTwo
+                                        maintwo
                                     </mainClass>
                                 </manifest>
                             </archive>

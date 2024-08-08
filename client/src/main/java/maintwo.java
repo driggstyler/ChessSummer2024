@@ -1,12 +1,12 @@
 import chess.*;
-import clientComm.PreLogin;
+import clientComm.prelogin;
 
-public class MainTwo {
+public class maintwo {
     public static void main(String[] args) {
         var piece = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
         System.out.println("♕ 240 Chess Client: " + piece);
         //Run looping pre and post screens until quit
-        PreLogin preLogin = new PreLogin(Integer.parseInt(args[0]));
+        prelogin preLogin = new prelogin(Integer.parseInt(args[0]));
         preLogin.run();
     }
 }

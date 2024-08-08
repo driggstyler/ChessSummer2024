@@ -21,7 +21,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <mainClass>MainTwo</mainClass>
+                    <mainClass>maintwo</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -38,7 +38,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        MainTwo
+                                        maintwo
                                     </mainClass>
                                 </manifest>
                             </archive>

@@ -11,9 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class ServerFacade {
+public class serverfacade {
     private int port;
-    public ServerFacade(int port) {
+    public serverfacade(int port) {
         this.port = port;
     }
     private <T> T run(String method, String path, Object body, Class<T> tClass, String authtoken) throws Exception {
