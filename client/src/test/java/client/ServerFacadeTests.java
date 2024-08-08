@@ -30,12 +30,13 @@ public class ServerFacadeTests {
         server.stop();
     }
 
-
     @Test
     void register() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
         var authData = facade.register(registerRequest);
         assertTrue(authData.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void registerFail() throws Exception {
@@ -44,6 +45,8 @@ public class ServerFacadeTests {
         RegisterRequest registerRequest2 = new RegisterRequest("player1", "password", "p1@email.com");
         var authData = facade.register(registerRequest2);
         assertFalse(authData.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void login() throws Exception {
@@ -52,6 +55,8 @@ public class ServerFacadeTests {
         LoginRequest loginRequest = new LoginRequest("player1", "password");
         LoginResult loginResult = facade.login(loginRequest);
         assertTrue(loginResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void loginFail() throws Exception {
@@ -60,6 +65,8 @@ public class ServerFacadeTests {
         LoginRequest loginRequest = new LoginRequest("player2", "password2");
         LoginResult loginResult = facade.login(loginRequest);
         assertFalse(loginResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void logout() throws Exception {
@@ -68,6 +75,8 @@ public class ServerFacadeTests {
         LogoutRequest logoutRequest = new LogoutRequest(registerResult.getAuthtoken());
         LogoutResult logoutResult = facade.logout(logoutRequest, registerResult.getAuthtoken());
         assertTrue(logoutResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void logoutFail() throws Exception {
@@ -76,6 +85,8 @@ public class ServerFacadeTests {
         LogoutRequest logoutRequest = new LogoutRequest(registerResult.getAuthtoken());
         LogoutResult logoutResult = facade.logout(logoutRequest, "notRealAuthtoken");
         assertFalse(logoutResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void createGame() throws Exception {
@@ -84,6 +95,8 @@ public class ServerFacadeTests {
         CreateGameRequest createGameRequest = new CreateGameRequest("firstGame");
         CreateGameResult createGameResult = facade.createGame(createGameRequest, registerResult.getAuthtoken());
         assertTrue(createGameResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void createGameFail() throws Exception {
@@ -92,6 +105,8 @@ public class ServerFacadeTests {
         CreateGameRequest createGameRequest = new CreateGameRequest("firstGame");
         CreateGameResult createGameResult = facade.createGame(createGameRequest, "notRealAuthtoken");
         assertFalse(createGameResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void listGames() throws Exception {
@@ -99,6 +114,8 @@ public class ServerFacadeTests {
         RegisterResult registerResult = facade.register(registerRequest);
         ListGamesResult listGamesResult = facade.listGames(registerResult.getAuthtoken());
         assertTrue(listGamesResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void listGamesFail() throws Exception {
@@ -106,6 +123,8 @@ public class ServerFacadeTests {
         facade.register(registerRequest);
         ListGamesResult listGamesResult = facade.listGames("notRealAuthtoken");
         assertFalse(listGamesResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void joinGame() throws Exception {
@@ -119,6 +138,8 @@ public class ServerFacadeTests {
         JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", listGamesResult.getGames().get(1).getGameID());
         JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
         assertTrue(joinGameResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
     @Test
     void joinGameFail() throws Exception {
@@ -127,6 +148,8 @@ public class ServerFacadeTests {
         JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", 99999);
         JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
         assertFalse(joinGameResult.isSuccess());
+        ClearService clearService = new ClearService();
+        clearService.Execute();
     }
 
 
