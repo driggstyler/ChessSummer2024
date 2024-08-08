@@ -10,7 +10,7 @@ public class CreateGameHandler implements Route {
     public Object handle(Request req, Response res) {
         CreateGameRequest createGameRequest = new Gson().fromJson(req.body(), CreateGameRequest.class);
         CreateGameService createGameService = new CreateGameService();
-        CreateGameResult createGameResult = createGameService.Execute(createGameRequest, req.headers("Authorization"));
+        CreateGameResult createGameResult = createGameService.execute(createGameRequest, req.headers("Authorization"));
         if (createGameResult.isSuccess()) {
             res.status(200);
         }

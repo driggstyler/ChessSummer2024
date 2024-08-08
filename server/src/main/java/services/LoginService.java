@@ -22,16 +22,16 @@ public class LoginService {
      * @param loginRequest Contains the information the user needs to log in.
      * @return A LogInResult object containing the results of the login operation.
      */
-    public LoginResult Execute(LoginRequest loginRequest){
+    public LoginResult execute(LoginRequest loginRequest){
         LoginResult loginResult = new LoginResult();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             UserDAO userDAO = new UserDAO(conn);
-            User user = userDAO.Find(loginRequest.getUsername());
+            User user = userDAO.find(loginRequest.getUsername());
             if (user != null) {
                 if (userDAO.verifyUser(user.getPassword(), loginRequest.getPassword())) {
                     String authtoken = UUID.randomUUID().toString();
-                    authtokenDAO.Insert(new Authtoken(authtoken, loginRequest.getUsername()));
+                    authtokenDAO.insert(new Authtoken(authtoken, loginRequest.getUsername()));
                     loginResult.setUsername(loginRequest.getUsername());
                     loginResult.setAuthtoken(authtoken);
                     loginResult.setSuccess(true);

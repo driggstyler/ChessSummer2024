@@ -10,7 +10,7 @@ public class LoginHandler implements Route {
     public Object handle(Request req, Response res) {
         LoginRequest loginRequest = new Gson().fromJson(req.body(), LoginRequest.class);
         LoginService loginService = new LoginService();
-        LoginResult loginResult = loginService.Execute(loginRequest);
+        LoginResult loginResult = loginService.execute(loginRequest);
         if (loginResult.isSuccess()) {
             res.status(200);
         }

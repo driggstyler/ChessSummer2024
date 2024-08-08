@@ -20,17 +20,17 @@ public class ListGamesService {
      * @param authtoken The authtoken of the signed-in user.
      * @return A ListGamesResult object containing the results of the listGames operation.
      */
-    public ListGamesResult Execute(String authtoken){
+    public ListGamesResult execute(String authtoken){
         ListGamesResult listGamesResult = new ListGamesResult();
         try (Connection conn = DatabaseManager.getConnection()){
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
-            if (authtokenDAO.Find(authtoken) == null) {
+            if (authtokenDAO.find(authtoken) == null) {
                 listGamesResult.setSuccess(false);
                 listGamesResult.setMessage("Error: Unauthorized");
                 return listGamesResult;
             }
-            ArrayList<Game> games = gameDAO.FindAll();
+            ArrayList<Game> games = gameDAO.findAll();
             listGamesResult.setGames(games);
             listGamesResult.setSuccess(true);
             listGamesResult.setMessage("Listed games successfully.");

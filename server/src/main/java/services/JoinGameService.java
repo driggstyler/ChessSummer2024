@@ -20,24 +20,24 @@ public class JoinGameService {
      * @param authtoken The authoke of the signed-in user.
      * @return A JoinGameResult object containing the results of the joinGame operation.
      */
-    public JoinGameResult Execute(JoinGameRequest joinGameRequest, String authtoken){
+    public JoinGameResult execute(JoinGameRequest joinGameRequest, String authtoken){
         JoinGameResult joinGameResult = new JoinGameResult();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
-            if (authtokenDAO.Find(authtoken) == null) {
+            if (authtokenDAO.find(authtoken) == null) {
                 joinGameResult.setSuccess(false);
                 joinGameResult.setMessage("Error: Unauthorized.");
                 return joinGameResult;
             }
-            if (gameDAO.Find(joinGameRequest.getGameID()) == null ||
+            if (gameDAO.find(joinGameRequest.getGameID()) == null ||
                     joinGameRequest.getPlayerColor() == null) {
                 joinGameResult.setSuccess(false);
                 joinGameResult.setMessage("Error: Bad request.");
                 return joinGameResult;
             }
             if (joinGameRequest.getPlayerColor() != null) {
-                boolean claimedSpot = gameDAO.claimSpot(joinGameRequest.getGameID(), joinGameRequest.getPlayerColor(), authtokenDAO.Find(authtoken).getUsername());
+                boolean claimedSpot = gameDAO.claimSpot(joinGameRequest.getGameID(), joinGameRequest.getPlayerColor(), authtokenDAO.find(authtoken).getUsername());
                 if (!claimedSpot) {
                     joinGameResult.setSuccess(false);
                     joinGameResult.setMessage("Error: Already taken.");

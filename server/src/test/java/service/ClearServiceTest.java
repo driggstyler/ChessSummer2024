@@ -16,7 +16,7 @@ public class ClearServiceTest {
         //make req
         ClearService clearService = new ClearService();
         //run clearservice
-        ClearResult clearResult = clearService.Execute();
+        ClearResult clearResult = clearService.execute();
         //take result object and make assertion
         Assertions.assertEquals("Clear succeeded.", clearResult.getMessage(), "Database did not clear.");
         //Assert(expected, actual, "message")

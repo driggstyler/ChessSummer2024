@@ -18,8 +18,8 @@ public class UserDAOTest {
     public void insertSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            Assertions.assertNotEquals(null, userDAO.Find("John"));
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            Assertions.assertNotEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO Insert threw an exception");
@@ -31,9 +31,9 @@ public class UserDAOTest {
     public void insertFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            userDAO.Remove("John");
-            Assertions.assertEquals(null, userDAO.Find("John"));
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            userDAO.remove("John");
+            Assertions.assertEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO InsertFail threw an exception");
@@ -46,8 +46,8 @@ public class UserDAOTest {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
             User user = new User("John", "Johnson", "JJ@gmail.com");
-            userDAO.Insert(user);
-            Assertions.assertNotEquals(null, userDAO.Find("John"));
+            userDAO.insert(user);
+            Assertions.assertNotEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO Find threw an exception");
@@ -59,7 +59,7 @@ public class UserDAOTest {
     public void findFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            Assertions.assertEquals(null, userDAO.Find("John"));
+            Assertions.assertEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO FindFail threw an exception");
@@ -71,9 +71,9 @@ public class UserDAOTest {
     public void removeSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            userDAO.Remove("John");
-            Assertions.assertEquals(null, userDAO.Find("John"));
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            userDAO.remove("John");
+            Assertions.assertEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO Remove threw an exception");
@@ -85,10 +85,10 @@ public class UserDAOTest {
     public void removeFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            userDAO.Remove("John");
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            Assertions.assertNotEquals(null, userDAO.Find("John"));
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            userDAO.remove("John");
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            Assertions.assertNotEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO RemoveFail threw an exception");
@@ -100,10 +100,10 @@ public class UserDAOTest {
     public void clearSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
-            userDAO.Insert(new User("Steve", "Rogers", "flag@gmail.com"));
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
+            userDAO.insert(new User("Steve", "Rogers", "flag@gmail.com"));
             userDAO.clear();
-            Assertions.assertEquals(null, userDAO.Find("John"));
+            Assertions.assertEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("UserDAO Clear threw an exception");
@@ -113,6 +113,6 @@ public class UserDAOTest {
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

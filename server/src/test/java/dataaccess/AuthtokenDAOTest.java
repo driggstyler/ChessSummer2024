@@ -18,8 +18,8 @@ public class AuthtokenDAOTest {
     public void insertSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            Assertions.assertNotEquals(authtokenDAO.Find("test123"), null);
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            Assertions.assertNotEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO Insert threw an exception");
@@ -31,9 +31,9 @@ public class AuthtokenDAOTest {
     public void insertFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            authtokenDAO.Remove("test123");
-            Assertions.assertEquals(authtokenDAO.Find("test123"), null);
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            authtokenDAO.remove("test123");
+            Assertions.assertEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO InsertFail threw an exception");
@@ -46,8 +46,8 @@ public class AuthtokenDAOTest {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             Authtoken authtoken = new Authtoken("test123", "tester1");
-            authtokenDAO.Insert(authtoken);
-            Assertions.assertNotEquals(authtokenDAO.Find("test123"), null);
+            authtokenDAO.insert(authtoken);
+            Assertions.assertNotEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO Find threw an exception");
@@ -59,7 +59,7 @@ public class AuthtokenDAOTest {
     public void findFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            Assertions.assertEquals(authtokenDAO.Find("test321"), null);
+            Assertions.assertEquals(authtokenDAO.find("test321"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO FindFail threw an exception");
@@ -71,9 +71,9 @@ public class AuthtokenDAOTest {
     public void removeSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            authtokenDAO.Remove("test123");
-            Assertions.assertEquals(authtokenDAO.Find("test123"), null);
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            authtokenDAO.remove("test123");
+            Assertions.assertEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO Remove threw an exception");
@@ -85,10 +85,10 @@ public class AuthtokenDAOTest {
     public void removeFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            authtokenDAO.Remove("test123");
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            Assertions.assertNotEquals(authtokenDAO.Find("test123"), null);
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            authtokenDAO.remove("test123");
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            Assertions.assertNotEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO RemoveFail threw an exception");
@@ -100,10 +100,10 @@ public class AuthtokenDAOTest {
     public void clearSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(new Authtoken("test123", "tester1"));
-            authtokenDAO.Insert(new Authtoken("test1234", "tester2"));
+            authtokenDAO.insert(new Authtoken("test123", "tester1"));
+            authtokenDAO.insert(new Authtoken("test1234", "tester2"));
             authtokenDAO.clear();
-            Assertions.assertEquals(authtokenDAO.Find("test123"), null);
+            Assertions.assertEquals(authtokenDAO.find("test123"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO Clear threw an exception");
@@ -113,7 +113,7 @@ public class AuthtokenDAOTest {
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }
 

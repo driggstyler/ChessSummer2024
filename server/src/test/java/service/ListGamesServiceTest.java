@@ -32,9 +32,9 @@ public class ListGamesServiceTest {
         try (Connection conn = DatabaseManager.getConnection()){
             Authtoken authtoken = new Authtoken("abcdefg", "testUser1");
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(authtoken);
+            authtokenDAO.insert(authtoken);
             ListGamesService listGamesService = new ListGamesService();
-            ListGamesResult listGamesResult = listGamesService.Execute("abcdefg");
+            ListGamesResult listGamesResult = listGamesService.execute("abcdefg");
             Assertions.assertEquals("Listed games successfully.", listGamesResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
@@ -45,12 +45,12 @@ public class ListGamesServiceTest {
     @DisplayName("List Games Failure")
     public void listGamesFail() {
         ListGamesService listGamesService = new ListGamesService();
-        ListGamesResult listGamesResult = listGamesService.Execute("abcdefg");
+        ListGamesResult listGamesResult = listGamesService.execute("abcdefg");
         Assertions.assertEquals("Error: Unauthorized", listGamesResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

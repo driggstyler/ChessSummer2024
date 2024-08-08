@@ -23,10 +23,10 @@ public class CreateGameTest {
         try (Connection conn = DatabaseManager.getConnection()){
             Authtoken authtoken = new Authtoken("abcdefg", "Zanmorn");
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(authtoken);
+            authtokenDAO.insert(authtoken);
             CreateGameRequest createGameRequest = new CreateGameRequest("testGame1");
             CreateGameService createGameService = new CreateGameService();
-            CreateGameResult createGameResult = createGameService.Execute(createGameRequest, authtoken.getAuthtoken());
+            CreateGameResult createGameResult = createGameService.execute(createGameRequest, authtoken.getAuthtoken());
             Assertions.assertEquals("Successfully created a new game.", createGameResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
@@ -38,12 +38,12 @@ public class CreateGameTest {
     public void createGameFail() {
         CreateGameRequest createGameRequest = new CreateGameRequest("testGame1");
         CreateGameService createGameService = new CreateGameService();
-        CreateGameResult createGameResult = createGameService.Execute(createGameRequest, "zyx");
+        CreateGameResult createGameResult = createGameService.execute(createGameRequest, "zyx");
         Assertions.assertEquals("Error: Unauthorized", createGameResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

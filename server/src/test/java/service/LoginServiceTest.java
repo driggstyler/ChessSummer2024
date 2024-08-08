@@ -34,10 +34,10 @@ public class LoginServiceTest {
         try (Connection conn = DatabaseManager.getConnection()){
             User user = new User("testUser1", "password1", "testEmail1");
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.Insert(user);
+            userDAO.insert(user);
             LoginRequest loginRequest = new LoginRequest("testUser1", "password1");
             LoginService loginService = new LoginService();
-            LoginResult loginResult = loginService.Execute(loginRequest);
+            LoginResult loginResult = loginService.execute(loginRequest);
             Assertions.assertEquals("Logged in successfully.", loginResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
@@ -49,12 +49,12 @@ public class LoginServiceTest {
     public void loginFail() {
         LoginRequest loginRequest = new LoginRequest("testUser1", "password1");
         LoginService loginService = new LoginService();
-        LoginResult loginResult = loginService.Execute(loginRequest);
+        LoginResult loginResult = loginService.execute(loginRequest);
         Assertions.assertEquals("Error: User not found in the database.", loginResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

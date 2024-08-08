@@ -10,7 +10,7 @@ public class JoinGameHandler implements Route {
     public Object handle (Request req, Response res) {
         JoinGameRequest joinGameRequest = new Gson().fromJson(req.body(), JoinGameRequest.class);
         JoinGameService joinGameService = new JoinGameService();
-        JoinGameResult joinGameResult = joinGameService.Execute(joinGameRequest, req.headers("Authorization"));
+        JoinGameResult joinGameResult = joinGameService.execute(joinGameRequest, req.headers("Authorization"));
         if (joinGameResult.isSuccess()) {
             res.status(200);
         }

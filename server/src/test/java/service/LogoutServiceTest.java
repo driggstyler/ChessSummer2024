@@ -32,9 +32,9 @@ public class LogoutServiceTest {
         try (Connection conn = DatabaseManager.getConnection()) {
             Authtoken authtoken = new Authtoken("abcdefg", "testUser1");
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(authtoken);
+            authtokenDAO.insert(authtoken);
             LogoutService logoutService = new LogoutService();
-            LogoutResult logoutResult = logoutService.Execute("abcdefg");
+            LogoutResult logoutResult = logoutService.execute("abcdefg");
             Assertions.assertEquals("Logged out successfully.", logoutResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
@@ -45,12 +45,12 @@ public class LogoutServiceTest {
     @DisplayName("Logout Failure")
     public void logoutFail() {
         LogoutService logoutService = new LogoutService();
-        LogoutResult logoutResult = logoutService.Execute("abcdefg");
+        LogoutResult logoutResult = logoutService.execute("abcdefg");
         Assertions.assertEquals("Error: Unauthorized", logoutResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

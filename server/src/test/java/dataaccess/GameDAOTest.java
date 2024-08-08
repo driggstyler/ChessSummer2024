@@ -23,8 +23,8 @@ public class GameDAOTest {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
             UserDAO userDAO = new UserDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            userDAO.Insert(new User("John", "Johnson", "JJ@gmail.com"));
+            gameDAO.insert(123, new Game(), "FirstGame");
+            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
             boolean joined = gameDAO.claimSpot(123, "WHITE", "John");
             Assertions.assertTrue(joined);
         } catch (DataAccessException | SQLException e) {
@@ -49,8 +49,8 @@ public class GameDAOTest {
     public void insertSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            Assertions.assertNotEquals(null, gameDAO.Find(123));
+            gameDAO.insert(123, new Game(), "FirstGame");
+            Assertions.assertNotEquals(null, gameDAO.find(123));
         } catch (DataAccessException | SQLException e) {
             System.out.println("GameDAO Insert threw an exception");
         }
@@ -61,9 +61,9 @@ public class GameDAOTest {
     public void insertFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
+            gameDAO.insert(123, new Game(), "FirstGame");
             gameDAO.clear();
-            Assertions.assertEquals(null, gameDAO.Find(123));
+            Assertions.assertEquals(null, gameDAO.find(123));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("GameDAO InsertFail threw an exception");
@@ -75,8 +75,8 @@ public class GameDAOTest {
     public void findSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            Assertions.assertNotEquals(null, gameDAO.Find(123));
+            gameDAO.insert(123, new Game(), "FirstGame");
+            Assertions.assertNotEquals(null, gameDAO.find(123));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("GameDAO Find threw an exception");
@@ -88,7 +88,7 @@ public class GameDAOTest {
     public void findFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            Assertions.assertEquals(null, gameDAO.Find(123));
+            Assertions.assertEquals(null, gameDAO.find(123));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("GameDao FindFail threw an exception");
@@ -100,9 +100,9 @@ public class GameDAOTest {
     public void findAllSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            gameDAO.Insert(456, new Game(), "SecondGame");
-            ArrayList<Game> list = gameDAO.FindAll();
+            gameDAO.insert(123, new Game(), "FirstGame");
+            gameDAO.insert(456, new Game(), "SecondGame");
+            ArrayList<Game> list = gameDAO.findAll();
             Assertions.assertFalse(list.isEmpty());
         }
         catch (DataAccessException | SQLException e) {
@@ -115,10 +115,10 @@ public class GameDAOTest {
     public void findAllFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            gameDAO.Insert(456, new Game(), "SecondGame");
+            gameDAO.insert(123, new Game(), "FirstGame");
+            gameDAO.insert(456, new Game(), "SecondGame");
             gameDAO.clear();
-            ArrayList<Game> list = gameDAO.FindAll();
+            ArrayList<Game> list = gameDAO.findAll();
             Assertions.assertTrue(list.isEmpty());
         }
         catch (DataAccessException | SQLException e) {
@@ -131,10 +131,10 @@ public class GameDAOTest {
     public void clearSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            gameDAO.Insert(123, new Game(), "FirstGame");
-            gameDAO.Insert(456, new Game(), "SecondGame");
+            gameDAO.insert(123, new Game(), "FirstGame");
+            gameDAO.insert(456, new Game(), "SecondGame");
             gameDAO.clear();
-            Assertions.assertEquals(null, gameDAO.Find(123));
+            Assertions.assertEquals(null, gameDAO.find(123));
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("GameDAO Clear threw an exception");
@@ -144,6 +144,6 @@ public class GameDAOTest {
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

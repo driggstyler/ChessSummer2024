@@ -17,16 +17,16 @@ public class LogoutService {
      * @param authtoken The authtoken of the signed-in user.
      * @return A LogoutResult object containing the results of the logout operation.
      */
-    public LogoutResult Execute(String authtoken){
+    public LogoutResult execute(String authtoken){
         LogoutResult logoutResult = new LogoutResult();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            if (authtokenDAO.Find(authtoken) == null) {
+            if (authtokenDAO.find(authtoken) == null) {
                 logoutResult.setSuccess(false);
                 logoutResult.setMessage("Error: Unauthorized");
                 return logoutResult;
             }
-            authtokenDAO.Remove(authtoken);
+            authtokenDAO.remove(authtoken);
             logoutResult.setSuccess(true);
             logoutResult.setMessage("Logged out successfully.");
         } catch (DataAccessException | SQLException e) {

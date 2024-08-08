@@ -10,7 +10,7 @@ public class RegisterHandler implements Route {
     public Object handle(Request req, Response res) {
         RegisterRequest registerRequest = new Gson().fromJson(req.body(), RegisterRequest.class);
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.Execute(registerRequest);
+        RegisterResult registerResult = registerService.execute(registerRequest);
         if (registerResult.isSuccess()) {
             res.status(200);
         }

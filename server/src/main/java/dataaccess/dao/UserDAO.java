@@ -39,7 +39,7 @@ public class UserDAO {
      * @param user The user object.
      * @throws DataAccessException
      */
-    public void Insert(User user) throws DataAccessException {
+    public void insert(User user) throws DataAccessException {
         String sql = "INSERT INTO user (username, password, email) VALUES(?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getUsername());
@@ -58,7 +58,7 @@ public class UserDAO {
      * @return The user with the corresponding username, or null if not in the database.
      * @throws DataAccessException
      */
-    public User Find(String username) throws DataAccessException {
+    public User find(String username) throws DataAccessException {
         User user;
         ResultSet rs;
         String sql = "SELECT * FROM user WHERE username = ?;";
@@ -83,7 +83,7 @@ public class UserDAO {
      * @param username Username of the user to remove.
      * @throws DataAccessException
      */
-    public void Remove(String username) throws DataAccessException {
+    public void remove(String username) throws DataAccessException {
         String sql = "DELETE FROM user WHERE username = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);

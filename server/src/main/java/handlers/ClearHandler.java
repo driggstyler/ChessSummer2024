@@ -9,7 +9,7 @@ import spark.*;
 public class ClearHandler implements Route {
     public Object handle(Request req, Response res ) {
         ClearService clearService = new ClearService();
-        ClearResult clearResult = clearService.Execute();
+        ClearResult clearResult = clearService.execute();
         if (clearResult.isSuccess()) {
             res.status(200);
         }

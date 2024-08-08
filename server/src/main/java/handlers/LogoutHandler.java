@@ -8,7 +8,7 @@ import spark.*;
 public class LogoutHandler implements Route {
     public Object handle(Request req, Response res) {
         LogoutService logoutService = new LogoutService();
-        LogoutResult logoutResult = logoutService.Execute(req.headers("Authorization"));
+        LogoutResult logoutResult = logoutService.execute(req.headers("Authorization"));
         if (logoutResult.isSuccess()) {
             res.status(200);
         }

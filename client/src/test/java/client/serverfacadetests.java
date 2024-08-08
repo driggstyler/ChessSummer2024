@@ -10,7 +10,7 @@ import server.Server;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class serverFacadeTests {
+public class serverfacadetests {
 
     private static Server server;
     static ServerFacade facade;
@@ -22,7 +22,7 @@ public class serverFacadeTests {
         System.out.println("Started test HTTP server on " + port);
         facade = new ServerFacade(port);
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 
     @AfterAll
@@ -36,7 +36,7 @@ public class serverFacadeTests {
         var authData = facade.register(registerRequest);
         assertTrue(authData.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void registerFail() throws Exception {
@@ -46,7 +46,7 @@ public class serverFacadeTests {
         var authData = facade.register(registerRequest2);
         assertFalse(authData.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void login() throws Exception {
@@ -56,7 +56,7 @@ public class serverFacadeTests {
         LoginResult loginResult = facade.login(loginRequest);
         assertTrue(loginResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void loginFail() throws Exception {
@@ -66,7 +66,7 @@ public class serverFacadeTests {
         LoginResult loginResult = facade.login(loginRequest);
         assertFalse(loginResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void logout() throws Exception {
@@ -76,7 +76,7 @@ public class serverFacadeTests {
         LogoutResult logoutResult = facade.logout(logoutRequest, registerResult.getAuthtoken());
         assertTrue(logoutResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void logoutFail() throws Exception {
@@ -86,7 +86,7 @@ public class serverFacadeTests {
         LogoutResult logoutResult = facade.logout(logoutRequest, "notRealAuthtoken");
         assertFalse(logoutResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void createGame() throws Exception {
@@ -96,7 +96,7 @@ public class serverFacadeTests {
         CreateGameResult createGameResult = facade.createGame(createGameRequest, registerResult.getAuthtoken());
         assertTrue(createGameResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void createGameFail() throws Exception {
@@ -106,7 +106,7 @@ public class serverFacadeTests {
         CreateGameResult createGameResult = facade.createGame(createGameRequest, "notRealAuthtoken");
         assertFalse(createGameResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void listGames() throws Exception {
@@ -115,7 +115,7 @@ public class serverFacadeTests {
         ListGamesResult listGamesResult = facade.listGames(registerResult.getAuthtoken());
         assertTrue(listGamesResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void listGamesFail() throws Exception {
@@ -124,7 +124,7 @@ public class serverFacadeTests {
         ListGamesResult listGamesResult = facade.listGames("notRealAuthtoken");
         assertFalse(listGamesResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void joinGame() throws Exception {
@@ -139,7 +139,7 @@ public class serverFacadeTests {
         JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
         assertTrue(joinGameResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
     @Test
     void joinGameFail() throws Exception {
@@ -149,7 +149,7 @@ public class serverFacadeTests {
         JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
         assertFalse(joinGameResult.isSuccess());
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 
 

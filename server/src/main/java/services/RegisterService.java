@@ -22,7 +22,7 @@ public class RegisterService {
      * @param registerRequest Contains the information needed to register the new user.
      * @return A RegisterResult object containing the results of the register operation.
      */
-    public RegisterResult Execute(RegisterRequest registerRequest){
+    public RegisterResult execute(RegisterRequest registerRequest){
         RegisterResult registerResult = new RegisterResult();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
@@ -33,14 +33,14 @@ public class RegisterService {
                 registerResult.setMessage("Error: Missing information to register.");
                 return registerResult;
             }
-            if (userDAO.Find(registerRequest.getUsername()) != null) {
+            if (userDAO.find(registerRequest.getUsername()) != null) {
                 registerResult.setSuccess(false);
                 registerResult.setMessage("Error: Username already taken.");
                 return registerResult;
             }
             String authtoken = UUID.randomUUID().toString();
-            authtokenDAO.Insert(new Authtoken(authtoken, registerRequest.getUsername()));
-            userDAO.Insert(new User(registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getEmail()));
+            authtokenDAO.insert(new Authtoken(authtoken, registerRequest.getUsername()));
+            userDAO.insert(new User(registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getEmail()));
             registerResult.setUsername(registerRequest.getUsername());
             registerResult.setAuthtoken(authtoken);
             registerResult.setSuccess(true);

@@ -47,7 +47,7 @@ public class GameDAO {
      * @throws DataAccessException
      */
     public boolean claimSpot(int gameID, String teamColor, String username) throws DataAccessException {
-        Game game = Find(gameID);
+        Game game = find(gameID);
         if (game == null) {
             return false;
         }
@@ -93,7 +93,7 @@ public class GameDAO {
      * @param gameName The name of the new game to insert.
      * @throws DataAccessException
      */
-    public void Insert(int gameID, Game game, String gameName) throws DataAccessException {
+    public void insert(int gameID, Game game, String gameName) throws DataAccessException {
         game.setGameName(gameName);
         game.setGameID(gameID);
         String sql = "INSERT INTO game (gameID, gameName, game) VALUES(?,?,?)";
@@ -117,8 +117,7 @@ public class GameDAO {
      * @return The game corresponding to the given gameID, or null if the game is not in the database.
      * @throws DataAccessException
      */
-    public Game Find(int gameID) throws DataAccessException{
-        Game game;
+    public Game find(int gameID) throws DataAccessException{
         ResultSet rs;
         String sql = "SELECT * FROM game WHERE gameID = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -142,7 +141,7 @@ public class GameDAO {
      * @return All games int the database in an ArrayList.
      * @throws DataAccessException
      */
-    public ArrayList<Game> FindAll() throws DataAccessException{
+    public ArrayList<Game> findAll() throws DataAccessException{
         ArrayList<Game> games = new ArrayList<>();
         ResultSet rs;
         String sql = "SELECT game FROM game;";

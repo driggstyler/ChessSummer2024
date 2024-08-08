@@ -8,7 +8,7 @@ import spark.*;
 public class ListGamesHandler implements Route {
     public Object handle(Request req, Response res) {
         ListGamesService listGamesService = new ListGamesService();
-        ListGamesResult listGamesResult = listGamesService.Execute(req.headers("Authorization"));
+        ListGamesResult listGamesResult = listGamesService.execute(req.headers("Authorization"));
         if (listGamesResult.isSuccess()) {
             res.status(200);
         }

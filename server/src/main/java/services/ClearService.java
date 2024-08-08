@@ -18,7 +18,7 @@ public class ClearService {
      * Clears everything in the database (Authtokens, Games, and Users).
      * @return A ClearResponse object containing the results of the clear operation.
      */
-    public ClearResult Execute() {
+    public ClearResult execute() {
         ClearResult clearResult = new ClearResult();
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);

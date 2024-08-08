@@ -34,13 +34,13 @@ public class JoinGameServiceTest {
         try (Connection conn = DatabaseManager.getConnection()){
             Authtoken authtoken = new Authtoken("abcdefg", "testUser1");
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.Insert(authtoken);
+            authtokenDAO.insert(authtoken);
             GameDAO gameDAO = new GameDAO(conn);
             Game game = new Game();
-            gameDAO.Insert(101, game, "First Game");
+            gameDAO.insert(101, game, "First Game");
             JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", 101);
             JoinGameService joinGameService = new JoinGameService();
-            JoinGameResult joinGameResult = joinGameService.Execute(joinGameRequest, "abcdefg");
+            JoinGameResult joinGameResult = joinGameService.execute(joinGameRequest, "abcdefg");
             Assertions.assertEquals("Joined game successfully.", joinGameResult.getMessage());
         }
         catch (DataAccessException | SQLException e) {
@@ -52,12 +52,12 @@ public class JoinGameServiceTest {
     public void joinGameFail() {
         JoinGameRequest joinGameRequest = new JoinGameRequest("White", 101);
         JoinGameService joinGameService = new JoinGameService();
-        JoinGameResult joinGameResult = joinGameService.Execute(joinGameRequest, "abcdefg");
+        JoinGameResult joinGameResult = joinGameService.execute(joinGameRequest, "abcdefg");
         Assertions.assertEquals("Error: Unauthorized.", joinGameResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

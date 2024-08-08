@@ -40,7 +40,7 @@ public class AuthtokenDAO {
      * @param authtoken The authtoken object to insert.
      * @throws DataAccessException
      */
-    public void Insert(Authtoken authtoken) throws DataAccessException {
+    public void insert(Authtoken authtoken) throws DataAccessException {
         String sql = "INSERT INTO authentication (authtoken, username) VALUES(?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, authtoken.getAuthtoken());
@@ -59,7 +59,7 @@ public class AuthtokenDAO {
      * @return The authoken object with the string matching the given authtoken string, or null if it's not in the database.
      * @throws DataAccessException
      */
-    public Authtoken Find(String authtokenString) throws DataAccessException {
+    public Authtoken find(String authtokenString) throws DataAccessException {
         Authtoken aToken;
         ResultSet rs;
         String sql = "SELECT * FROM authentication WHERE authtoken = ?;";
@@ -83,7 +83,7 @@ public class AuthtokenDAO {
      * @param authtokenString The string of the authtoken to find.
      * @throws DataAccessException
      */
-    public void Remove(String authtokenString) throws DataAccessException {
+    public void remove(String authtokenString) throws DataAccessException {
         String sql = "DELETE FROM authentication WHERE authtoken = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, authtokenString);

@@ -34,7 +34,7 @@ public class RegisterServiceTest {
     public void registerSuccess() {
         RegisterRequest registerRequest = new RegisterRequest("testUser1", "password1", "testEmail1");
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.Execute(registerRequest);
+        RegisterResult registerResult = registerService.execute(registerRequest);
         Assertions.assertEquals("Registered successfully.", registerResult.getMessage());
     }
     @Test
@@ -42,12 +42,12 @@ public class RegisterServiceTest {
     public void registerFail() {
         RegisterRequest registerRequest = new RegisterRequest("testUser1", null, null);
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.Execute(registerRequest);
+        RegisterResult registerResult = registerService.execute(registerRequest);
         Assertions.assertEquals("Error: Missing information to register.", registerResult.getMessage());
     }
     @AfterEach
     public void tearDown() {
         ClearService clearService = new ClearService();
-        clearService.Execute();
+        clearService.execute();
     }
 }

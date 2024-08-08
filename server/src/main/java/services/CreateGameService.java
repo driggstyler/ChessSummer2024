@@ -21,12 +21,12 @@ public class CreateGameService {
      * @param authtoken The authtoken of the signed-in user.
      * @return A CreateGameResult the contains the results of the createGame operation.
      */
-    public CreateGameResult Execute(CreateGameRequest createGameRequest, String authtoken) {
+    public CreateGameResult execute(CreateGameRequest createGameRequest, String authtoken) {
         CreateGameResult createGameResult = new CreateGameResult();
         try (Connection conn = DatabaseManager.getConnection()){
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
-            if (authtokenDAO.Find(authtoken) == null) {
+            if (authtokenDAO.find(authtoken) == null) {
                 createGameResult.setSuccess(false);
                 createGameResult.setMessage("Error: Unauthorized");
                 return createGameResult;
@@ -38,13 +38,13 @@ public class CreateGameService {
             }
 
             int gameID;
-            if (gameDAO.FindAll() != null) {
-                gameID = gameDAO.FindAll().size() + 1;
+            if (gameDAO.findAll() != null) {
+                gameID = gameDAO.findAll().size() + 1;
             }
             else {
                 gameID = 1;
             }
-            gameDAO.Insert(gameID, new Game(), createGameRequest.getGameName());
+            gameDAO.insert(gameID, new Game(), createGameRequest.getGameName());
             createGameResult.setGameID(gameID);
             createGameResult.setSuccess(true);
             createGameResult.setMessage("Successfully created a new game.");
