@@ -33,7 +33,13 @@ public class PostLogin {
             String input = scanner.nextLine();
             //Do command based on input
             if (input.equals("help")) {
-                System.out.println("Options: \nlogout\ncreate game\nlist games\nplay game\nobserve game");
+                System.out.println("""
+                    Options:
+                    logout - Logs you out of the server.
+                    create game - Creates a new playable game.
+                    list games - Lists all of the ongoing games.
+                    play game - Join a game you can play.
+                    observe game - Observe a game being played.""");
             }
             else if (input.equals("logout")) {
                 try {

@@ -60,7 +60,12 @@ public class PreLogin {
                 }
             }
             else if (input.equals("help")) {
-                System.out.println("Options: \nlogin\nregister\nquit");
+                System.out.println("""
+                        Options:
+                        login - Logs you into the server by prompting you for your username and password
+                        register - Registers you as a new user and automatically logs you in by prompting you
+                            for a new username, password, and email
+                        quit - Closes the program.""");
             }
             else {
                 System.out.println("Invalid command. Type help to view valid commands.");
