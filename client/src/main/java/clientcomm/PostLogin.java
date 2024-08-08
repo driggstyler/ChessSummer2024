@@ -84,8 +84,15 @@ public class PostLogin {
                             if (game.getWhiteUsername() != null) {
                                 System.out.println(game.getWhiteUsername() + " is playing as white");
                             }
+                            else {
+                                System.out.println("No one is playing as white");
+
+                            }
                             if (game.getBlackUsername() != null) {
                                 System.out.println(game.getBlackUsername() + " is playing as black");
+                            }else {
+                                System.out.println("No one is playing as black");
+
                             }
                         }
                     }

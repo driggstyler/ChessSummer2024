@@ -39,36 +39,50 @@ public class ChessboardUI {
         String white = "white";
         String black = "black";
 
-        drawHeaders(out);
+        drawHeaders(out, white);
 
         drawTicTacToeBoard(out, chessBoard, white);
 
-        drawHeaders(out);
+        drawHeaders(out, white);
 
-        drawHeaders(out);
+        drawHeaders(out, black);
 
         drawTicTacToeBoard(out, chessBoard, black);
 
-        drawHeaders(out);
+        drawHeaders(out, black);
 
         out.print(SET_BG_COLOR_DARK_GREY);
         out.print(SET_TEXT_COLOR_WHITE);
     }
 
-    private static void drawHeaders(PrintStream out) {
+    private static void drawHeaders(PrintStream out, String perspective) {
 
         setBlack(out);
 
-        String[] headers = { "    a ", " b ", " c ", " d ", " e ", " f ", " g ", " h " };
-        for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
-            drawHeader(out, headers[boardCol]);
+        if (perspective.equals("white")){
+            String[] headers = {"    a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
+            for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
+                drawHeader(out, headers[boardCol]);
 
-            if (boardCol < BOARD_SIZE_IN_SQUARES - 1) {
-                out.print(EMPTY.repeat(LINE_WIDTH_IN_PADDED_CHARS));
+                if (boardCol < BOARD_SIZE_IN_SQUARES - 1) {
+                    out.print(EMPTY.repeat(LINE_WIDTH_IN_PADDED_CHARS));
+                }
             }
-        }
 
-        out.println();
+            out.println();
+        }
+        if (perspective.equals("black")){
+            String[] headers = {"    h ", " g ", " f ", " e ", " d ", " c ", " b ", " a "};
+            for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
+                drawHeader(out, headers[boardCol]);
+
+                if (boardCol < BOARD_SIZE_IN_SQUARES - 1) {
+                    out.print(EMPTY.repeat(LINE_WIDTH_IN_PADDED_CHARS));
+                }
+            }
+
+            out.println();
+        }
     }
 
     private static void drawHeader(PrintStream out, String headerText) {
@@ -92,7 +106,12 @@ public class ChessboardUI {
     private static void drawTicTacToeBoard(PrintStream out, ChessBoard chessBoard, String perspective) {
 
         for (int boardRow = 0; boardRow < BOARD_SIZE_IN_SQUARES; ++boardRow) {
-            int rowLabel = 8 - boardRow;
+            int rowLabel = 0;
+            if (perspective.equals("white")) {
+                rowLabel = 8 - boardRow;
+            } else {
+                rowLabel = boardRow + 1;
+            }
             drawRowOfSquares(out, boardRow, chessBoard, perspective, rowLabel);
 
             if (boardRow < BOARD_SIZE_IN_SQUARES - 1) {
