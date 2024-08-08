@@ -10,7 +10,7 @@ import server.Server;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class serverfacadetests {
+public class serverFacadeTests {
 
     private static Server server;
     static ServerFacade facade;
