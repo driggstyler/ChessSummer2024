@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
 
 public class ServerFacade {
     private int port;
@@ -62,12 +61,8 @@ public class ServerFacade {
     }
 
     private <T> T receiveResponse(HttpURLConnection http, Class<T> tClass) throws IOException {
-        var statusCode = http.getResponseCode();
-        var statusMessage = http.getResponseMessage();
-
-        T responseBody = readResponseBody(http, tClass);
         //Do stuff based on response
-        return responseBody;
+        return readResponseBody(http, tClass);
     }
 
     private static <T> T readResponseBody(HttpURLConnection http, Class<T> tClass) throws IOException {
