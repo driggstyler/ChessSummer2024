@@ -35,8 +35,6 @@ k
 ;shared/src/test/java/passoff/chess/piece/PawnMoveTests.java,f\5\f5f303eb20d0409e171fe16f357212147605d4a8
 e
 5shared/src/test/java/passoff/chess/TestUtilities.java,1\4\14062c2f20526a866f3144a841b2af7bd4bb47af
-]
--shared/src/test/java/passoff/TestFactory.java,0\0\00e17b5475f43a14ad8ef5cc19d8bd58d481b048
 l
 <shared/src/test/java/passoff/chess/game/GameStatusTests.java,3\d\3d8e6e324b6bb763d5d4a1a3f28e088c47790aa0
 m
