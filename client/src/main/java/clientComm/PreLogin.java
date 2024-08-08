@@ -34,6 +34,9 @@ public class PreLogin {
                         System.out.println("Login was successful");
                         postLogin.run(port, loginResult.getAuthtoken());
                     }
+                    else {
+                        System.out.println("Couldn't log in, username or password was incorrect.");
+                    }
                 } catch (Exception e) {
                     System.out.println("Login failed from PreLogin class.");
                 }
@@ -51,6 +54,9 @@ public class PreLogin {
                     if (registerResult.isSuccess()) {
                         System.out.println("Register was successful.");
                         postLogin.run(port, registerResult.getAuthtoken());
+                    }
+                    else {
+                        System.out.println("Couldn't register, username is already taken.");
                     }
                 } catch (Exception e) {
                     System.out.println("Register failed from PreLogin class.");
