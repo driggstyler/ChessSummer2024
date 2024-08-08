@@ -32,6 +32,7 @@ public class ListGamesService {
             }
             ArrayList<Game> games = gameDAO.FindAll();
             listGamesResult.setGames(games);
+            listGamesResult.setSuccess(true);
             listGamesResult.setMessage("Listed games successfully.");
         } catch (DataAccessException | SQLException e) {
             e.printStackTrace();
