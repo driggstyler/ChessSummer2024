@@ -1,16 +1,8 @@
-package Results;
+package results;
 
-public class JoinGameResult {
+public class LogoutResult {
     private String message;
     private boolean success;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public boolean isSuccess() {
         return success;
@@ -18,5 +10,13 @@ public class JoinGameResult {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

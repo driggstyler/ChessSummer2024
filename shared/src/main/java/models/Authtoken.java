@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 /**
  * The authtoken object containing both the username and the actual authtoken string.

@@ -1,7 +1,7 @@
 package handlers;
 
-import Requests.CreateGameRequest;
-import Results.CreateGameResult;
+import requests.CreateGameRequest;
+import results.CreateGameResult;
 import services.CreateGameService;
 import com.google.gson.Gson;
 import spark.*;

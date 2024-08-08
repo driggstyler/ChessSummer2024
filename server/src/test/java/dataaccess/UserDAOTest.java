@@ -1,6 +1,6 @@
 package dataaccess;
 
-import Models.User;
+import models.User;
 import services.ClearService;
 import dataaccess.dao.UserDAO;
 import org.junit.jupiter.api.*;

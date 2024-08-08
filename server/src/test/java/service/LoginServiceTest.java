@@ -1,8 +1,8 @@
 package service;
 
-import Models.User;
-import Requests.LoginRequest;
-import Results.LoginResult;
+import models.User;
+import requests.LoginRequest;
+import results.LoginResult;
 import services.ClearService;
 import services.LoginService;
 import dataaccess.dao.AuthtokenDAO;

@@ -1,13 +1,13 @@
 package clientcomm;
 
-import Models.Game;
-import Requests.CreateGameRequest;
-import Requests.JoinGameRequest;
-import Requests.LogoutRequest;
-import Results.CreateGameResult;
-import Results.JoinGameResult;
-import Results.ListGamesResult;
-import Results.LogoutResult;
+import models.Game;
+import requests.CreateGameRequest;
+import requests.JoinGameRequest;
+import requests.LogoutRequest;
+import results.CreateGameResult;
+import results.JoinGameResult;
+import results.ListGamesResult;
+import results.LogoutResult;
 import chess.ChessBoard;
 import ui.ChessboardUI;
 

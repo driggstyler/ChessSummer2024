@@ -3,7 +3,7 @@ package services;
 import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.GameDAO;
 import dataaccess.dao.UserDAO;
-import Results.ClearResult;
+import results.ClearResult;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

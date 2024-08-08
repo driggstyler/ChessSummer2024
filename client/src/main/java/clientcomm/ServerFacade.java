@@ -1,7 +1,7 @@
 package clientcomm;
 
-import Requests.*;
-import Results.*;
+import requests.*;
+import results.*;
 import com.google.gson.Gson;
 
 import java.io.IOException;

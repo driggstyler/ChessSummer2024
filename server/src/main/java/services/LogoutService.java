@@ -1,7 +1,7 @@
 package services;
 
 import dataaccess.dao.AuthtokenDAO;
-import Results.LogoutResult;
+import results.LogoutResult;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

@@ -2,10 +2,10 @@ package services;
 
 import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.UserDAO;
-import Models.Authtoken;
-import Models.User;
-import Requests.LoginRequest;
-import Results.LoginResult;
+import models.Authtoken;
+import models.User;
+import requests.LoginRequest;
+import results.LoginResult;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

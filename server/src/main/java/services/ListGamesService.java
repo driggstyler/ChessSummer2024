@@ -2,8 +2,8 @@ package services;
 
 import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.GameDAO;
-import Models.Game;
-import Results.ListGamesResult;
+import models.Game;
+import results.ListGamesResult;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

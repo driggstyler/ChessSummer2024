@@ -1,7 +1,7 @@
 package service;
 
-import Models.Authtoken;
-import Results.LogoutResult;
+import models.Authtoken;
+import results.LogoutResult;
 import services.ClearService;
 import services.LogoutService;
 import dataaccess.dao.AuthtokenDAO;

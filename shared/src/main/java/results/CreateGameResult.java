@@ -1,7 +1,7 @@
-package Results;
+package results;
 
-public class ClearResult {
-    private boolean success;
+public class CreateGameResult {
+    private Integer gameID;
     private String message;
 
     public boolean isSuccess() {
@@ -10,6 +10,16 @@ public class ClearResult {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    private boolean success;
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(Integer gameID) {
+        this.gameID = gameID;
     }
 
     public String getMessage() {

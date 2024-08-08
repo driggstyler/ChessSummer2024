@@ -1,9 +1,9 @@
 package clientcomm;
 
-import Requests.LoginRequest;
-import Requests.RegisterRequest;
-import Results.LoginResult;
-import Results.RegisterResult;
+import requests.LoginRequest;
+import requests.RegisterRequest;
+import results.LoginResult;
+import results.RegisterResult;
 import java.util.Scanner;
 
 public class PreLogin {

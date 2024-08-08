@@ -1,7 +1,7 @@
 package service;
 
-import Requests.RegisterRequest;
-import Results.RegisterResult;
+import requests.RegisterRequest;
+import results.RegisterResult;
 import services.ClearService;
 import services.RegisterService;
 import dataaccess.dao.AuthtokenDAO;

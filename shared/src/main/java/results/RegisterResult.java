@@ -1,4 +1,4 @@
-package Results;
+package results;
 
 public class RegisterResult {
     private String username;

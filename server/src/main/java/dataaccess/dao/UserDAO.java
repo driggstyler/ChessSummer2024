@@ -1,6 +1,6 @@
 package dataaccess.dao;
 
-import Models.User;
+import models.User;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 import org.mindrot.jbcrypt.BCrypt;

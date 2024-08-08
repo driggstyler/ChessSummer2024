@@ -1,21 +1,8 @@
-package Results;
+package results;
 
-import Models.Game;
-
-import java.util.ArrayList;
-
-public class ListGamesResult {
-    private ArrayList<Game> games = new ArrayList<>();
+public class JoinGameResult {
     private String message;
     private boolean success;
-
-    public ArrayList<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(ArrayList<Game> games) {
-        this.games = games;
-    }
 
     public String getMessage() {
         return message;

@@ -1,8 +1,8 @@
-package Results;
+package results;
 
-public class LogoutResult {
-    private String message;
+public class ClearResult {
     private boolean success;
+    private String message;
 
     public boolean isSuccess() {
         return success;

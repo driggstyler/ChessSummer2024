@@ -1,7 +1,7 @@
 package dataaccess;
 
-import Models.Game;
-import Models.User;
+import models.Game;
+import models.User;
 import services.ClearService;
 import dataaccess.dao.GameDAO;
 import dataaccess.dao.UserDAO;

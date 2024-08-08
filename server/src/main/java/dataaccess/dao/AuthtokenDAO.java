@@ -1,6 +1,6 @@
 package dataaccess.dao;
 
-import Models.Authtoken;
+import models.Authtoken;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

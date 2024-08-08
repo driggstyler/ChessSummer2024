@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 /**
  * The User object containing the username, password, and email of the given user.

@@ -2,8 +2,8 @@ package services;
 
 import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.GameDAO;
-import Requests.JoinGameRequest;
-import Results.JoinGameResult;
+import requests.JoinGameRequest;
+import results.JoinGameResult;
 import dataaccess.DataAccessException;
 import dataaccess.DatabaseManager;
 

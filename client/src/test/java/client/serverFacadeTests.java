@@ -1,7 +1,7 @@
 package client;
 
-import Requests.*;
-import Results.*;
+import requests.*;
+import results.*;
 import services.ClearService;
 import clientcomm.ServerFacade;
 import org.junit.jupiter.api.*;

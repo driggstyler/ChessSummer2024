@@ -1,6 +1,6 @@
 package dataaccess.dao;
 
-import Models.Game;
+import models.Game;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;

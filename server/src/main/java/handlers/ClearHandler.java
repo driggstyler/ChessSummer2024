@@ -1,6 +1,6 @@
 package handlers;
 
-import Results.ClearResult;
+import results.ClearResult;
 
 import services.ClearService;
 import com.google.gson.Gson;

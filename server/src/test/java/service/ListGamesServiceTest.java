@@ -1,7 +1,7 @@
 package service;
 
-import Models.Authtoken;
-import Results.ListGamesResult;
+import models.Authtoken;
+import results.ListGamesResult;
 import services.ClearService;
 import services.ListGamesService;
 import dataaccess.dao.AuthtokenDAO;
