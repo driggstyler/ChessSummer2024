@@ -5,8 +5,6 @@ A
 server/server.iml,3\f\3f335f11ae5914540a6aba5f5129f694b55a8d87
 A
 client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
-b
-2client/src/test/java/client/ServerFacadeTests.java,e\6\e6826acb161285e1dab795e5cfe93be0d16ca8b4
 e
 5server/src/test/java/service/RegisterServiceTest.java,f\1\f10de077afc184d6ee76fdba2e688ba07c4d4054
 c
@@ -51,8 +49,6 @@ e
 5server/src/test/java/dataaccess/AuthtokenDAOTest.java,a\2\a27878873d44cd49e958366ed7693329d38c4dc4
 b
 2server/src/test/java/service/ClearServiceTest.java,0\7\077a5a04e2f7d160761be627b48d8ba38373f6b2
-d
-4server/src/main/java/dataaccess/DatabaseManager.java,f\b\fb7cdb568d97831984b27de21950263d16967a67
 f
 6shared/src/test/java/passoff/chess/ChessMoveTests.java,d\0\d0976cffcef29072b835886c43fd62174459be03
 k
@@ -99,8 +95,6 @@ Z
 *shared/src/main/java/chess/ChessBoard.java,d\f\dfc4ec84b5d57ac6e0266e9c319b728da99e0c51
 ]
 -shared/src/main/java/Results/ClearResult.java,d\4\d4e29433e7d9be32a2099fd2213df23b09d24287
-_
-/server/src/main/java/Services/ClearService.java,8\4\84e15f051cd0cdaac7fee877c98cf7a543444e86
 d
 4shared/src/main/java/Requests/CreateGameRequest.java,8\8\880478740382f465d60ccfb9aff057cdf4393dc4
 b
@@ -135,8 +129,6 @@ U
 %shared/src/main/java/Models/User.java,6\e\6e13feec46a0e41b8de3b3828242afe52e8ecf44
 `
 0server/src/main/java/dataaccess/DAO/UserDAO.java,c\c\ccea1bf7a8594ec4c6dc4ce08e39594014ebffb3
-\
-,client/src/main/java/ui/EscapeSequences.java,b\6\b6823e781e53d487887c1ba9760d63892cdd044c
 l
 <shared/src/test/java/passoff/chess/game/GameStatusTests.java,3\d\3d8e6e324b6bb763d5d4a1a3f28e088c47790aa0
 a

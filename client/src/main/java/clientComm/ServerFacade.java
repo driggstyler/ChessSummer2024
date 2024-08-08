@@ -17,20 +17,10 @@ public class ServerFacade {
     public ServerFacade(int port) {
         this.port = port;
     }
-    private <T> T run(String method, String path, Object body, Class<T> Tclass, String authtoken) throws Exception {
-        //if (args.length >= 2) {
-            //var method = method;
+    private <T> T run(String method, String path, Object body, Class<T> tClass, String authtoken) throws Exception {
             var url = "http://localhost:"+ port + path;
-            //var path = args[1];
-            //var body = args.length == 3 ? args[2] : "";
-            //var body = body;
-
             HttpURLConnection http = sendRequest(url, method, body, authtoken);
-            return receiveResponse(http, Tclass);
-//        } else {
-//            System.out.println("ClientCurlExample <method> <url> [<body>]");
-//            return null;
-//        }
+            return receiveResponse(http, tClass);
     }
     public LoginResult login(LoginRequest loginRequest) throws Exception{
         return run("POST", "/session", loginRequest, LoginResult.class, "");
@@ -58,7 +48,6 @@ public class ServerFacade {
         http.addRequestProperty("authorization", authtoken);
         writeRequestBody(body, http);
         http.connect();
-        System.out.printf("= Request =========\n[%s] %s\n\n%s\n\n", method, url, body);
         return http;
     }
 
@@ -72,29 +61,28 @@ public class ServerFacade {
         }
     }
 
-    private <T> T receiveResponse(HttpURLConnection http, Class<T> Tclass) throws IOException {
+    private <T> T receiveResponse(HttpURLConnection http, Class<T> tClass) throws IOException {
         var statusCode = http.getResponseCode();
         var statusMessage = http.getResponseMessage();
 
-        T responseBody = readResponseBody(http, Tclass);
-        System.out.printf("= Response =========\n[%d] %s\n\n%s\n\n", statusCode, statusMessage, responseBody);
+        T responseBody = readResponseBody(http, tClass);
         //Do stuff based on response
         return responseBody;
     }
 
-    private static <T> T readResponseBody(HttpURLConnection http, Class<T> Tclass) throws IOException {
+    private static <T> T readResponseBody(HttpURLConnection http, Class<T> tClass) throws IOException {
         T responseBody = null;
         int status = http.getResponseCode();
         if (status == 200) {
             try (InputStream respBody = http.getInputStream()) {
                 InputStreamReader inputStreamReader = new InputStreamReader(respBody);
-                responseBody = new Gson().fromJson(inputStreamReader, Tclass);
+                responseBody = new Gson().fromJson(inputStreamReader, tClass);
             }
         }
         else {
             try (InputStream respBody = http.getErrorStream()) {
                 InputStreamReader inputStreamReader = new InputStreamReader(respBody);
-                responseBody = new Gson().fromJson(inputStreamReader, Tclass);
+                responseBody = new Gson().fromJson(inputStreamReader, tClass);
             }
         }
 

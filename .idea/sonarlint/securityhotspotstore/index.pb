@@ -5,8 +5,6 @@ A
 server/server.iml,3\f\3f335f11ae5914540a6aba5f5129f694b55a8d87
 A
 client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
-b
-2client/src/test/java/client/ServerFacadeTests.java,e\6\e6826acb161285e1dab795e5cfe93be0d16ca8b4
 e
 5server/src/test/java/service/RegisterServiceTest.java,f\1\f10de077afc184d6ee76fdba2e688ba07c4d4054
 c
@@ -51,8 +49,6 @@ e
 5server/src/test/java/dataaccess/AuthtokenDAOTest.java,a\2\a27878873d44cd49e958366ed7693329d38c4dc4
 b
 2server/src/test/java/service/ClearServiceTest.java,0\7\077a5a04e2f7d160761be627b48d8ba38373f6b2
-d
-4server/src/main/java/dataaccess/DatabaseManager.java,f\b\fb7cdb568d97831984b27de21950263d16967a67
 f
 6shared/src/test/java/passoff/chess/ChessMoveTests.java,d\0\d0976cffcef29072b835886c43fd62174459be03
 k
@@ -137,9 +133,5 @@ _
 /server/src/main/java/Services/LoginService.java,b\e\befaa7c880408d21d7c6600e1e1907f2a109ef3f
 d
 4server/src/main/java/Services/CreateGameService.java,1\a\1a11ce33345b220210289fc59f388c593a9fdf9c
-_
-/server/src/main/java/Services/ClearService.java,8\4\84e15f051cd0cdaac7fee877c98cf7a543444e86
-\
-,client/src/main/java/ui/EscapeSequences.java,b\6\b6823e781e53d487887c1ba9760d63892cdd044c
 a
 1shared/src/main/java/Results/ListGamesResult.java,1\4\149f14d104eb57de81bec91c90713cabdf9d7ae0

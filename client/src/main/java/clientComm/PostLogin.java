@@ -12,7 +12,6 @@ import chess.ChessBoard;
 import ui.ChessboardUI;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -59,7 +58,6 @@ public class PostLogin {
             else if (input.equals("create game")) {
                 System.out.println("Please type the name of the new game.");
                 String gameName = scanner.nextLine();
-                String body = "gameName: " + gameName;
                 try {
                     CreateGameRequest createGameRequest = new CreateGameRequest(gameName);
                     CreateGameResult createGameResult = serverFacade.createGame(createGameRequest, authtoken);
@@ -89,7 +87,6 @@ public class PostLogin {
                             if (game.getBlackUsername() != null) {
                                 System.out.println(game.getBlackUsername() + " is playing as black");
                             }
-                            //System.out.println("\n");
                         }
                     }
                     else {
@@ -145,7 +142,6 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                String playerColor = null;
                 ChessboardUI.run(new ChessBoard());
             }
             else {

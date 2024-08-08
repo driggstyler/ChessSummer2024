@@ -4,9 +4,6 @@ import Requests.LoginRequest;
 import Requests.RegisterRequest;
 import Results.LoginResult;
 import Results.RegisterResult;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PreLogin {

@@ -27,9 +27,6 @@ public class ChessboardUI {
     private static final String R = " R ";
     private static final String P = " P ";
 
-    private static Random rand = new Random();
-
-
     public static void main(String[] args) {
         ChessBoard chessBoard = new ChessBoard();
         run(chessBoard);
@@ -102,8 +99,6 @@ public class ChessboardUI {
             drawRowOfSquares(out, boardRow, chessBoard, perspective, rowLabel);
 
             if (boardRow < BOARD_SIZE_IN_SQUARES - 1) {
-                // Draw horizontal row separator.
-                drawHorizontalLine(out);
                 setBlack(out);
             }
         }
@@ -136,17 +131,6 @@ public class ChessboardUI {
                 if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
                     int prefixLength = SQUARE_SIZE_IN_PADDED_CHARS / 2;
                     int suffixLength = SQUARE_SIZE_IN_PADDED_CHARS - prefixLength - 1;
-                    //Iterate based on perspective
-//                    int chessRow;
-//                    int chessCol;
-//                    if (perspective.equals("black")) {
-//                        chessRow = 7 - boardRow;
-//                        chessCol = 7 - boardCol;
-//                    }
-//                    else {
-//                        chessRow = boardRow;
-//                        chessCol = boardCol;
-//                    }
                     String letter;
                     ChessPiece piece;
                     if (perspective.equals("white")) {
@@ -213,20 +197,6 @@ public class ChessboardUI {
         }
     }
 
-    private static void drawHorizontalLine(PrintStream out) {
-
-        int boardSizeInSpaces = BOARD_SIZE_IN_SQUARES * SQUARE_SIZE_IN_PADDED_CHARS +
-                (BOARD_SIZE_IN_SQUARES - 1) * LINE_WIDTH_IN_PADDED_CHARS;
-
-        for (int lineRow = 0; lineRow < LINE_WIDTH_IN_PADDED_CHARS; ++lineRow) {
-            setRed(out);
-            out.print(EMPTY.repeat(boardSizeInSpaces));
-
-            setBlack(out);
-            out.println();
-        }
-    }
-
     private static void setWhite(PrintStream out) {
         out.print(SET_BG_COLOR_WHITE);
         out.print(SET_TEXT_COLOR_WHITE);
@@ -243,7 +213,6 @@ public class ChessboardUI {
     }
 
     private static void printPlayer(PrintStream out, String player, String color) {
-        //out.print(SET_BG_COLOR_WHITE);
         if (color.equals("white")) {
             out.print(SET_TEXT_COLOR_RED);
         }
