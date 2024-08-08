@@ -71,9 +71,9 @@ public class serverFacadeTests {
     @Test
     void logout() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
-        LogoutRequest logoutRequest = new LogoutRequest(registerResult.getAuthtoken());
-        LogoutResult logoutResult = facade.logout(logoutRequest, registerResult.getAuthtoken());
+        LoginResult loginResult = facade.register(registerRequest);
+        LogoutRequest logoutRequest = new LogoutRequest(loginResult.getAuthtoken());
+        LogoutResult logoutResult = facade.logout(logoutRequest, loginResult.getAuthtoken());
         assertTrue(logoutResult.isSuccess());
         ClearService clearService = new ClearService();
         clearService.execute();
@@ -81,8 +81,8 @@ public class serverFacadeTests {
     @Test
     void logoutFail() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
-        LogoutRequest logoutRequest = new LogoutRequest(registerResult.getAuthtoken());
+        LoginResult loginResult = facade.register(registerRequest);
+        LogoutRequest logoutRequest = new LogoutRequest(loginResult.getAuthtoken());
         LogoutResult logoutResult = facade.logout(logoutRequest, "notRealAuthtoken");
         assertFalse(logoutResult.isSuccess());
         ClearService clearService = new ClearService();
@@ -91,9 +91,9 @@ public class serverFacadeTests {
     @Test
     void createGame() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
+        LoginResult loginResult = facade.register(registerRequest);
         CreateGameRequest createGameRequest = new CreateGameRequest("firstGame");
-        CreateGameResult createGameResult = facade.createGame(createGameRequest, registerResult.getAuthtoken());
+        CreateGameResult createGameResult = facade.createGame(createGameRequest, loginResult.getAuthtoken());
         assertTrue(createGameResult.isSuccess());
         ClearService clearService = new ClearService();
         clearService.execute();
@@ -101,7 +101,7 @@ public class serverFacadeTests {
     @Test
     void createGameFail() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
+        facade.register(registerRequest);
         CreateGameRequest createGameRequest = new CreateGameRequest("firstGame");
         CreateGameResult createGameResult = facade.createGame(createGameRequest, "notRealAuthtoken");
         assertFalse(createGameResult.isSuccess());
@@ -111,8 +111,8 @@ public class serverFacadeTests {
     @Test
     void listGames() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
-        ListGamesResult listGamesResult = facade.listGames(registerResult.getAuthtoken());
+        LoginResult loginResult = facade.register(registerRequest);
+        ListGamesResult listGamesResult = facade.listGames(loginResult.getAuthtoken());
         assertTrue(listGamesResult.isSuccess());
         ClearService clearService = new ClearService();
         clearService.execute();
@@ -129,14 +129,14 @@ public class serverFacadeTests {
     @Test
     void joinGame() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
+        LoginResult loginResult = facade.register(registerRequest);
         CreateGameRequest createGameRequest = new CreateGameRequest("matchGame");
-        facade.createGame(createGameRequest, registerResult.getAuthtoken());
+        facade.createGame(createGameRequest, loginResult.getAuthtoken());
         CreateGameRequest createGameRequest2 = new CreateGameRequest("rematchGame");
-        facade.createGame(createGameRequest2, registerResult.getAuthtoken());
-        ListGamesResult listGamesResult = facade.listGames(registerResult.getAuthtoken());
+        facade.createGame(createGameRequest2, loginResult.getAuthtoken());
+        ListGamesResult listGamesResult = facade.listGames(loginResult.getAuthtoken());
         JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", listGamesResult.getGames().get(1).getGameID());
-        JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
+        JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, loginResult.getAuthtoken());
         assertTrue(joinGameResult.isSuccess());
         ClearService clearService = new ClearService();
         clearService.execute();
@@ -144,9 +144,9 @@ public class serverFacadeTests {
     @Test
     void joinGameFail() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("player1", "password", "p1@email.com");
-        RegisterResult registerResult = facade.register(registerRequest);
+        LoginResult loginResult = facade.register(registerRequest);
         JoinGameRequest joinGameRequest = new JoinGameRequest("WHITE", 99999);
-        JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, registerResult.getAuthtoken());
+        JoinGameResult joinGameResult = facade.joinGame(joinGameRequest, loginResult.getAuthtoken());
         assertFalse(joinGameResult.isSuccess());
         ClearService clearService = new ClearService();
         clearService.execute();

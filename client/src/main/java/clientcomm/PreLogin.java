@@ -3,7 +3,8 @@ package clientcomm;
 import requests.LoginRequest;
 import requests.RegisterRequest;
 import results.LoginResult;
-import results.RegisterResult;
+import results.LogoutResult;
+
 import java.util.Scanner;
 
 public class PreLogin {
@@ -50,10 +51,10 @@ public class PreLogin {
                 String email = scanner.nextLine();
                 RegisterRequest registerRequest = new RegisterRequest(username, password, email);
                 try {
-                    RegisterResult registerResult = serverFacade.register(registerRequest);
-                    if (registerResult.isSuccess()) {
+                    LoginResult loginResult = serverFacade.register(registerRequest);
+                    if (loginResult.isSuccess()) {
                         System.out.println("Register was successful.");
-                        postLogin.run(port, registerResult.getAuthtoken());
+                        postLogin.run(port, loginResult.getAuthtoken());
                     }
                     else {
                         System.out.println("Couldn't register, username is already taken.");

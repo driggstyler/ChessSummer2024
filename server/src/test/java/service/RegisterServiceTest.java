@@ -1,7 +1,7 @@
 package service;
 
 import requests.RegisterRequest;
-import results.RegisterResult;
+import results.LoginResult;
 import services.ClearService;
 import services.RegisterService;
 import dataaccess.dao.AuthtokenDAO;
@@ -34,16 +34,16 @@ public class RegisterServiceTest {
     public void registerSuccess() {
         RegisterRequest registerRequest = new RegisterRequest("testUser1", "password1", "testEmail1");
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.execute(registerRequest);
-        Assertions.assertEquals("Registered successfully.", registerResult.getMessage());
+        LoginResult loginResult = registerService.execute(registerRequest);
+        Assertions.assertEquals("Registered successfully.", loginResult.getMessage());
     }
     @Test
     @DisplayName("Register Failure")
     public void registerFail() {
         RegisterRequest registerRequest = new RegisterRequest("testUser1", null, null);
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.execute(registerRequest);
-        Assertions.assertEquals("Error: Missing information to register.", registerResult.getMessage());
+        LoginResult loginResult = registerService.execute(registerRequest);
+        Assertions.assertEquals("Error: Missing information to register.", loginResult.getMessage());
     }
     @AfterEach
     public void tearDown() {

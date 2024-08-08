@@ -24,8 +24,8 @@ public class ServerFacade {
     public LoginResult login(LoginRequest loginRequest) throws Exception{
         return run("POST", "/session", loginRequest, LoginResult.class, "");
     }
-    public RegisterResult register(RegisterRequest registerRequest) throws Exception {
-        return run("POST", "/user", registerRequest, RegisterResult.class, "");
+    public LoginResult register(RegisterRequest registerRequest) throws Exception {
+        return run("POST", "/user", registerRequest, LoginResult.class, "");
     }
     public LogoutResult logout(LogoutRequest logoutRequest, String authtoken) throws Exception{
         return run("DELETE", "/session", logoutRequest, LogoutResult.class, authtoken);

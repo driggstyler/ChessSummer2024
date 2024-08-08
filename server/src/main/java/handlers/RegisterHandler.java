@@ -1,7 +1,7 @@
 package handlers;
 
 import requests.RegisterRequest;
-import results.RegisterResult;
+import results.LoginResult;
 import services.RegisterService;
 import com.google.gson.Gson;
 import spark.*;
@@ -10,21 +10,21 @@ public class RegisterHandler implements Route {
     public Object handle(Request req, Response res) {
         RegisterRequest registerRequest = new Gson().fromJson(req.body(), RegisterRequest.class);
         RegisterService registerService = new RegisterService();
-        RegisterResult registerResult = registerService.execute(registerRequest);
-        if (registerResult.isSuccess()) {
+        LoginResult loginResult = registerService.execute(registerRequest);
+        if (loginResult.isSuccess()) {
             res.status(200);
         }
         else {
-            if (registerResult.getMessage().equals("Error: Missing information to register.")) {
+            if (loginResult.getMessage().equals("Error: Missing information to register.")) {
                 res.status(400);
             }
-            else if (registerResult.getMessage().equals("Error: Username already taken.")) {
+            else if (loginResult.getMessage().equals("Error: Username already taken.")) {
                 res.status(403);
             }
-            else if (registerResult.getMessage().equals("Error in registering.")) {
+            else if (loginResult.getMessage().equals("Error in registering.")) {
                 res.status(500);
             }
         }
-        return new Gson().toJson(registerResult);
+        return new Gson().toJson(loginResult);
     }
 }
