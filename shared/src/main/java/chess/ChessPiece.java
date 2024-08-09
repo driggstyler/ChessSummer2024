@@ -144,7 +144,7 @@ public class ChessPiece {
             for (int j = -1; j <= 1; j++) {
                 for (int l = 1; l <= 8; l++) {
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
-                    if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
+                    if (outOfBoundsChecker(myPosition, i, j, l)) {
                         break;
                     }
                     if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
@@ -167,15 +167,10 @@ public class ChessPiece {
                         break;
                     }
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
-                    if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
+                    if (outOfBoundsChecker(myPosition, i, j, l) || (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor)) {
                         break;
                     }
-                    if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
-                        possibleMoves.add(new ChessMove(myPosition, currPosition, null));
-                    }
-                    if (board.getPiece(currPosition) != null) {
-                        break;
-                    }
+                    possibleMoves.add(new ChessMove(myPosition, currPosition, null));
                 }
             }
         }
@@ -216,6 +211,14 @@ public class ChessPiece {
             }
         }
         return possibleMoves;
+    }
+    public boolean outOfBoundsChecker(ChessPosition myPosition, int i, int j, int l) {
+        boolean outOfBounds = false;
+        ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
+        if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
+            outOfBounds = true;
+        }
+        return outOfBounds;
     }
     @Override
     public boolean equals(Object o) {
