@@ -76,25 +76,7 @@ public class PostLogin {
                     ListGamesResult listGamesResult = serverFacade.listGames(authtoken);
                     if (listGamesResult.isSuccess()) {
                         games = listGamesResult.getGames();
-                        System.out.println("List of games: \n");
-                        for (int i = 0; i < games.size(); i++) {
-                            int n = i + 1;
-                            Game game = games.get(i);
-                            System.out.println(n + ": " + game.getGameName());
-                            if (game.getWhiteUsername() != null) {
-                                System.out.println(game.getWhiteUsername() + " is playing as white");
-                            }
-                            else {
-                                System.out.println("No one is playing as white");
-
-                            }
-                            if (game.getBlackUsername() != null) {
-                                System.out.println(game.getBlackUsername() + " is playing as black");
-                            }else {
-                                System.out.println("No one is playing as black");
-
-                            }
-                        }
+                        printGames(games);
                     }
                     else {
                         System.out.println("Failed to retrieve list of games.");
@@ -153,6 +135,27 @@ public class PostLogin {
             }
             else {
                 System.out.println("Invalid command. Type help to view valid commands.");
+            }
+        }
+    }
+    public void printGames(ArrayList<Game> games) {
+        System.out.println("List of games: \n");
+        for (int i = 0; i < games.size(); i++) {
+            int n = i + 1;
+            Game game = games.get(i);
+            System.out.println(n + ": " + game.getGameName());
+            if (game.getWhiteUsername() != null) {
+                System.out.println(game.getWhiteUsername() + " is playing as white");
+            }
+            else {
+                System.out.println("No one is playing as white");
+
+            }
+            if (game.getBlackUsername() != null) {
+                System.out.println(game.getBlackUsername() + " is playing as black");
+            }else {
+                System.out.println("No one is playing as black");
+
             }
         }
     }
