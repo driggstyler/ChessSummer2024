@@ -158,21 +158,18 @@ public class ChessboardUI {
                     String color = "";
                     //switch statements for pieces
                     if (piece != null) {
-                        switch (piece.getPieceType()) {
-                            case KING -> letter = K;
-                            case QUEEN -> letter = Q;
-                            case BISHOP -> letter = B;
-                            case KNIGHT -> letter = N;
-                            case ROOK -> letter = R;
-                            case PAWN -> letter = P;
-                            default -> letter = EMPTY;
-                        }
-                        if (piece.getTeamColor() == ChessGame.TeamColor.WHITE) {
-                            color = "white";
-                        }
-                        else {
-                            color = "black";
-                        }
+                        letter = pieceLetter(piece.getPieceType());
+//                        switch (piece.getPieceType()) {
+//                            case KING -> letter = K;
+//                            case QUEEN -> letter = Q;
+//                            case BISHOP -> letter = B;
+//                            case KNIGHT -> letter = N;
+//                            case ROOK -> letter = R;
+//                            case PAWN -> letter = P;
+//                            default -> letter = EMPTY;
+                        //}
+
+                        color = pieceColorToString(piece.getTeamColor());
                     }
                     else {
                         letter = EMPTY;
@@ -236,5 +233,26 @@ public class ChessboardUI {
             out.print(SET_TEXT_COLOR_BLUE);
         }
         out.print(player);
+    }
+    private static String pieceLetter(ChessPiece.PieceType pieceType) {
+        String letter;
+        switch (pieceType) {
+            case KING -> letter = K;
+            case QUEEN -> letter = Q;
+            case BISHOP -> letter = B;
+            case KNIGHT -> letter = N;
+            case ROOK -> letter = R;
+            case PAWN -> letter = P;
+            default -> letter = EMPTY;
+        }
+        return letter;
+    }
+    private static String pieceColorToString(ChessGame.TeamColor teamColor) {
+        if (teamColor == ChessGame.TeamColor.WHITE) {
+            return "white";
+        }
+        else {
+            return "black";
+        }
     }
 }
