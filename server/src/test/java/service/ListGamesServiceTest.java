@@ -19,8 +19,8 @@ public class ListGamesServiceTest {
         try (Connection conn = DatabaseManager.getConnection()){
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
-            authtokenDAO.clear();
             gameDAO.clear();
+            authtokenDAO.clear();
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("JoinGameTest setup threw an exception.");
