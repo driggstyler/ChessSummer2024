@@ -83,7 +83,10 @@ public class ChessPiece {
                         break;
                     }
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
-                    if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
+                    if (currPosition.getRow() < 1 || currPosition.getRow() > 8) {
+                        break;
+                    }
+                    if (currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
                         break;
                     }
                     if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
