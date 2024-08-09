@@ -16,7 +16,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class PostLogin {
-    //Join and play game starts UI
     public void run(int port, String authtoken) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Game> games = new ArrayList<>();
@@ -24,13 +23,10 @@ public class PostLogin {
         try {
             ListGamesResult listGamesResult = serverFacade.listGames(authtoken);
             games = listGamesResult.getGames();
-        } catch (Exception e) {
-            System.out.println("Exception thrown while getting a list of games in PostLogin class (top of run method).");
-        }
+        } catch (Exception e) {System.out.println("Exception thrown while getting a list of games in PostLogin class (top of run method).");}
         System.out.println("Logged in, to see commands type help.");
         while (true) {
             String input = scanner.nextLine();
-            //Do command based on input
             if (input.equals("help")) {
                 System.out.println("""
                     Options:
@@ -48,12 +44,8 @@ public class PostLogin {
                         System.out.println("Logout was successful");
                         break;
                     }
-                    else {
-                        System.out.println("Error: Failed to logout.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Logout failed in PostLogin class due to an exception thrown.");
-                }
+                    else {System.out.println("Error: Failed to logout.");}
+                } catch (Exception e) {System.out.println("Logout failed in PostLogin class due to an exception thrown.");}
             }
             else if (input.equals("create game")) {
                 System.out.println("Please type the name of the new game.");
@@ -64,12 +56,8 @@ public class PostLogin {
                     if (createGameResult.isSuccess()) {
                         System.out.println("The " + gameName + " game has been successfully added.");
                     }
-                    else {
-                        System.out.println("Game was not successfully added.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Exception thrown while creating a game in PostLogin class.");
-                }
+                    else {System.out.println("Game was not successfully added.");}
+                } catch (Exception e) {System.out.println("Exception thrown while creating a game in PostLogin class.");}
             }
             else if (input.equals("list games")) {
                 try {
@@ -78,9 +66,7 @@ public class PostLogin {
                         games = listGamesResult.getGames();
                         printGames(games);
                     }
-                    else {
-                        System.out.println("Failed to retrieve list of games.");
-                    }
+                    else {System.out.println("Failed to retrieve list of games.");}
                 } catch (Exception e) {
                     System.out.println("Exception thrown while getting a list of games in PostLogin class.");
                 }
@@ -109,19 +95,11 @@ public class PostLogin {
                         System.out.println("Successfully joined game");
                         ChessboardUI.run(new ChessBoard());
                     }
-                    else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
-                        System.out.println("Sorry, that player position is already taken.");
-                    }
-                    else {
-                        System.out.println("Failed to join game.");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Exception thrown while trying to join game in the PostLogin Class.");
-                }
+                    else if (joinGameResult.getMessage().equals("Error: Already taken.")) {System.out.println("Sorry, that player position is already taken.");}
+                    else {System.out.println("Failed to join game.");}
+                } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
             }
             else if (input.equals("observe game")) {
-                //no http comm, print a board
-                //validate if its a game
                 int gameNum = -1;
                 while (gameNum > games.size() + 1 || gameNum < 0) {
                     System.out.println("Please pick a number within the list of games. If stuck, type 0 to go back.");
@@ -133,9 +111,7 @@ public class PostLogin {
                 if (gameNum == 0) {continue;}
                 ChessboardUI.run(new ChessBoard());
             }
-            else {
-                System.out.println("Invalid command. Type help to view valid commands.");
-            }
+            else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }
     public void printGames(ArrayList<Game> games) {
