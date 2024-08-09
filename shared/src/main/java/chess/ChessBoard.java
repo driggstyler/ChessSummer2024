@@ -99,10 +99,12 @@ public class ChessBoard {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null || getClass() != o.getClass())
+        }
+        if (o == null || getClass() != o.getClass()) {
             return false;
+        }
         ChessBoard chessBoard = (ChessBoard) o;
         return Arrays.deepEquals(boardArray, chessBoard.getBoardArray());
     }
