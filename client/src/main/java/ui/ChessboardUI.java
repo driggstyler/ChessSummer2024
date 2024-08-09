@@ -159,16 +159,6 @@ public class ChessboardUI {
                     //switch statements for pieces
                     if (piece != null) {
                         letter = pieceLetter(piece.getPieceType());
-//                        switch (piece.getPieceType()) {
-//                            case KING -> letter = K;
-//                            case QUEEN -> letter = Q;
-//                            case BISHOP -> letter = B;
-//                            case KNIGHT -> letter = N;
-//                            case ROOK -> letter = R;
-//                            case PAWN -> letter = P;
-//                            default -> letter = EMPTY;
-                        //}
-
                         color = pieceColorToString(piece.getTeamColor());
                     }
                     else {
