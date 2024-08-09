@@ -156,19 +156,7 @@ public class ChessGame {
             return false;
         }
         //Check if any move can get the king out of check.
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
-                ChessPosition currPosition = new ChessPosition(i, j);
-                if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != teamColor) {
-                    continue;
-                }
-                Collection<ChessMove> validMoves = validMoves(currPosition);
-                if (!validMoves.isEmpty()) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return isEveryOtherSquareUnsafe(teamColor);
     }
 
     /**
@@ -184,6 +172,10 @@ public class ChessGame {
             return false;
         }
         //Check if any move is valid
+        return isEveryOtherSquareUnsafe(teamColor);
+    }
+
+    public boolean isEveryOtherSquareUnsafe(TeamColor teamColor) {
         for (int i = 1; i <= 8; i++) {
             for (int j = 1; j <= 8; j++) {
                 ChessPosition currPosition = new ChessPosition(i, j);
