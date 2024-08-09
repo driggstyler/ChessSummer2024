@@ -37,7 +37,10 @@ public class JoinGameService {
                 return joinGameResult;
             }
             if (joinGameRequest.getPlayerColor() != null) {
-                boolean claimedSpot = gameDAO.claimSpot(joinGameRequest.getGameID(), joinGameRequest.getPlayerColor(), authtokenDAO.find(authtoken).getUsername());
+                int claimID = joinGameRequest.getGameID();
+                String claimTeamColor = joinGameRequest.getPlayerColor();
+                String claimerUsername = authtokenDAO.find(authtoken).getUsername();
+                boolean claimedSpot = gameDAO.claimSpot(claimID, claimTeamColor, claimerUsername);
                 if (!claimedSpot) {
                     joinGameResult.setSuccess(false);
                     joinGameResult.setMessage("Error: Already taken.");

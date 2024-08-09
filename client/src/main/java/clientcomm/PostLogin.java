@@ -95,7 +95,8 @@ public class PostLogin {
                         System.out.println("Successfully joined game");
                         ChessboardUI.run(new ChessBoard());
                     }
-                    else if (joinGameResult.getMessage().equals("Error: Already taken.")) {System.out.println("Sorry, that player position is already taken.");}
+                    else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
+                        System.out.println("Sorry, that player position is already taken.");}
                     else {System.out.println("Failed to join game.");}
                 } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
             }

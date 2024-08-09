@@ -15,7 +15,10 @@ public class LoginHandler implements Route {
             res.status(200);
         }
         else {
-            if (loginResult.getMessage().equals("Error: Incorrect password.") || loginResult.getMessage().equals("Error: User not found in the database.")) {
+            if (loginResult.getMessage().equals("Error: Incorrect password.")) {
+                res.status(401);
+            }
+            if (loginResult.getMessage().equals("Error: User not found in the database.")) {
                 res.status(401);
             }
             else if (loginResult.getMessage().equals("Error in login.")) {
