@@ -170,7 +170,11 @@ public class ChessPiece {
                         break;
                     }
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
-                    if (outOfBoundsChecker(myPosition, i, j, l) || (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor)) {
+                    boolean outOfBounds = outOfBoundsChecker(myPosition, i, j, l);
+                    if (outOfBounds) {
+                        break;
+                    }
+                    if (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor){
                         break;
                     }
                     possibleMoves.add(new ChessMove(myPosition, currPosition, null));
