@@ -31,9 +31,9 @@ public class AuthtokenDAOTest {
     public void insertFail() {
         try (Connection conn = DatabaseManager.getConnection()) {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            authtokenDAO.insert(new Authtoken("test123", "tester1"));
-            authtokenDAO.remove("test123");
-            Assertions.assertEquals(authtokenDAO.find("test123"), null);
+            authtokenDAO.insert(new Authtoken("test456", "tester2"));
+            authtokenDAO.remove("test456");
+            Assertions.assertEquals(authtokenDAO.find("test456"), null);
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("AuthtokenDAO InsertFail threw an exception");

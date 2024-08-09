@@ -71,8 +71,8 @@ public class UserDAOTest {
     public void removeSuccess() {
         try (Connection conn = DatabaseManager.getConnection()) {
             UserDAO userDAO = new UserDAO(conn);
-            userDAO.insert(new User("John", "Johnson", "JJ@gmail.com"));
-            userDAO.remove("John");
+            userDAO.insert(new User("Joe", "Swanson", "JS@gmail.com"));
+            userDAO.remove("Joe");
             Assertions.assertEquals(null, userDAO.find("John"));
         }
         catch (DataAccessException | SQLException e) {
