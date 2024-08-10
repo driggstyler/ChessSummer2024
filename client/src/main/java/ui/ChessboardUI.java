@@ -31,7 +31,8 @@ public class ChessboardUI {
 
     public static void run(ChessBoard chessBoard) {
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-
+        //should be current board instead
+        //only print players perspective or white of observer's perspective
         chessBoard.resetBoard();
 
         out.print(ERASE_SCREEN);
