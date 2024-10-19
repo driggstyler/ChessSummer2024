@@ -143,9 +143,7 @@ public class ChessPiece {
             for (int j = -1; j <= 1; j++) {
                 for (int l = 1; l <= 8; l++) {
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
-                    if (outOfBoundsChecker(myPosition, i, j, l)) {
-                        break;
-                    }
+                    if (outOfBoundsChecker(myPosition, i, j, l)) {break;}
                     if (board.getPiece(currPosition) == null || board.getPiece(currPosition).getTeamColor() != pieceColor) {
                         possibleMoves.add(new ChessMove(myPosition, currPosition, null));
                     }
