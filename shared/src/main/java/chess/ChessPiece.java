@@ -158,14 +158,10 @@ public class ChessPiece {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 for (int l = 1; l <= 8; l++) {
-                    if (l > 1) {
-                        break;
-                    }
+                    if (l > 1) {break;}
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
                     boolean outOfBounds = outOfBoundsChecker(myPosition, i, j, l);
-                    if (outOfBounds) {
-                        break;
-                    }
+                    if (outOfBounds) {break;}
                     if (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor){
                         break;
                     }
