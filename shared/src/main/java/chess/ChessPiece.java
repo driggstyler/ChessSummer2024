@@ -123,9 +123,7 @@ public class ChessPiece {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 for (int l = 1; l <= 8; l++) {
-                    if (i == 0 || j == 0) {
-                        break;
-                    }
+                    if (i == 0 || j == 0) {break;}
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
                     if (currPosition.getRow() < 1 || currPosition.getRow() > 8 || currPosition.getColumn() < 1 || currPosition.getColumn() > 8) {
                         break;
