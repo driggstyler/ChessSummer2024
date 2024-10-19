@@ -57,8 +57,8 @@ public class ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         //suggested: make a switch statement for each function per pieceType
         Set<ChessMove> possibleMoves = new HashSet<>();
-        ChessPiece.PieceType val = board.getPiece(myPosition).getPieceType();
-        switch(val) {
+        ChessPiece.PieceType type = board.getPiece(myPosition).getPieceType();
+        switch(type) {
             case ROOK: possibleMoves = rookPossibleMoves(possibleMoves, board, myPosition);
             break;
             case KNIGHT: possibleMoves = knightPossibleMoves(possibleMoves, board, myPosition);
