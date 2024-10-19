@@ -162,9 +162,7 @@ public class ChessPiece {
                     ChessPosition currPosition = new ChessPosition(myPosition.getRow() + (i*l), myPosition.getColumn() + (j*l));
                     boolean outOfBounds = outOfBoundsChecker(myPosition, i, j, l);
                     if (outOfBounds) {break;}
-                    if (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor){
-                        break;
-                    }
+                    if (board.getPiece(currPosition) != null && board.getPiece(currPosition).getTeamColor() == pieceColor){break;}
                     possibleMoves.add(new ChessMove(myPosition, currPosition, null));
                 }
             }
