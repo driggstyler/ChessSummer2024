@@ -1,5 +1,7 @@
 package websocket.messages;
 
+import models.Game;
+
 import java.util.Objects;
 
 /**

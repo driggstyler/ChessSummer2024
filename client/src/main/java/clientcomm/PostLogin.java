@@ -10,6 +10,7 @@ import results.ListGamesResult;
 import results.LogoutResult;
 import chess.ChessBoard;
 import ui.ChessboardUI;
+import websocket.commands.UserGameCommand;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -30,6 +31,7 @@ public class PostLogin {
             if (input.equals("help")) {
                 System.out.println("""
                     Options:
+                    help - Shows the commands while you are logged in.
                     logout - Logs you out of the server.
                     create game - Creates a new playable game.
                     list games - Lists all of the ongoing games.
@@ -92,8 +94,8 @@ public class PostLogin {
                 try {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
-                        System.out.println("Successfully joined game");
-                        ChessboardUI.run(new ChessBoard());
+                        GamePlayUI gamePlayUI = new GamePlayUI();
+                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
                     }
                     else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");}
@@ -110,7 +112,15 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                ChessboardUI.run(new ChessBoard());
+                JoinGameRequest joinGameRequest = new JoinGameRequest(null, games.get(gameNum - 1).getGameID());
+                try {
+                    JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
+                    if (joinGameResult.isSuccess()) {
+                        GamePlayUI gamePlayUI = new GamePlayUI();
+                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
+                    }
+                    else {System.out.println("Failed to join game.");}
+                } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
             }
             else {System.out.println("Invalid command. Type help to view valid commands.");}
         }

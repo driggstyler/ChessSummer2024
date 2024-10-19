@@ -10,6 +10,8 @@ public class Server {
 
         Spark.staticFiles.location("web");
 
+        Spark.webSocket("/ws", WebSocketHandler.class);
+
         // Register your endpoints and handle exceptions here.
         Spark.delete("/db", (req, res) -> new ClearHandler().handle(req, res));
         Spark.post("/game", (req, res) -> new CreateGameHandler().handle(req, res));

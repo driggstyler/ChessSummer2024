@@ -1,11 +1,11 @@
 package ui;
 
-import chess.ChessBoard;
-import chess.ChessGame;
-import chess.ChessPiece;
-import chess.ChessPosition;
+import chess.*;
+
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+
 import static ui.EscapeSequences.*;
 
 public class ChessboardUI {
@@ -26,10 +26,10 @@ public class ChessboardUI {
 
     public static void main(String[] args) {
         ChessBoard chessBoard = new ChessBoard();
-        run(chessBoard);
+        run(chessBoard, ChessGame.TeamColor.WHITE, null);
     }
 
-    public static void run(ChessBoard chessBoard) {
+    public static void run(ChessBoard chessBoard, ChessGame.TeamColor teamColor, Collection<ChessMove> possibleMoves) {
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
         //should be current board instead
         //only print players perspective or white of observer's perspective
@@ -37,20 +37,21 @@ public class ChessboardUI {
 
         out.print(ERASE_SCREEN);
 
+        String color;
+        if (teamColor == ChessGame.TeamColor.WHITE) {
+            color = "white";
+        } else {
+            color = "black";
+        }
+
         String white = "white";
         String black = "black";
 
-        drawHeaders(out, white);
+        drawHeaders(out, color);
 
-        drawTicTacToeBoard(out, chessBoard, white);
+        drawTicTacToeBoard(out, chessBoard, color, possibleMoves);
 
-        drawHeaders(out, white);
-
-        drawHeaders(out, black);
-
-        drawTicTacToeBoard(out, chessBoard, black);
-
-        drawHeaders(out, black);
+        drawHeaders(out, color);
 
         out.print(SET_BG_COLOR_DARK_GREY);
         out.print(SET_TEXT_COLOR_WHITE);
@@ -104,7 +105,7 @@ public class ChessboardUI {
         setBlack(out);
     }
 
-    private static void drawTicTacToeBoard(PrintStream out, ChessBoard chessBoard, String perspective) {
+    private static void drawTicTacToeBoard(PrintStream out, ChessBoard chessBoard, String perspective, Collection<ChessMove> possibleMoves) {
 
         for (int boardRow = 0; boardRow < BOARD_SIZE_IN_SQUARES; ++boardRow) {
             int rowLabel = 0;
@@ -113,7 +114,7 @@ public class ChessboardUI {
             } else {
                 rowLabel = boardRow + 1;
             }
-            drawRowOfSquares(out, boardRow, chessBoard, perspective, rowLabel);
+            drawRowOfSquares(out, boardRow, chessBoard, perspective, rowLabel, possibleMoves);
 
             if (boardRow < BOARD_SIZE_IN_SQUARES - 1) {
                 setBlack(out);
@@ -121,7 +122,7 @@ public class ChessboardUI {
         }
     }
 
-    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective, int rowLabel) {
+    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective, int rowLabel, Collection<ChessMove> possibleMoves) {
         for (int squareRow = 0; squareRow < SQUARE_SIZE_IN_PADDED_CHARS; ++squareRow) {
             for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
                 if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
@@ -139,11 +140,23 @@ public class ChessboardUI {
                     }
                 }
 
+                ChessPosition chessPosition;
+                if (perspective.equals("white")) {
+                    chessPosition =  new ChessPosition((7 - boardRow) + 1, boardCol + 1);
+                }
+                else {
+                    chessPosition = new ChessPosition(9 - ((7 - boardRow) + 1), 9 -(boardCol + 1));
+                }
                 if ((boardCol % 2 == 0 && boardRow % 2 == 0) || (boardCol % 2 != 0 && boardRow % 2 != 0)) {
                     setWhite(out);
                 }
                 else {
                     setBlack(out);
+                }
+                for (ChessMove chessMove : possibleMoves) {
+                    if (chessPosition.equals(chessMove.getEndPosition())) {
+                        out.print(SET_BG_COLOR_YELLOW);
+                    }
                 }
                 if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
                     int prefixLength = SQUARE_SIZE_IN_PADDED_CHARS / 2;

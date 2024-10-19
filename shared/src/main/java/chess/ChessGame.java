@@ -14,6 +14,16 @@ public class ChessGame {
     private TeamColor teamColor = TeamColor.WHITE;
     private ChessBoard board;
 
+    public boolean isGameOVer() {
+        return gameOVer;
+    }
+
+    public void setGameOVer(boolean gameOVer) {
+        this.gameOVer = gameOVer;
+    }
+
+    private boolean gameOVer = false;
+
     public ChessGame() {
         board = new ChessBoard();
         board.resetBoard();

@@ -66,6 +66,7 @@ public class PreLogin {
             else if (input.equals("help")) {
                 System.out.println("""
                         Options:
+                        help - Shows the possible commands.
                         login - Logs you into the server by prompting you for your username and password
                         register - Registers you as a new user and automatically logs you in by prompting you
                             for a new username, password, and email
