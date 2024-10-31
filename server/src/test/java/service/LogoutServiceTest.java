@@ -17,10 +17,10 @@ public class LogoutServiceTest {
     @BeforeEach
     public void setup() {
         try (Connection conn = DatabaseManager.getConnection()) {
-            GameDAO gameDAO = new GameDAO(conn);
-            AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
-            gameDAO.clear();
-            authtokenDAO.clear();
+            GameDAO gamerDAO = new GameDAO(conn);
+            AuthtokenDAO authentokenDAO = new AuthtokenDAO(conn);
+            gamerDAO.clear();
+            authentokenDAO.clear();
         }
         catch (DataAccessException | SQLException e) {
             System.out.println("JoinGameTest setup threw an exception.");
