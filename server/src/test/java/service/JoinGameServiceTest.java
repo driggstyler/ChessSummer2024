@@ -19,8 +19,8 @@ public class JoinGameServiceTest {
     @BeforeEach
     public void setup() {
         try (Connection conn = DatabaseManager.getConnection()){
-            GameDAO gameDAO = new GameDAO(conn);
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
+            GameDAO gameDAO = new GameDAO(conn);
             authtokenDAO.clear();
             gameDAO.clear();
         }

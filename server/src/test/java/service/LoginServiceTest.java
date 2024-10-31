@@ -19,8 +19,8 @@ public class LoginServiceTest {
     @BeforeEach
     public void setup() {
         try (Connection conn = DatabaseManager.getConnection()){
-            AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             GameDAO gameDAO = new GameDAO(conn);
+            AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             authtokenDAO.clear();
             gameDAO.clear();
         }

@@ -81,7 +81,7 @@ public class WebSocketHandler {
         else {
             notificationMessage.setMessage(authUsername + " joined the game as an observer.");
         }
-        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //FIXME: NOTIFICATION class message
+        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
     public void makeMove(Session session, UserGameCommand userGameCommand) throws IOException {
         Game game = null;
@@ -105,7 +105,7 @@ public class WebSocketHandler {
         sendMessage(session, responseMessage);
         //ServerMessage broadcast = new ServerMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
-        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //FIXME: NOTIFICATION class message
+        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
     public void leave(Session session, UserGameCommand userGameCommand) throws IOException {
         webSocketSessions.removeSession(session);
@@ -124,7 +124,7 @@ public class WebSocketHandler {
         sendMessage(session, responseMessage);
         //NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         notificationMessage.setMessage(auth.getUsername() + " left the game.");
-        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //FIXME: NOTIFICATION class message
+        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
     public void resign(Session session, UserGameCommand userGameCommand) throws IOException {
         //Set the gameOver value in Chessgame to true
