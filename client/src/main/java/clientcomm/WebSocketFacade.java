@@ -1,7 +1,6 @@
 package clientcomm;
 
 import com.google.gson.Gson;
-import handlers.WebSocketSessions;
 import models.Game;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
