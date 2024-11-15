@@ -10,5 +10,5 @@ import java.util.Collection;
 
 public interface GameHandler {
     void updateGame(Game game, ChessGame.TeamColor teamColor, Collection<ChessMove> possibleMoves);
-    void updateMessage(String message);
+    //void updateMessage(String message);
 }

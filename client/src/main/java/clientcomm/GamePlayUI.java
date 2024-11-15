@@ -51,14 +51,6 @@ public class GamePlayUI implements GameHandler {
                 System.out.println("Please enter valid command.");
             }
         }
-//        UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.CONNECT, authtoken, gameID);
-//        webSocketFacade = new WebSocketFacade(port, this);
-//        try {
-//            webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
-//        } catch (Exception e) {
-//            System.out.println("Error thrown in GamePlayUI");
-//        }
-
     }
 
     public void redrawCommand(int port, String authtoken, int gameID) {
@@ -236,10 +228,5 @@ public class GamePlayUI implements GameHandler {
         //print current board
         this.game = game;
         ChessboardUI.run(game.getGame().getBoard(), teamColor, possibleMoves);
-    }
-
-    @Override
-    public void updateMessage(String message) {
-        System.out.printf(message);
     }
 }

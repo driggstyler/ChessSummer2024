@@ -40,25 +40,21 @@ public class PostLogin {
             }
             else if (input.equals("logout")) {
                 try {
-                    LogoutRequest logoutRequest = new LogoutRequest(authtoken);
-                    LogoutResult logoutResult = serverFacade.logout(logoutRequest, authtoken);
+                    LogoutResult logoutResult = serverFacade.logout(new LogoutRequest(authtoken), authtoken);
                     if (logoutResult.isSuccess()) {
                         System.out.println("Logout was successful");
                         break;
-                    }
-                    else {System.out.println("Error: Failed to logout.");}
+                    } else {System.out.println("Error: Failed to logout.");}
                 } catch (Exception e) {System.out.println("Logout failed in PostLogin class due to an exception thrown.");}
             }
             else if (input.equals("create game")) {
                 System.out.println("Please type the name of the new game.");
                 String gameName = scanner.nextLine();
                 try {
-                    CreateGameRequest createGameRequest = new CreateGameRequest(gameName);
-                    CreateGameResult createGameResult = serverFacade.createGame(createGameRequest, authtoken);
+                    CreateGameResult createGameResult = serverFacade.createGame(new CreateGameRequest(gameName), authtoken);
                     if (createGameResult.isSuccess()) {
                         System.out.println("The " + gameName + " game has been successfully added.");
-                    }
-                    else {System.out.println("Game was not successfully added.");}
+                    } else {System.out.println("Game was not successfully added.");}
                 } catch (Exception e) {System.out.println("Exception thrown while creating a game in PostLogin class.");}
             }
             else if (input.equals("list games")) {
@@ -67,8 +63,7 @@ public class PostLogin {
                     if (listGamesResult.isSuccess()) {
                         games = listGamesResult.getGames();
                         printGames(games);
-                    }
-                    else {System.out.println("Failed to retrieve list of games.");}
+                    } else {System.out.println("Failed to retrieve list of games.");}
                 } catch (Exception e) {
                     System.out.println("Exception thrown while getting a list of games in PostLogin class.");
                 }
@@ -96,8 +91,7 @@ public class PostLogin {
                     if (joinGameResult.isSuccess()) {
                         GamePlayUI gamePlayUI = new GamePlayUI();
                         gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
-                    }
-                    else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
+                    } else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");}
                     else {System.out.println("Failed to join game.");}
                 } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
@@ -118,11 +112,9 @@ public class PostLogin {
                     if (joinGameResult.isSuccess()) {
                         GamePlayUI gamePlayUI = new GamePlayUI();
                         gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
-                    }
-                    else {System.out.println("Failed to join game.");}
+                    } else {System.out.println("Failed to join game.");}
                 } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
-            }
-            else {System.out.println("Invalid command. Type help to view valid commands.");}
+            } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }
     public void printGames(ArrayList<Game> games) {
@@ -133,14 +125,13 @@ public class PostLogin {
             System.out.println(n + ": " + game.getGameName());
             if (game.getWhiteUsername() != null) {
                 System.out.println(game.getWhiteUsername() + " is playing as white");
-            }
-            else {
+            } else {
                 System.out.println("No one is playing as white");
 
             }
             if (game.getBlackUsername() != null) {
                 System.out.println(game.getBlackUsername() + " is playing as black");
-            }else {
+            } else {
                 System.out.println("No one is playing as black");
 
             }

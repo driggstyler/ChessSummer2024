@@ -122,7 +122,8 @@ public class ChessboardUI {
         }
     }
 
-    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective, int rowLabel, Collection<ChessMove> possibleMoves) {
+    private static void drawRowOfSquares(PrintStream out, int boardRow, ChessBoard chessBoard, String perspective,
+                                         int rowLabel, Collection<ChessMove> possibleMoves) {
         for (int squareRow = 0; squareRow < SQUARE_SIZE_IN_PADDED_CHARS; ++squareRow) {
             for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
                 if (squareRow == SQUARE_SIZE_IN_PADDED_CHARS / 2) {
