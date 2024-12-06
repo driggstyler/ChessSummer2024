@@ -1,5 +1,6 @@
 package services;
 
+import chess.ChessGame;
 import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.GameDAO;
 import models.Game;
@@ -44,7 +45,10 @@ public class CreateGameService {
             else {
                 gameID = 1;
             }
-            gameDAO.insert(gameID, new Game(), createGameRequest.getGameName());
+            Game game = new Game();
+            game.setGameName(createGameRequest.getGameName());
+            game.setGame(new ChessGame());
+            gameDAO.insert(gameID, game, createGameRequest.getGameName());
             createGameResult.setGameID(gameID);
             createGameResult.setSuccess(true);
             createGameResult.setMessage("Successfully created a new game.");

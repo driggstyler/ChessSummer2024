@@ -57,6 +57,4 @@ public class WebSocketFacade extends Endpoint implements MessageHandler.Whole<St
     public void onOpen(Session session, EndpointConfig endpointConfig) {
 
     }
-
-    //Send stuff
 }

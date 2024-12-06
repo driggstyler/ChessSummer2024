@@ -95,14 +95,10 @@ _
 /server/src/main/java/services/LoginService.java,c\a\caa1e775d509d5203f8b530bc0be4841d5315660
 `
 0server/src/main/java/handlers/LogoutHandler.java,6\9\69ce373a29a40f16a9efbaa0d64e562e8dc06a1f
-d
-4server/src/main/java/services/CreateGameService.java,d\c\dc1990ee7c57df336cd3ad0bbbe863391d8ab121
 _
 /server/src/main/java/services/ClearService.java,0\5\05c490c836e689d3e947a4a5d58be9a634bbec1f
 c
 3server/src/main/java/handlers/ListGamesHandler.java,8\d\8d4e1b74c29220900207e8c42b5f82af6e8ca1ba
-d
-4server/src/main/java/handlers/CreateGameHandler.java,6\0\60d75adf50a567fe9d88a7b48cfedd4355261250
 f
 6shared/src/test/java/passoff/chess/ChessMoveTests.java,d\0\d0976cffcef29072b835886c43fd62174459be03
 k
@@ -169,8 +165,6 @@ e
 0server/src/test/java/dataaccess/UserDAOTest.java,6\5\65a5f3aa5806e0d7a9fee68f33fd08f8d43ccf31
 _
 /server/src/main/java/handlers/ClearHandler.java,d\2\d2d996d9fed9b3707d5006bdbb6c3d78f1c32ba4
-U
-%shared/src/main/java/models/Game.java,a\b\ab546af392c2761c740a39538a7db6023e5af559
 b
 2shared/src/main/java/requests/JoinGameRequest.java,1\5\15803bbcee5775f2ebeb7f6892b8e435fb3d0a0c
 k
@@ -179,18 +173,10 @@ b
 2server/src/main/java/handlers/RegisterHandler.java,c\c\cce46332b06f227c4891c82ea58e463310864627
 ]
 -shared/src/main/java/chess/ChessPosition.java,3\b\3b013a24b64d343e15bac32b29d3d69c6c135d82
-`
-0server/src/main/java/dataaccess/dao/GameDAO.java,c\4\c4910513fae27388244dde953023b818ae988cec
 Z
 *shared/src/main/java/chess/ChessBoard.java,d\f\dfc4ec84b5d57ac6e0266e9c319b728da99e0c51
 Y
 )shared/src/main/java/chess/ChessMove.java,c\5\c52f67c55315a844e23611bb848b35269aaedb66
-i
-9shared/src/main/java/websocket/messages/ErrorMessage.java,6\d\6d43d74275dadc856b480bdfa9cf5a951a936cb8
-Z
-*shared/src/main/java/chess/ChessPiece.java,c\0\c02b93065e1c720b0a958f6a9aa91f709ca1cca9
-Y
-)shared/src/main/java/chess/ChessGame.java,1\2\12ee2b2e0577bf40c2f0f09ceb1e2b3d9b36bd7a
 N
 server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
 d

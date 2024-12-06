@@ -102,6 +102,11 @@ public class WebSocketHandler {
                 game.getGame().makeMove(makeMoveCommand.getMove());
             } catch (InvalidMoveException ignore) {
                 System.out.println("WebsocketHandler threw an Invalid move exception from makeMove.");
+                //TODO tell user move was invalid
+                ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
+                errorMessage.setErrorMessage("Sorry, that move was invalid.");
+                sendMessage(session, new Gson().toJson(errorMessage));
+                return;
             }
         } catch (DataAccessException | SQLException e) {
             ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
@@ -113,7 +118,9 @@ public class WebSocketHandler {
         loadService.setGame(game);
         String responseMessage = new Gson().toJson(loadService);
         sendMessage(session, responseMessage);
+        broadcastMessage(game.getGameID(), responseMessage, session);
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
+        notificationMessage.setMessage("Move successful.");
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session);
     }
     public void leave(Session session, UserGameCommand userGameCommand) throws IOException {
