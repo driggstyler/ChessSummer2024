@@ -100,6 +100,9 @@ public class WebSocketHandler {
                 if (auth == null) {
                     throw new InvalidMoveException("InvalidMove: Bad authtoken.");
                 }
+                if (game.getGame().isGameOVer()) {
+                    throw new InvalidMoveException("InvalidMove: The game is already over.");
+                }
                 if (auth.getUsername().equals(game.getWhiteUsername())) {
                     playerColor = "WHITE";
                 }
@@ -156,8 +159,8 @@ public class WebSocketHandler {
             System.out.println("Exception thrown in leave() in WebsocketHandler");
         }
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
-        String responseMessage = new Gson().toJson(notificationMessage);
-        sendMessage(session, responseMessage);
+        //String responseMessage = new Gson().toJson(notificationMessage);
+        //sendMessage(session, responseMessage);
         notificationMessage.setMessage(auth.getUsername() + " left the game.");
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
@@ -176,10 +179,16 @@ public class WebSocketHandler {
             if (game.getGame().isGameOVer()) {
                 ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
                 errorMessage.setErrorMessage("The game is already over, you can't resign.");
+                String responseMessage = new Gson().toJson(errorMessage);
+                sendMessage(session, responseMessage);
+                return;
             }
-            if (auth.getUsername() == null) {
+            if (!auth.getUsername().equals(game.getWhiteUsername()) && !auth.getUsername().equals(game.getBlackUsername())) {
                 ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
                 errorMessage.setErrorMessage("You are observing, you can't resign.");
+                String responseMessage = new Gson().toJson(errorMessage);
+                sendMessage(session, responseMessage);
+                return;
             }
             game.getGame().setGameOver(true);
             gameDAO.update(game);
