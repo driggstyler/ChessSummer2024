@@ -137,8 +137,6 @@ k
 -shared/src/main/java/results/LoginResult.java,1\1\1124addc2e3af17966cd058d583a8170639a4655
 g
 7shared/src/test/java/passoff/chess/ChessBoardTests.java,7\0\704add9b7257f7adc3fb4fb5f33f76b7c8820901
-d
-4shared/src/main/java/chess/InvalidMoveException.java,e\3\e39c3486fec5f2b87e64591840622613400adc99
 ]
 -shared/src/main/java/results/ClearResult.java,7\a\7af70f808d9e94d0a5f3d8179ea347ee56ca77be
 `
@@ -167,20 +165,14 @@ _
 /server/src/main/java/handlers/ClearHandler.java,d\2\d2d996d9fed9b3707d5006bdbb6c3d78f1c32ba4
 b
 2shared/src/main/java/requests/JoinGameRequest.java,1\5\15803bbcee5775f2ebeb7f6892b8e435fb3d0a0c
-k
-;server/src/test/java/passoff/server/server/TestFactory.java,f\d\fded42da908033eef47067878d0e5eb585bdb886
 b
 2server/src/main/java/handlers/RegisterHandler.java,c\c\cce46332b06f227c4891c82ea58e463310864627
 ]
 -shared/src/main/java/chess/ChessPosition.java,3\b\3b013a24b64d343e15bac32b29d3d69c6c135d82
 Z
 *shared/src/main/java/chess/ChessBoard.java,d\f\dfc4ec84b5d57ac6e0266e9c319b728da99e0c51
-Y
-)shared/src/main/java/chess/ChessMove.java,c\5\c52f67c55315a844e23611bb848b35269aaedb66
 N
 server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
-d
-4server/src/main/java/dataaccess/DatabaseManager.java,f\b\fb7cdb568d97831984b27de21950263d16967a67
 c
 3server/src/main/java/services/ListGamesService.java,3\6\36840892ef84930e8838e602c22d24007c19f8dc
 b

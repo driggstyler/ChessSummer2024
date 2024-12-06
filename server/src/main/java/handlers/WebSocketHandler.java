@@ -100,9 +100,10 @@ public class WebSocketHandler {
             game = gameDAO.find(makeMoveCommand.getGameID());
             try {
                 game.getGame().makeMove(makeMoveCommand.getMove());
+                //Update game state
+                gameDAO.update(game);
             } catch (InvalidMoveException ignore) {
                 System.out.println("WebsocketHandler threw an Invalid move exception from makeMove.");
-                //TODO tell user move was invalid
                 ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
                 errorMessage.setErrorMessage("Sorry, that move was invalid.");
                 sendMessage(session, new Gson().toJson(errorMessage));

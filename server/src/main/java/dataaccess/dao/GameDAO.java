@@ -179,4 +179,21 @@ public class GameDAO {
             throw new DataAccessException("Error encountered while clearing the games table.");
         }
     }
+
+    public void remove(int gameID) throws DataAccessException {
+        String sql = "DELETE FROM game WHERE gameID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, gameID);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while deleting a game from the database");
+        }
+    }
+
+    public void update(Game game) throws DataAccessException {
+        remove(game.getGameID());
+        insert(game.getGameID(), game, game.getGameName());
+    }
 }
