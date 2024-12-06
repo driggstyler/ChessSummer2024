@@ -20,7 +20,8 @@ public class WebSocketSessions {
     }
 
     public void removeSession(int gameID, Session session) {
-        sessionMap.remove(gameID);
+
+        sessionMap.get(gameID).remove(session);
     }
     public Map<Integer, Set<Session>> getSessions() {
         return sessionMap;

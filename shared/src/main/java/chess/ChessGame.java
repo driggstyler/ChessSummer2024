@@ -18,7 +18,7 @@ public class ChessGame {
         return gameOVer;
     }
 
-    public void setGameOVer(boolean gameOVer) {
+    public void setGameOver(boolean gameOVer) {
         this.gameOVer = gameOVer;
     }
 
@@ -87,11 +87,11 @@ public class ChessGame {
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
         if (board.getPiece(move.getStartPosition()) == null) {
-            throw new InvalidMoveException();
+            throw new InvalidMoveException("InvalidMove: Piece is not there");
         }
         Collection<ChessMove> validMoves = validMoves(move.getStartPosition());
         if (teamColor != board.getPiece(move.getStartPosition()).getTeamColor()){
-            throw new InvalidMoveException();
+            throw new InvalidMoveException("InvalidMove: Not your color piece");
         }
         if (validMoves.contains(move)) {
             if (move.getPromotionPiece() != null) {
@@ -104,7 +104,7 @@ public class ChessGame {
             board.removePiece(move.getStartPosition());
 
         } else {
-            throw new InvalidMoveException();
+            throw new InvalidMoveException("InvalidMove: That piece has no valid moves.");
         }
         if (teamColor == TeamColor.WHITE) {
             setTeamTurn(TeamColor.BLACK);

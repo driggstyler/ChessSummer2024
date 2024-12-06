@@ -8,15 +8,9 @@ import dataaccess.dao.AuthtokenDAO;
 import dataaccess.dao.GameDAO;
 import models.Authtoken;
 import models.Game;
-import org.eclipse.jetty.server.Authentication;
-import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import requests.JoinGameRequest;
-import results.JoinGameResult;
-import services.JoinGameService;
 import websocket.commands.MakeMoveCommand;
 import websocket.commands.UserGameCommand;
 import websocket.messages.ErrorMessage;
@@ -95,17 +89,33 @@ public class WebSocketHandler {
     }
     public void makeMove(Session session, MakeMoveCommand makeMoveCommand) throws IOException {
         Game game = null;
+        Authtoken auth = null;
+        String playerColor = null;
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
+            AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             game = gameDAO.find(makeMoveCommand.getGameID());
+            auth = authtokenDAO.find(makeMoveCommand.getAuthToken());
             try {
-                game.getGame().makeMove(makeMoveCommand.getMove());
-                //Update game state
-                gameDAO.update(game);
-            } catch (InvalidMoveException ignore) {
+                if (auth == null) {
+                    throw new InvalidMoveException("InvalidMove: Bad authtoken.");
+                }
+                if (auth.getUsername().equals(game.getWhiteUsername())) {
+                    playerColor = "WHITE";
+                }
+                else if (auth.getUsername().equals(game.getBlackUsername())) {
+                    playerColor = "BLACK";
+                }
+                if (playerColor == null || !playerColor.equalsIgnoreCase(game.getGame().getTeamTurn().name())) {
+                    throw new InvalidMoveException("It is not your turn.");
+                }
+                    game.getGame().makeMove(makeMoveCommand.getMove());
+                    //Update game state
+                    gameDAO.update(game);
+            } catch (InvalidMoveException invalidMoveException) {
                 System.out.println("WebsocketHandler threw an Invalid move exception from makeMove.");
                 ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
-                errorMessage.setErrorMessage("Sorry, that move was invalid.");
+                errorMessage.setErrorMessage(invalidMoveException.getMessage());
                 sendMessage(session, new Gson().toJson(errorMessage));
                 return;
             }
@@ -125,6 +135,7 @@ public class WebSocketHandler {
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session);
     }
     public void leave(Session session, UserGameCommand userGameCommand) throws IOException {
+        //update that the spot open
         webSocketSessions.removeSession(userGameCommand.getGameID(), session);
         Game game = null;
         Authtoken auth = null;
@@ -133,6 +144,14 @@ public class WebSocketHandler {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             game = gameDAO.find(userGameCommand.getGameID());
             auth = authtokenDAO.find(userGameCommand.getAuthToken());
+            //open spot
+            if (auth.getUsername().equals(game.getWhiteUsername())) {
+                game.setWhiteUsername(null);
+            }
+            else if (auth.getUsername().equals(game.getBlackUsername())) {
+                game.setBlackUsername(null);
+            }
+            gameDAO.update(game);
         } catch (DataAccessException | SQLException e) {
             System.out.println("Exception thrown in leave() in WebsocketHandler");
         }
@@ -143,9 +162,10 @@ public class WebSocketHandler {
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
     public void resign(Session session, UserGameCommand userGameCommand) throws IOException {
+        // Game set to over, but you can still hang out
+
         //Set the gameOver value in Chessgame to true
         //Send messages client and others
-        webSocketSessions.removeSession(userGameCommand.getGameID(), session);
         Game game = null;
         Authtoken auth = null;
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -153,11 +173,21 @@ public class WebSocketHandler {
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
             game = gameDAO.find(userGameCommand.getGameID());
             auth = authtokenDAO.find(userGameCommand.getAuthToken());
-            game.getGame().setGameOVer(true);
+            if (game.getGame().isGameOVer()) {
+                ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
+                errorMessage.setErrorMessage("The game is already over, you can't resign.");
+            }
+            if (auth.getUsername() == null) {
+                ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
+                errorMessage.setErrorMessage("You are observing, you can't resign.");
+            }
+            game.getGame().setGameOver(true);
+            gameDAO.update(game);
         } catch (DataAccessException | SQLException e) {
 
         }
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
+        notificationMessage.setMessage("You have resigned.");
         String responseMessage = new Gson().toJson(notificationMessage);
         sendMessage(session, responseMessage);
         notificationMessage.setMessage(auth.getUsername() + " resigned.");
@@ -179,6 +209,7 @@ public class WebSocketHandler {
         }
     }
     public void broadcastMessage(int gameID, String message, Session exceptThisSession) throws IOException {
+        System.out.println("Brakpont");
         for (Session session : webSocketSessions.getSessions().get(gameID)) {
             if (session == exceptThisSession) {
                 continue;

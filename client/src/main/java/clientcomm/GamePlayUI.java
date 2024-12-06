@@ -17,7 +17,8 @@ import java.util.Scanner;
 public class GamePlayUI implements GameHandler {
     private WebSocketFacade webSocketFacade;
     private Game game;
-    public void run(int port, String authtoken, int gameID, Scanner scanner) {
+    private String playerColor = null;
+    public void run(int port, String authtoken, int gameID, Scanner scanner, String playerColor) {
         //Convert usercommand to json
         webSocketFacade = new WebSocketFacade(port, this);
         System.out.println("Successfully joined game! Type help to see commands");
@@ -40,7 +41,7 @@ public class GamePlayUI implements GameHandler {
                 break;
             }
             else if (scanner.nextLine().equals("make move")) {
-                makeMoveCommand(port, authtoken, gameID, game, scanner);
+                makeMoveCommand(port, authtoken, gameID, game, scanner, playerColor);
             }
             else if (scanner.nextLine().equals("resign")) {
                 resignCommand(port, authtoken, gameID);
@@ -70,7 +71,7 @@ public class GamePlayUI implements GameHandler {
         }
     }
 
-    public void makeMoveCommand(int port, String authtoken, int gameID, Game game, Scanner scanner) {
+    public void makeMoveCommand(int port, String authtoken, int gameID, Game game, Scanner scanner, String playerColor) {
         if (game.getGame().isGameOVer()) {
             //Return, you can't do it
             System.out.println("The game is over, no more moves can be made.");
@@ -151,6 +152,7 @@ public class GamePlayUI implements GameHandler {
             ChessMove move = new ChessMove(startPosition, endPosition, promotionPiece);
             if (game.getGame().validMoves(startPosition).contains(move)) {
                 MakeMoveCommand makeMoveCommand = new MakeMoveCommand(UserGameCommand.CommandType.MAKE_MOVE, authtoken, gameID);
+                makeMoveCommand.setPlayerColor(playerColor);
                 try {
                     webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(makeMoveCommand));
                     System.out.println("Piece moved from " + startPosition + " to " + endPosition);
