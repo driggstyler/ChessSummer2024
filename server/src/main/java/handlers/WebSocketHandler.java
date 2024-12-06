@@ -11,6 +11,7 @@ import models.Game;
 import org.eclipse.jetty.server.Authentication;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import requests.JoinGameRequest;
@@ -38,10 +39,20 @@ public class WebSocketHandler {
         UserGameCommand.CommandType commandType = userGameCommand.getCommandType();
         String jsonResponse;
         switch (commandType) {
-            case CONNECT ->  connect(session, userGameCommand);
-            case MAKE_MOVE -> makeMove(session, userGameCommand);
-            case LEAVE -> leave(session, userGameCommand);
-            case RESIGN -> resign(session, userGameCommand);
+            case CONNECT:
+                connect(session, userGameCommand);
+                break;
+            case MAKE_MOVE:
+                // Ensure you're casting the correct type
+                MakeMoveCommand makeMoveCommand = gson.fromJson(message, MakeMoveCommand.class);
+                makeMove(session, makeMoveCommand);
+                break;
+            case LEAVE:
+                leave(session, userGameCommand);
+                break;
+            case RESIGN:
+                resign(session, userGameCommand);
+                break;
         }
     }
     public void connect(Session session, UserGameCommand userGameCommand) throws IOException {
@@ -70,7 +81,6 @@ public class WebSocketHandler {
             loadService.setGame(game);
         String responseMessage = new Gson().toJson(loadService);
         sendMessage(session, responseMessage);
-        //ServerMessage broadcast = new ServerMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         if (authUsername.equals(whiteUsername)) {
             notificationMessage.setMessage(whiteUsername + " joined the game as white.");
@@ -83,13 +93,13 @@ public class WebSocketHandler {
         }
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
-    public void makeMove(Session session, UserGameCommand userGameCommand) throws IOException {
+    public void makeMove(Session session, MakeMoveCommand makeMoveCommand) throws IOException {
         Game game = null;
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
-            game = gameDAO.find(userGameCommand.getGameID());
+            game = gameDAO.find(makeMoveCommand.getGameID());
             try {
-                game.getGame().makeMove(((MakeMoveCommand) userGameCommand).getMove());
+                game.getGame().makeMove(makeMoveCommand.getMove());
             } catch (InvalidMoveException ignore) {
                 System.out.println("WebsocketHandler threw an Invalid move exception from makeMove.");
             }
@@ -103,12 +113,11 @@ public class WebSocketHandler {
         loadService.setGame(game);
         String responseMessage = new Gson().toJson(loadService);
         sendMessage(session, responseMessage);
-        //ServerMessage broadcast = new ServerMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
-        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
+        broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session);
     }
     public void leave(Session session, UserGameCommand userGameCommand) throws IOException {
-        webSocketSessions.removeSession(session);
+        webSocketSessions.removeSession(userGameCommand.getGameID(), session);
         Game game = null;
         Authtoken auth = null;
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -117,18 +126,18 @@ public class WebSocketHandler {
             game = gameDAO.find(userGameCommand.getGameID());
             auth = authtokenDAO.find(userGameCommand.getAuthToken());
         } catch (DataAccessException | SQLException e) {
-
+            System.out.println("Exception thrown in leave() in WebsocketHandler");
         }
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         String responseMessage = new Gson().toJson(notificationMessage);
         sendMessage(session, responseMessage);
-        //NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         notificationMessage.setMessage(auth.getUsername() + " left the game.");
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session); //Needs to be NOTIFICATION class message
     }
     public void resign(Session session, UserGameCommand userGameCommand) throws IOException {
         //Set the gameOver value in Chessgame to true
         //Send messages client and others
+        webSocketSessions.removeSession(userGameCommand.getGameID(), session);
         Game game = null;
         Authtoken auth = null;
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -143,19 +152,53 @@ public class WebSocketHandler {
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         String responseMessage = new Gson().toJson(notificationMessage);
         sendMessage(session, responseMessage);
-        //NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
         notificationMessage.setMessage(auth.getUsername() + " resigned.");
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session);
     }
     public void sendMessage(Session session, String jsonResponse) throws IOException {
         //Sends the message/game to root client
-        session.getRemote().sendString(jsonResponse);
+        if (session != null && session.isOpen()) {
+            try {
+                session.getRemote().sendString(jsonResponse);
+            } catch (Exception e) {
+                System.out.println("Exception thrown from sendMessage in WebSocketHandler.");
+            }
+        } else if (!session.isOpen()){
+            System.out.println("Session close, unable to sendMessage.");
+        }
+        else {
+            System.out.println("Session is null, unable to sendMessage.");
+        }
     }
     public void broadcastMessage(int gameID, String message, Session exceptThisSession) throws IOException {
         for (Session session : webSocketSessions.getSessions().get(gameID)) {
-            if (session != exceptThisSession) {
-                session.getRemote().sendString(message);
-            }
+            sendMessage(session, message);
         }
+
+        //        for (Session session : webSocketSessions.getSessions().get(gameID)) {
+//            if (session.hashCode() != exceptThisSession.hashCode()) {
+//                if (session != null && session.isOpen()) {
+//                    try {
+//                        session.getRemote().sendString(message);
+//                    } catch (IOException e) {
+//                        System.out.println("Exception thrown in broadcastMessage in WebSocketHandler");
+//                    }
+//                } else if (!session.isOpen()){
+//                    System.out.println("Session is closed, can't broadcastMessage.");
+//                }
+//                else {
+//                    System.out.println("Session is null, can't broadcastMessage.");
+//                }
+//            }
+//        }
     }
+
+//    @OnWebSocketClose
+//    public void onClose(Session session, int statusCode, String reason) {
+//        // Remove the session from the session list
+//        webSocketSessions.removeSession(session); // Remove the session when it's closed
+//
+//        // Log the reason for the closure (optional)
+//        System.out.println("Session closed. Status Code: " + statusCode + ", Reason: " + reason);
+//    }
 }

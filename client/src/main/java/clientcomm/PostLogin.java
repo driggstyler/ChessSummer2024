@@ -1,5 +1,6 @@
 package clientcomm;
 
+import chess.ChessGame;
 import models.Game;
 import requests.CreateGameRequest;
 import requests.JoinGameRequest;
@@ -13,6 +14,7 @@ import ui.ChessboardUI;
 import websocket.commands.UserGameCommand;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -89,8 +91,9 @@ public class PostLogin {
                 try {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
-                        GamePlayUI gamePlayUI = new GamePlayUI();
-                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
+                        //GamePlayUI gamePlayUI = new GamePlayUI();
+                        //gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
+                        ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.valueOf(playerColor), new HashSet<>());
                     } else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");}
                     else {System.out.println("Failed to join game.");}
@@ -106,14 +109,15 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                JoinGameRequest joinGameRequest = new JoinGameRequest(null, games.get(gameNum - 1).getGameID());
-                try {
-                    JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
-                    if (joinGameResult.isSuccess()) {
-                        GamePlayUI gamePlayUI = new GamePlayUI();
-                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
-                    } else {System.out.println("Failed to join game.");}
-                } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
+                //JoinGameRequest joinGameRequest = new JoinGameRequest(null, games.get(gameNum - 1).getGameID());
+                //try {
+                    //JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
+                    //if (joinGameResult.isSuccess()) {
+                        //GamePlayUI gamePlayUI = new GamePlayUI();
+                        //gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
+                        ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.WHITE, new HashSet<>());
+                    //} else {System.out.println("Failed to join game.");}
+                //} catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
             } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }

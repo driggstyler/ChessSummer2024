@@ -5,6 +5,7 @@ import chess.*;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.HashSet;
 
 import static ui.EscapeSequences.*;
 
@@ -26,14 +27,15 @@ public class ChessboardUI {
 
     public static void main(String[] args) {
         ChessBoard chessBoard = new ChessBoard();
-        run(chessBoard, ChessGame.TeamColor.WHITE, null);
+        chessBoard.resetBoard();
+        run(chessBoard, ChessGame.TeamColor.WHITE, new HashSet<>());
     }
 
     public static void run(ChessBoard chessBoard, ChessGame.TeamColor teamColor, Collection<ChessMove> possibleMoves) {
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
         //should be current board instead
         //only print players perspective or white of observer's perspective
-        chessBoard.resetBoard();
+
 
         out.print(ERASE_SCREEN);
 

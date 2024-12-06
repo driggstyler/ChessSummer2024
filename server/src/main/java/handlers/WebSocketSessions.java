@@ -19,8 +19,8 @@ public class WebSocketSessions {
         }
     }
 
-    public void removeSession(Session session) {
-        //For later phase
+    public void removeSession(int gameID, Session session) {
+        sessionMap.remove(gameID);
     }
     public Map<Integer, Set<Session>> getSessions() {
         return sessionMap;

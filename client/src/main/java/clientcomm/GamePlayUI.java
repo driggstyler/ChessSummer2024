@@ -14,11 +14,11 @@ import java.util.Collection;
 import java.util.Scanner;
 
 public class GamePlayUI implements GameHandler {
-    //private WebSocketFacade webSocketFacade;
+    private WebSocketFacade webSocketFacade;
     private Game game;
     public void run(int port, String authtoken, int gameID, Scanner scanner) {
         //Convert usercommand to json
-        //webSocketFacade = new WebSocketFacade(port, this);
+        webSocketFacade = new WebSocketFacade(port, this);
         System.out.println("Successfully joined game! Type help to see commands");
         while(true) {
             if (scanner.nextLine().equals("help")) {
@@ -54,19 +54,14 @@ public class GamePlayUI implements GameHandler {
     }
 
     public void redrawCommand(int port, String authtoken, int gameID) {
-        UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.CONNECT, authtoken, gameID);
-        try {
-            //webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
-        } catch (Exception e) {
-            System.out.println("Error thrown in connectCommand");
-        }
+        //Only redraw board
     }
 
     public void leaveCommand(int port, String authtoken, int gameID) {
         UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.LEAVE, authtoken, gameID);
 
         try {
-            //webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
+            webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
         } catch (Exception e) {
             System.out.println("Error thrown in leaveCommand");
         }
@@ -153,9 +148,8 @@ public class GamePlayUI implements GameHandler {
             ChessMove move = new ChessMove(startPosition, endPosition, promotionPiece);
             if (game.getGame().validMoves(startPosition).contains(move)) {
                 MakeMoveCommand makeMoveCommand = new MakeMoveCommand(UserGameCommand.CommandType.MAKE_MOVE, authtoken, gameID);
-                //webSocketFacade = new WebSocketFacade(port, this);
                 try {
-                    //webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(makeMoveCommand));
+                    webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(makeMoveCommand));
                     System.out.println("Piece moved from " + startPosition + " to " + endPosition);
                 } catch (Exception e) {
                     System.out.println("Error thrown in makeMoveCommand");
@@ -171,9 +165,8 @@ public class GamePlayUI implements GameHandler {
 
     public void resignCommand(int port, String authtoken, int gameID) {
         UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.RESIGN, authtoken, gameID);
-        //webSocketFacade = new WebSocketFacade(port, this);
         try {
-            //webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
+            webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
         } catch (Exception e) {
             System.out.println("Error thrown in resignCommand");
         }
@@ -228,5 +221,10 @@ public class GamePlayUI implements GameHandler {
         //print current board
         this.game = game;
         ChessboardUI.run(game.getGame().getBoard(), teamColor, possibleMoves);
+    }
+
+    @Override
+    public void updateMessage(String message) {
+        System.out.println(message);
     }
 }
