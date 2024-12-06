@@ -172,6 +172,9 @@ public class WebSocketHandler {
     }
     public void broadcastMessage(int gameID, String message, Session exceptThisSession) throws IOException {
         for (Session session : webSocketSessions.getSessions().get(gameID)) {
+            if (session == exceptThisSession) {
+                continue;
+            }
             sendMessage(session, message);
         }
 

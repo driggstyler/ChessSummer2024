@@ -11,6 +11,7 @@ import websocket.commands.MakeMoveCommand;
 import websocket.commands.UserGameCommand;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class GamePlayUI implements GameHandler {
@@ -32,7 +33,7 @@ public class GamePlayUI implements GameHandler {
                         highlight legal moves - highlight the available moves of a given piece.""");
             }
             else if (scanner.nextLine().equals("redraw chess board")) {
-                redrawCommand(port, authtoken, gameID);
+                redrawCommand(port, authtoken, gameID, game);
             }
             else if (scanner.nextLine().equals("leave")) {
                 leaveCommand(port, authtoken, gameID);
@@ -53,8 +54,10 @@ public class GamePlayUI implements GameHandler {
         }
     }
 
-    public void redrawCommand(int port, String authtoken, int gameID) {
+    public void redrawCommand(int port, String authtoken, int gameID, Game game) {
         //Only redraw board
+        Collection<ChessMove> noMoves = new HashSet<>();
+        ChessboardUI.run(game.getGame().getBoard(), game.getGame().getTeamTurn(), noMoves);
     }
 
     public void leaveCommand(int port, String authtoken, int gameID) {
