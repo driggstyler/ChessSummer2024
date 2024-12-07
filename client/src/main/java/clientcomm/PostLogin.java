@@ -31,6 +31,7 @@ public class PostLogin {
         System.out.println("Logged in, to see commands type help.");
         while (true) {
             String input = scanner.nextLine();
+            //Now can check command
             if (input.equals("help")) {
                 System.out.println("""
                     Options:
