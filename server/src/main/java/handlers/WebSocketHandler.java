@@ -226,22 +226,6 @@ public class WebSocketHandler {
             sendMessage(session, message);
         }
 
-        //        for (Session session : webSocketSessions.getSessions().get(gameID)) {
-//            if (session.hashCode() != exceptThisSession.hashCode()) {
-//                if (session != null && session.isOpen()) {
-//                    try {
-//                        session.getRemote().sendString(message);
-//                    } catch (IOException e) {
-//                        System.out.println("Exception thrown in broadcastMessage in WebSocketHandler");
-//                    }
-//                } else if (!session.isOpen()){
-//                    System.out.println("Session is closed, can't broadcastMessage.");
-//                }
-//                else {
-//                    System.out.println("Session is null, can't broadcastMessage.");
-//                }
-//            }
-//        }
     }
 
 //    @OnWebSocketClose
