@@ -76,6 +76,7 @@ public class PostLogin {
             else if (input.equals("play game")) {
                 int gameNum = -1;
                 while (gameNum > games.size() + 1 || gameNum < 0) {
+                    //TODO need to reject numbered games that aren't in the list
                     System.out.println("Please pick a number within the list of games. If stuck, type 0 to go back.");
                     try {
                         String number = scanner.nextLine();

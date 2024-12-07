@@ -22,30 +22,32 @@ public class GamePlayUI implements GameHandler {
         webSocketFacade = new WebSocketFacade(port, this);
         System.out.println("Successfully joined game! Type help to see commands");
         while(true) {
-            if (scanner.nextLine().equals("help")) {
+            //TODO check string, not scanner
+            String command = scanner.nextLine();
+            if (command.equals("help")) {
                 System.out.println("""
                         Options:
                         help - Shows the commands to play the game.
-                        redraw chess board - Redraws the current chessboard.
+                        redraw - Redraws the current chessboard.
                         leave - Leave the game.
                         make move - Make a move (do this only on your turn).
                         resign - Resign and forfeit the match (give up).
                         highlight legal moves - highlight the available moves of a given piece.""");
             }
-            else if (scanner.nextLine().equals("redraw chess board")) {
+            else if (command.equals("redraw")) {
                 redrawCommand(port, authtoken, gameID, game);
             }
-            else if (scanner.nextLine().equals("leave")) {
+            else if (command.equals("leave")) {
                 leaveCommand(port, authtoken, gameID);
                 break;
             }
-            else if (scanner.nextLine().equals("make move")) {
+            else if (command.equals("make move")) {
                 makeMoveCommand(port, authtoken, gameID, game, scanner);
             }
-            else if (scanner.nextLine().equals("resign")) {
+            else if (command.equals("resign")) {
                 resignCommand(port, authtoken, gameID);
             }
-            else if (scanner.nextLine().equals("highlight legal moves")) {
+            else if (command.equals("highlight")) {
                 highlightMovesCommand(port, authtoken, gameID, game, scanner);
             }
             else {
