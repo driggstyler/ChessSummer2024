@@ -78,6 +78,7 @@ public class GamePlayUI implements GameHandler {
             System.out.println("The game is over, no more moves can be made.");
             return;
         }
+
         while(true) {
             System.out.println("""
                                 Please indicate where you want to move the piece by typing the start position, 
