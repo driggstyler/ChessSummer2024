@@ -95,7 +95,6 @@ public class PostLogin {
                 try {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
-                        //GamePlayUI gamePlayUI = new GamePlayUI();
                         gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), scanner);
                         ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.valueOf(playerColor), new HashSet<>());
                     } else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
