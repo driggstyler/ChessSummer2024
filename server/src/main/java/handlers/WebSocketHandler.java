@@ -227,13 +227,4 @@ public class WebSocketHandler {
         }
 
     }
-
-//    @OnWebSocketClose
-//    public void onClose(Session session, int statusCode, String reason) {
-//        // Remove the session from the session list
-//        webSocketSessions.removeSession(session); // Remove the session when it's closed
-//
-//        // Log the reason for the closure (optional)
-//        System.out.println("Session closed. Status Code: " + statusCode + ", Reason: " + reason);
-//    }
 }
