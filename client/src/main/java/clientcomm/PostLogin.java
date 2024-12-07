@@ -112,15 +112,7 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                //JoinGameRequest joinGameRequest = new JoinGameRequest(null, games.get(gameNum - 1).getGameID());
-                //try {
-                    //JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
-                    //if (joinGameResult.isSuccess()) {
-                        //GamePlayUI gamePlayUI = new GamePlayUI();
                         gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
-                        //ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.WHITE, new HashSet<>());
-                    //} else {System.out.println("Failed to join game.");}
-                //} catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
             } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }
