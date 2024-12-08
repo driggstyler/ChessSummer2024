@@ -183,8 +183,6 @@ _
 /server/src/main/java/handlers/LoginHandler.java,2\4\24ef2daf20f5f2fae5081332837e4e2b6e5ce16b
 W
 'server/src/main/java/server/Server.java,8\0\8036b8cb9ce2e6760f04e2a3b475b260935bb7b8
-a
-1client/src/main/java/clientcomm/ServerFacade.java,5\5\55c9eb4d9837363a2ca84ecfd99e28bb89695cde
 A
 client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
 A
@@ -211,17 +209,7 @@ d
 4shared/src/main/java/chess/InvalidMoveException.java,e\3\e39c3486fec5f2b87e64591840622613400adc99
 b
 2server/src/main/java/handlers/JoinGameHandler.java,f\1\f1c9ca4013f60b1aaa7e06b3fd470e7bf47e636d
-b
-2server/src/main/java/services/JoinGameService.java,7\6\76f7be4454e42d2a24c1af5f2a4e744bec86984b
-d
-4client/src/main/java/clientcomm/WebSocketFacade.java,2\b\2bdab6f45036cb740dedce499e961f5b2fe861ad
-l
-<shared/src/main/java/websocket/commands/UserGameCommand.java,f\9\f96f36bc77280a61997004d435062b4a33b2286d
-`
-0server/src/main/java/dataaccess/dao/GameDAO.java,c\4\c4910513fae27388244dde953023b818ae988cec
 U
 %shared/src/main/java/models/Game.java,a\b\ab546af392c2761c740a39538a7db6023e5af559
 p
 @shared/src/main/java/websocket/messages/NotificationMessage.java,4\0\4098269bcef71afe53db939c957241c82c68fb25
-Y
-)shared/src/main/java/chess/ChessGame.java,1\2\12ee2b2e0577bf40c2f0f09ceb1e2b3d9b36bd7a

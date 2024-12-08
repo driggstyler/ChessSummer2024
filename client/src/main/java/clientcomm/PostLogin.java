@@ -76,8 +76,7 @@ public class PostLogin {
             }
             else if (input.equals("play game")) {
                 int gameNum = -1;
-                while (gameNum > games.size() + 1 || gameNum < 0) {
-                    //TODO need to reject numbered games that aren't in the list
+                while (gameNum > games.size() || gameNum < 0) {
                     System.out.println("Please pick a number within the list of games. If stuck, type 0 to go back.");
                     try {
                         String number = scanner.nextLine();
@@ -96,12 +95,14 @@ public class PostLogin {
                 try {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
-                        gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), scanner);
+                        gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), games.get(gameNum - 1), scanner);
                         ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.valueOf(playerColor), new HashSet<>());
                     } else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");}
                     else {System.out.println("Failed to join game.");}
-                } catch (Exception e) {System.out.println("Exception thrown while trying to join game in the PostLogin Class.");}
+                } catch (Exception e) {
+                    System.out.println("Exception thrown while trying to join game in the PostLogin Class.");
+                }
             }
             else if (input.equals("observe game")) {
                 int gameNum = -1;
@@ -113,7 +114,7 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), scanner);
+                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), games.get(gameNum - 1), scanner);
             } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }

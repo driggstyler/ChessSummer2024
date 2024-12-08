@@ -17,12 +17,18 @@ import java.util.Scanner;
 public class GamePlayUI implements GameHandler {
     private WebSocketFacade webSocketFacade;
     private Game game;
-    public void run(int port, String authtoken, int gameID, Scanner scanner) {
+    public void run(int port, String authtoken, int gameID, Game game, Scanner scanner) {
+        this.game = game;
         //Convert usercommand to json
         webSocketFacade = new WebSocketFacade(port, this);
+        UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.CONNECT, authtoken, gameID);
+        try {
+            webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
+        } catch (Exception e) {
+            System.out.println("Error thrown while sending CONNECT at top of GamePlayUI");
+        }
         System.out.println("Successfully joined game! Type help to see commands");
         while(true) {
-            //TODO check string, not scanner
             String command = scanner.nextLine();
             if (command.equals("help")) {
                 System.out.println("""
@@ -32,7 +38,7 @@ public class GamePlayUI implements GameHandler {
                         leave - Leave the game.
                         make move - Make a move (do this only on your turn).
                         resign - Resign and forfeit the match (give up).
-                        highlight legal moves - highlight the available moves of a given piece.""");
+                        highlight - highlight the available moves of a given piece.""");
             }
             else if (command.equals("redraw")) {
                 redrawCommand(port, authtoken, gameID, game);
@@ -84,10 +90,11 @@ public class GamePlayUI implements GameHandler {
                                 Please indicate where you want to move the piece by typing the start position, 
                                 then the end position. i.e. "a1 a2". If you want to go back, type 0.
                                 """);
-            if (scanner.nextLine().equals("0")) {
+            String input = scanner.nextLine();
+            if (input.equals("0")) {
                 break;
             }
-            String input = scanner.nextLine(); // a1 a2
+            //String input = scanner.nextLine(); // a1 a2
             //make sure is size 5 and input is valid
             if (input.length() != 5) {
                 continue;
@@ -185,36 +192,41 @@ public class GamePlayUI implements GameHandler {
                     Please indicate what piece you want to highlight possible moves for by typing the piece's position. 
                     i.e. "a1". If you want to go back, type 0.
                     """);
-            if (scanner.nextLine().equals("0")) {
+            String input = scanner.nextLine();
+            if (input.equals("0")) {
+                System.out.println("Ok, what do you want to do instead?");
                 break;
             }
-            String input = scanner.nextLine(); // a1 a2
+            //String input = scanner.nextLine(); // a1 a2
             //make sure is size 5 and input is valid
             if (input.length() != 2) {
+                System.out.println("Please enter a valid input");
                 continue;
             }
             char potentialI = input.charAt(0);
             int positionI = 0;
-            int positionJ = (int)input.charAt(1);
+            int positionJ = ((int)input.charAt(1) - '0');
             boolean inputReal = true;
             switch (potentialI) {
-                case 'a' -> positionI = 0;
-                case 'b' -> positionI = 1;
-                case 'c' -> positionI = 2;
-                case 'd' -> positionI = 3;
-                case 'e' -> positionI = 4;
-                case 'f' -> positionI = 5;
-                case 'g' -> positionI = 6;
-                case 'h' -> positionI = 7;
+                case 'a' -> positionI = 1;
+                case 'b' -> positionI = 2;
+                case 'c' -> positionI = 3;
+                case 'd' -> positionI = 4;
+                case 'e' -> positionI = 5;
+                case 'f' -> positionI = 6;
+                case 'g' -> positionI = 7;
+                case 'h' -> positionI = 8;
                 default -> inputReal = false;
             }
             if (!inputReal) {
                 System.out.println("Invalid input.");
                 continue;
             }
-            ChessPosition chessPosition = new ChessPosition(positionI, positionJ);
+            //Switched around I and J because it reads row, then column, while "a1" reads column, then row.
+            ChessPosition chessPosition = new ChessPosition(positionJ, positionI);
             if (game.getGame().getBoard().getPiece(chessPosition) == null) {
-                System.out.println("There is no piece there.");
+                System.out.println("There is no piece there. Please enter a valid input");
+                continue;
             }
             Collection<ChessMove> possibleMoves = game.getGame().validMoves(chessPosition);
             updateGame(game, game.getGame().getTeamTurn(), possibleMoves);
