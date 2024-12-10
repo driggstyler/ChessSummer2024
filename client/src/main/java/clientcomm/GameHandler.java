@@ -9,6 +9,6 @@ import websocket.commands.UserGameCommand;
 import java.util.Collection;
 
 public interface GameHandler {
-    void updateGame(Game game, ChessGame.TeamColor teamColor, Collection<ChessMove> possibleMoves);
+    void updateGame(Game game, Collection<ChessMove> possibleMoves);
     void updateMessage(String message);
 }

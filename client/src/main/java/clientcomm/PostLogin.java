@@ -95,8 +95,8 @@ public class PostLogin {
                 try {
                     JoinGameResult joinGameResult = serverFacade.joinGame(joinGameRequest, authtoken);
                     if (joinGameResult.isSuccess()) {
-                        gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), games.get(gameNum - 1), scanner);
-                        ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.valueOf(playerColor), new HashSet<>());
+                        gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), games.get(gameNum - 1), scanner, playerColor);
+                        //ChessboardUI.run(new ChessGame().getBoard(), ChessGame.TeamColor.valueOf(playerColor), new HashSet<>());
                     } else if (joinGameResult.getMessage().equals("Error: Already taken.")) {
                         System.out.println("Sorry, that player position is already taken.");}
                     else {System.out.println("Failed to join game.");}
@@ -114,7 +114,7 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), games.get(gameNum - 1), scanner);
+                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), games.get(gameNum - 1), scanner, null);
             } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }

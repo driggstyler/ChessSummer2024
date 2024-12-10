@@ -177,8 +177,6 @@ c
 3server/src/main/java/services/ListGamesService.java,3\6\36840892ef84930e8838e602c22d24007c19f8dc
 b
 2server/src/test/java/service/LoginServiceTest.java,a\f\af88b544b54bd409e8e5837d6fcb6c983aec3ee7
-j
-:shared/src/main/java/websocket/messages/ServerMessage.java,f\e\fe32700f7e09df25841d54d884adfd3e6253f49f
 _
 /server/src/main/java/handlers/LoginHandler.java,2\4\24ef2daf20f5f2fae5081332837e4e2b6e5ce16b
 W
@@ -187,14 +185,10 @@ A
 client/client.iml,0\2\022fd7ad3cac7d492229d5142f7207b87826a366
 A
 server/server.iml,3\f\3f335f11ae5914540a6aba5f5129f694b55a8d87
-`
-0client/src/main/java/clientcomm/GameHandler.java,e\7\e7c1d6a3b5afa9ebfb4c3947abbd164758e47b35
 d
 4server/src/main/java/handlers/CreateGameHandler.java,6\0\60d75adf50a567fe9d88a7b48cfedd4355261250
 i
 9shared/src/main/java/websocket/messages/ErrorMessage.java,6\d\6d43d74275dadc856b480bdfa9cf5a951a936cb8
-h
-8shared/src/main/java/websocket/messages/LoadService.java,f\f\ff1119ebe09f0a894910a7fd2144ec3b70c7a74b
 d
 4server/src/main/java/services/CreateGameService.java,d\c\dc1990ee7c57df336cd3ad0bbbe863391d8ab121
 Z
@@ -213,3 +207,7 @@ U
 %shared/src/main/java/models/Game.java,a\b\ab546af392c2761c740a39538a7db6023e5af559
 p
 @shared/src/main/java/websocket/messages/NotificationMessage.java,4\0\4098269bcef71afe53db939c957241c82c68fb25
+n
+>server/src/test/java/passoff/server/server/WebSocketTests.java,7\7\778c3a3f86f94786b4a5520e48e869b7fc765091
+b
+2server/src/main/java/services/JoinGameService.java,7\6\76f7be4454e42d2a24c1af5f2a4e744bec86984b

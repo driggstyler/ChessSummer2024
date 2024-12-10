@@ -6,6 +6,7 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import com.google.gson.Gson;
 import models.Game;
+import org.glassfish.grizzly.http.server.Session;
 import ui.ChessboardUI;
 import websocket.commands.MakeMoveCommand;
 import websocket.commands.UserGameCommand;
@@ -15,10 +16,15 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class GamePlayUI implements GameHandler {
+    private ServerFacade serverFacade;
     private WebSocketFacade webSocketFacade;
     private Game game;
-    public void run(int port, String authtoken, int gameID, Game game, Scanner scanner) {
+    private GameHandler gameHandler;
+    private String playerColor;
+    public void run(int port, String authtoken, int gameID, Game game, Scanner scanner, String playerColor) {
         this.game = game;
+        Session session;
+        this.playerColor = playerColor;
         //Convert usercommand to json
         webSocketFacade = new WebSocketFacade(port, this);
         UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.CONNECT, authtoken, gameID);
@@ -41,20 +47,20 @@ public class GamePlayUI implements GameHandler {
                         highlight - highlight the available moves of a given piece.""");
             }
             else if (command.equals("redraw")) {
-                redrawCommand(port, authtoken, gameID, game);
+                redrawCommand(port, authtoken, gameID, this.game);
             }
             else if (command.equals("leave")) {
                 leaveCommand(port, authtoken, gameID);
                 break;
             }
             else if (command.equals("make move")) {
-                makeMoveCommand(port, authtoken, gameID, game, scanner);
+                makeMoveCommand(port, authtoken, gameID, this.game, scanner);
             }
             else if (command.equals("resign")) {
                 resignCommand(port, authtoken, gameID);
             }
             else if (command.equals("highlight")) {
-                highlightMovesCommand(port, authtoken, gameID, game, scanner);
+                highlightMovesCommand(port, authtoken, gameID, this.game, scanner);
             }
             else {
                 System.out.println("Please enter valid command.");
@@ -64,8 +70,18 @@ public class GamePlayUI implements GameHandler {
 
     public void redrawCommand(int port, String authtoken, int gameID, Game game) {
         //Only redraw board
+        //TODO: Only print your perspective
+        //TODO: Observe ONLY IN WHITE
+        ChessGame.TeamColor teamColor = null;
+        if (playerColor.equals("WHITE")) {
+            teamColor = ChessGame.TeamColor.WHITE;
+        } else if (playerColor.equals("BLACK")) {
+            teamColor = ChessGame.TeamColor.BLACK;
+        } else {
+            teamColor = ChessGame.TeamColor.WHITE;
+        }
         Collection<ChessMove> noMoves = new HashSet<>();
-        ChessboardUI.run(game.getGame().getBoard(), game.getGame().getTeamTurn(), noMoves);
+        ChessboardUI.run(game.getGame().getBoard(), teamColor, noMoves);
     }
 
     public void leaveCommand(int port, String authtoken, int gameID) {
@@ -73,6 +89,8 @@ public class GamePlayUI implements GameHandler {
 
         try {
             webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
+            webSocketFacade.session.close();
+            System.out.println("You left the game.");
         } catch (Exception e) {
             System.out.println("Error thrown in leaveCommand");
         }
@@ -102,7 +120,7 @@ public class GamePlayUI implements GameHandler {
             char potentialI = input.charAt(0);
             int startI = 0;
             char potentialJ = input.charAt(3);
-            int startJ = 0;
+            int endI = 0;
             boolean inputReal = true;
             switch (potentialI) {
                 case 'a' -> startI = 0;
@@ -116,22 +134,22 @@ public class GamePlayUI implements GameHandler {
                 default -> inputReal = false;
             }
             switch (potentialJ) {
-                case 'a' -> startJ = 0;
-                case 'b' -> startJ = 1;
-                case 'c' -> startJ = 2;
-                case 'd' -> startJ = 3;
-                case 'e' -> startJ = 4;
-                case 'f' -> startJ = 5;
-                case 'g' -> startJ = 6;
-                case 'h' -> startJ = 7;
+                case 'a' -> endI = 0;
+                case 'b' -> endI = 1;
+                case 'c' -> endI = 2;
+                case 'd' -> endI = 3;
+                case 'e' -> endI = 4;
+                case 'f' -> endI = 5;
+                case 'g' -> endI = 6;
+                case 'h' -> endI = 7;
                 default -> inputReal = false;
             }
             if (!inputReal) {
                 System.out.println("Invalid input.");
                 continue;
             }
-            int endI = (int)input.charAt(1);
-            int endJ = (int)input.charAt(4);
+            int startJ = ((int)input.charAt(1) - '0') - 1;
+            int endJ = ((int)input.charAt(4) - '0') - 1;
             //check if it is a real position and parse input
             ChessPiece.PieceType promotionPiece = null;
             while(true) {System.out.println("""
@@ -156,11 +174,11 @@ public class GamePlayUI implements GameHandler {
                 }
                 System.out.println("Please enter a valid input.");
             }
-            ChessPosition startPosition = new ChessPosition(startI, startJ);
-            ChessPosition endPosition = new ChessPosition(endI, endJ);
+            ChessPosition startPosition = new ChessPosition(startJ + 1, startI + 1);
+            ChessPosition endPosition = new ChessPosition(endJ + 1, endI + 1);
             ChessMove move = new ChessMove(startPosition, endPosition, promotionPiece);
             if (game.getGame().validMoves(startPosition).contains(move)) {
-                MakeMoveCommand makeMoveCommand = new MakeMoveCommand(UserGameCommand.CommandType.MAKE_MOVE, authtoken, gameID);
+                MakeMoveCommand makeMoveCommand = new MakeMoveCommand(UserGameCommand.CommandType.MAKE_MOVE, authtoken, gameID, move);
                 try {
                     webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(makeMoveCommand));
                     System.out.println("Piece moved from " + startPosition + " to " + endPosition);
@@ -229,16 +247,27 @@ public class GamePlayUI implements GameHandler {
                 continue;
             }
             Collection<ChessMove> possibleMoves = game.getGame().validMoves(chessPosition);
-            updateGame(game, game.getGame().getTeamTurn(), possibleMoves);
+            updateGame(game, possibleMoves);
             break;
         }
     }
 
     @Override
-    public void updateGame(Game game, ChessGame.TeamColor teamColor, Collection<ChessMove> possibleMoves) {
+    public void updateGame(Game game, Collection<ChessMove> possibleMoves) {
         //print current board
         this.game = game;
-        ChessboardUI.run(game.getGame().getBoard(), teamColor, possibleMoves);
+        if (game != null) {
+            System.out.println("GAME");
+        }
+        if (playerColor == null) {
+            ChessboardUI.run(game.getGame().getBoard(), ChessGame.TeamColor.WHITE, possibleMoves);
+        }
+        else if (playerColor.equals("WHITE")){
+            ChessboardUI.run(game.getGame().getBoard(), ChessGame.TeamColor.WHITE, possibleMoves);
+        }
+        else {
+            ChessboardUI.run(game.getGame().getBoard(), ChessGame.TeamColor.BLACK, possibleMoves);
+        }
     }
 
     @Override
