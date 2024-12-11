@@ -57,7 +57,7 @@ public class GamePlayUI implements GameHandler {
                 makeMoveCommand(port, authtoken, gameID, this.game, scanner);
             }
             else if (command.equals("resign")) {
-                resignCommand(port, authtoken, gameID);
+                resignCommand(port, authtoken, gameID, scanner);
             }
             else if (command.equals("highlight")) {
                 highlightMovesCommand(port, authtoken, gameID, this.game, scanner);
@@ -195,12 +195,19 @@ public class GamePlayUI implements GameHandler {
 
     }
 
-    public void resignCommand(int port, String authtoken, int gameID) {
-        UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.RESIGN, authtoken, gameID);
-        try {
-            webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
-        } catch (Exception e) {
-            System.out.println("Error thrown in resignCommand");
+    public void resignCommand(int port, String authtoken, int gameID, Scanner scanner) {
+        System.out.println("Are you sure you want to resign? (yes/no)");
+        String input = scanner.nextLine();
+        if (input.equals("yes")) {
+            UserGameCommand userGameCommand = new UserGameCommand(UserGameCommand.CommandType.RESIGN, authtoken, gameID);
+            try {
+                webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(userGameCommand));
+            } catch (Exception e) {
+                System.out.println("Error thrown in resignCommand");
+            }
+        }
+        else {
+            System.out.println("Cancelled resigning.");
         }
     }
 

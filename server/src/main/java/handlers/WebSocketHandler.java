@@ -123,12 +123,12 @@ public class WebSocketHandler {
                 game.getGame().makeMove(makeMoveCommand.getMove());
                 ChessMove move = makeMoveCommand.getMove();
                 //Announce the move to the party.
-                char startRow = (char) (move.getStartPosition().getRow() + 1);
-                char startCol = (char) (move.getStartPosition().getColumn() + 'a');
-                String startP = startCol + startRow + "";
-                char endRow = (char) (move.getEndPosition().getRow() + 1);
-                char endCol = (char) (move.getEndPosition().getColumn() + 'a');
-                String endP = endCol + endRow + "";
+                String startRow = Integer.toString (move.getStartPosition().getRow());
+                char startCol = (char) (move.getStartPosition().getColumn() - 1 + 'a');
+                String startP = "" + startCol + "" + startRow + "";
+                String endRow = Integer.toString (move.getEndPosition().getRow());
+                char endCol = (char) (move.getEndPosition().getColumn() - 1 + 'a');
+                String endP = "" + endCol + "" + endRow + "";
                 String pieceString = "";
                 switch (piece.getPieceType()) {
                     case KING:
@@ -156,7 +156,7 @@ public class WebSocketHandler {
                 } else {
                     moverUsername = game.getWhiteUsername();
                 }
-                whoMoved = moverUsername + " moved " + pieceString + " from " + startP + " to " + endP + ".";
+                whoMoved = moverUsername + " moved " + pieceString + " from " + startP + " to " + endP + ".\n";
                 //Check if there is a checkmate, stalemate, or check
                 if (game.getGame().isInCheckmate(game.getGame().getTeamTurn())) {
                     game.getGame().setGameOver(true);
