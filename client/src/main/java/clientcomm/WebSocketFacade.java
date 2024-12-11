@@ -29,7 +29,6 @@ public class WebSocketFacade extends Endpoint {
             this.session.addMessageHandler(new MessageHandler.Whole<String>() {
                 @Override
                 public void onMessage(String message) {
-                    System.out.println(message);
                     try {
                         Gson gson = new Gson();
                         ServerMessage serverMessage = gson.fromJson(message, ServerMessage.class);

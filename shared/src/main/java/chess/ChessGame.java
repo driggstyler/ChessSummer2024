@@ -167,6 +167,8 @@ public class ChessGame {
             return false;
         }
         //Check if any move can get the king out of check.
+        boolean result = isEveryOtherSquareUnsafe(teamColor);
+        if (result) {setGameOver(true);}
         return isEveryOtherSquareUnsafe(teamColor);
     }
 
@@ -183,6 +185,8 @@ public class ChessGame {
             return false;
         }
         //Check if any move is valid
+        boolean result = isEveryOtherSquareUnsafe(teamColor);
+        if (result) {setGameOver(true);}
         return isEveryOtherSquareUnsafe(teamColor);
     }
 

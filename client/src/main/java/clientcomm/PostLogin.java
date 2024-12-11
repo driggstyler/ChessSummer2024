@@ -114,7 +114,7 @@ public class PostLogin {
                     } catch (NumberFormatException ignored){}
                 }
                 if (gameNum == 0) {continue;}
-                        gamePlayUI.run(port, authtoken, games.get(gameNum).getGameID(), games.get(gameNum - 1), scanner, null);
+                        gamePlayUI.run(port, authtoken, games.get(gameNum - 1).getGameID(), games.get(gameNum - 1), scanner, null);
             } else {System.out.println("Invalid command. Type help to view valid commands.");}
         }
     }

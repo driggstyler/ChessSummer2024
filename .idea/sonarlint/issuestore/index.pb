@@ -91,8 +91,6 @@ b
 0server/src/test/java/dataaccess/GameDAOTest.java,f\9\f9c51361d5fa73b708ba59ce6241955ff60ea204
 c
 3server/src/main/java/handlers/ListGamesHandler.java,8\d\8d4e1b74c29220900207e8c42b5f82af6e8ca1ba
-_
-/server/src/main/java/services/LoginService.java,c\a\caa1e775d509d5203f8b530bc0be4841d5315660
 `
 0server/src/main/java/handlers/LogoutHandler.java,6\9\69ce373a29a40f16a9efbaa0d64e562e8dc06a1f
 `
@@ -167,10 +165,6 @@ b
 2shared/src/main/java/requests/JoinGameRequest.java,1\5\15803bbcee5775f2ebeb7f6892b8e435fb3d0a0c
 b
 2server/src/main/java/handlers/RegisterHandler.java,c\c\cce46332b06f227c4891c82ea58e463310864627
-]
--shared/src/main/java/chess/ChessPosition.java,3\b\3b013a24b64d343e15bac32b29d3d69c6c135d82
-Z
-*shared/src/main/java/chess/ChessBoard.java,d\f\dfc4ec84b5d57ac6e0266e9c319b728da99e0c51
 N
 server/src/main/java/Main.java,f\4\f49eb7b67ea6fd5de7d54f4d8e080215196bedf3
 c

@@ -1,5 +1,8 @@
 package handlers;
 
+import chess.ChessGame;
+import chess.ChessMove;
+import chess.ChessPiece;
 import chess.InvalidMoveException;
 import com.google.gson.Gson;
 import dataaccess.DataAccessException;
@@ -91,6 +94,8 @@ public class WebSocketHandler {
         Game game = null;
         Authtoken auth = null;
         String playerColor = null;
+        String whoMoved = "";
+        String moreInfo = "";
         try (Connection conn = DatabaseManager.getConnection()) {
             GameDAO gameDAO = new GameDAO(conn);
             AuthtokenDAO authtokenDAO = new AuthtokenDAO(conn);
@@ -112,9 +117,72 @@ public class WebSocketHandler {
                 if (playerColor == null || !playerColor.equalsIgnoreCase(game.getGame().getTeamTurn().name())) {
                     throw new InvalidMoveException("It is not your turn.");
                 }
-                    game.getGame().makeMove(makeMoveCommand.getMove());
-                    //Update game state
-                    gameDAO.update(game);
+                //Needed for message
+                ChessPiece piece = game.getGame().getBoard().getPiece(makeMoveCommand.getMove().getStartPosition());
+                //Make move
+                game.getGame().makeMove(makeMoveCommand.getMove());
+                ChessMove move = makeMoveCommand.getMove();
+                //Announce the move to the party.
+                char startRow = (char) (move.getStartPosition().getRow() + 1);
+                char startCol = (char) (move.getStartPosition().getColumn() + 'a');
+                String startP = startCol + startRow + "";
+                char endRow = (char) (move.getEndPosition().getRow() + 1);
+                char endCol = (char) (move.getEndPosition().getColumn() + 'a');
+                String endP = endCol + endRow + "";
+                String pieceString = "";
+                switch (piece.getPieceType()) {
+                    case KING:
+                        pieceString = "King";
+                        break;
+                    case QUEEN:
+                        pieceString = "Queen";
+                        break;
+                    case BISHOP:
+                        pieceString = "Bishop";
+                        break;
+                    case KNIGHT:
+                        pieceString = "Knight";
+                        break;
+                    case ROOK:
+                        pieceString = "Rook";
+                        break;
+                    case PAWN:
+                        pieceString = "Pawn";
+                        break;
+                }
+                String moverUsername = "";
+                if (game.getGame().getTeamTurn() == ChessGame.TeamColor.WHITE) {
+                    moverUsername = game.getBlackUsername();
+                } else {
+                    moverUsername = game.getWhiteUsername();
+                }
+                whoMoved = moverUsername + " moved " + pieceString + " from " + startP + " to " + endP + ".";
+                //Check if there is a checkmate, stalemate, or check
+                if (game.getGame().isInCheckmate(game.getGame().getTeamTurn())) {
+                    game.getGame().setGameOver(true);
+                    String losingPlayer = "";
+                    if (game.getGame().getTeamTurn() == ChessGame.TeamColor.WHITE) {
+                        losingPlayer = game.getWhiteUsername();
+                    } else {
+                        losingPlayer = game.getBlackUsername();
+                    }
+                    moreInfo = losingPlayer + " is in checkmate!";
+                }
+                else if (game.getGame().isInStalemate(game.getGame().getTeamTurn())) {
+                    game.getGame().setGameOver(true);
+                    moreInfo = "It is a stalemate!";
+                }
+                else if (game.getGame().isInCheck(game.getGame().getTeamTurn())) {
+                    String losingPlayer = "";
+                    if (game.getGame().getTeamTurn() == ChessGame.TeamColor.WHITE) {
+                        losingPlayer = game.getWhiteUsername();
+                    } else {
+                        losingPlayer = game.getBlackUsername();
+                    }
+                    moreInfo = losingPlayer + " is in check!";
+                }
+                //Update game state
+                gameDAO.update(game);
             } catch (InvalidMoveException invalidMoveException) {
                 System.out.println("WebsocketHandler threw an Invalid move exception from makeMove.");
                 ErrorMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR);
@@ -134,7 +202,7 @@ public class WebSocketHandler {
         sendMessage(session, responseMessage);
         broadcastMessage(game.getGameID(), responseMessage, session);
         NotificationMessage notificationMessage = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION);
-        notificationMessage.setMessage("Move successful.");
+        notificationMessage.setMessage(whoMoved + moreInfo);
         broadcastMessage(game.getGameID(), new Gson().toJson(notificationMessage), session);
     }
     public void leave(Session session, UserGameCommand userGameCommand) throws IOException {

@@ -73,12 +73,13 @@ public class GamePlayUI implements GameHandler {
         //TODO: Only print your perspective
         //TODO: Observe ONLY IN WHITE
         ChessGame.TeamColor teamColor = null;
-        if (playerColor.equals("WHITE")) {
+        if (playerColor == null) {
+            teamColor = ChessGame.TeamColor.WHITE;
+        }
+        else if (playerColor.equals("WHITE")) {
             teamColor = ChessGame.TeamColor.WHITE;
         } else if (playerColor.equals("BLACK")) {
             teamColor = ChessGame.TeamColor.BLACK;
-        } else {
-            teamColor = ChessGame.TeamColor.WHITE;
         }
         Collection<ChessMove> noMoves = new HashSet<>();
         ChessboardUI.run(game.getGame().getBoard(), teamColor, noMoves);
@@ -181,7 +182,7 @@ public class GamePlayUI implements GameHandler {
                 MakeMoveCommand makeMoveCommand = new MakeMoveCommand(UserGameCommand.CommandType.MAKE_MOVE, authtoken, gameID, move);
                 try {
                     webSocketFacade.session.getBasicRemote().sendText(new Gson().toJson(makeMoveCommand));
-                    System.out.println("Piece moved from " + startPosition + " to " + endPosition);
+                    //System.out.println("You move you piece " + startPosition + " to " + endPosition);
                 } catch (Exception e) {
                     System.out.println("Error thrown in makeMoveCommand");
                 }
